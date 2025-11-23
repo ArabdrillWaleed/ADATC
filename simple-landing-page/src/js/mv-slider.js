@@ -36,7 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function startAutoRotate() {
     stopAutoRotate(); // Clear any existing timer
-    autoRotateTimer = setInterval(nextSlide, ROTATE_INTERVAL);
+    if (window.innerWidth > 700) {
+      autoRotateTimer = setInterval(nextSlide, ROTATE_INTERVAL);
+    }
   }
 
   function stopAutoRotate() {
@@ -59,12 +61,20 @@ document.addEventListener('DOMContentLoaded', () => {
   // Wrap navigation functions to restart timer
   function handlePrevClick() {
     prevSlide();
-    startAutoRotate(); // Reset timer when manually navigating
+    if (window.innerWidth > 700) {
+      startAutoRotate(); // Reset timer when manually navigating
+    } else {
+      stopAutoRotate();
+    }
   }
 
   function handleNextClick() {
     nextSlide();
-    startAutoRotate(); // Reset timer when manually navigating
+    if (window.innerWidth > 700) {
+      startAutoRotate(); // Reset timer when manually navigating
+    } else {
+      stopAutoRotate();
+    }
   }
 
   // Only add navigation if both buttons exist
@@ -89,8 +99,16 @@ document.addEventListener('DOMContentLoaded', () => {
     sliderContainer.addEventListener('mouseenter', stopAutoRotate);
     sliderContainer.addEventListener('mouseleave', startAutoRotate);
 
-    // Start auto-rotation when we have navigation
-    startAutoRotate();
+    // Only start auto-rotation if not on mobile
+    function maybeStartAutoRotate() {
+      if (window.innerWidth > 700) {
+        startAutoRotate();
+      } else {
+        stopAutoRotate();
+      }
+    }
+    maybeStartAutoRotate();
+    window.addEventListener('resize', maybeStartAutoRotate);
   } else {
     console.log('Mission & Vision slider: Navigation buttons not found, navigation disabled');
   }
@@ -108,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (document.hidden) {
         stopAutoRotate();
       } else {
-        startAutoRotate();
+        maybeStartAutoRotate();
       }
     });
   }
