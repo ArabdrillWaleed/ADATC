@@ -88,8 +88,19 @@
 }
 
 /* DIT Navigation Styles */
+/* Desktop: arrows on each side */
 .dit-nav-container {
-  }
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1001;
+  transform: translateY(-50%);
+}
 
   @media (max-width: 700px) {
     .dit-nav-container {
@@ -102,19 +113,19 @@
       z-index: 1000;
       display: flex;
       justify-content: space-between;
+      align-items: flex-end;
       padding-left: 2vw;
       padding-right: 2vw;
     }
   position: absolute;
-  top: 50%;
+  bottom: 2rem;
   left: 0;
   right: 0;
-  transform: translateY(-50%);
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 0 2rem;
-  pointer-events: none;
-  z-index: 1000;
+  align-items: flex-end;
+  z-index: 1001;
 }
 
 .dit-nav-btn {
