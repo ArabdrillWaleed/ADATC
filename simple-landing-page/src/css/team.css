@@ -1,3 +1,50 @@
+/* Mobile responsive filter buttons */
+@media (max-width: 700px) {
+  .team-filter-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+  .team-filter-btn {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 0.75rem 1rem;
+    text-align: center;
+    border-radius: 0.25rem;
+  }
+}
+/* Unified button style for team and overview category filters */
+
+
+.team-filter-btn {
+  background: #f4f4f4;
+  color: #003c34;
+  border: 2px solid #003c34;
+  border-radius: 0;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+  outline: none;
+}
+.team-filter-btn.active,
+.team-filter-btn:focus {
+  background: #003c34;
+  color: #fff;
+  border-color: #003c34;
+}
+.team-filter-btn:hover {
+  background: #f6630c;
+  color: #fff;
+  border-color: #f6630c;
+}
+.team-filter-buttons {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0 2rem 0;
+  justify-content: flex-start;
+}
 .team-section {
   margin-bottom: 3rem;
 }

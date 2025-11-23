@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const addBtn = (label, value, isActive=false) => {
       const b = document.createElement('button');
       b.type = 'button';
-      b.className = 'accreditation-filter-btn' + (isActive ? ' active' : '');
+      b.className = 'team-filter-btn' + (isActive ? ' active' : '');
       b.dataset.accreditation = value;
       b.textContent = label;
       filtersContainer.appendChild(b);
@@ -84,10 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
   addBtn('HSE', 'hse');
 
     filtersContainer.addEventListener('click', e => {
-      const btn = e.target.closest('.accreditation-filter-btn');
+      const btn = e.target.closest('.team-filter-btn');
       if(!btn) return;
       currentAccreditation = btn.dataset.accreditation || 'all';
-      filtersContainer.querySelectorAll('.accreditation-filter-btn').forEach(b => b.classList.remove('active'));
+      filtersContainer.querySelectorAll('.team-filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       renderRows(getFilteredAndSorted());
     });
@@ -115,10 +115,9 @@ document.addEventListener('DOMContentLoaded', () => {
         category: n.dataset.category || ''
       }));
       // Prefer a curated subset at top: show all for now
-  state.allCourses = list;
-  buildFilters();
-  renderRows(getFilteredAndSorted());
-
+      state.allCourses = list;
+      buildFilters();
+      renderRows(getFilteredAndSorted());
       // Deep link support removed (no search field now)
     })
     .catch(() => {

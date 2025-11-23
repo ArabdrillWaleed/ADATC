@@ -1,35 +1,84 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const searchClearBtn = document.getElementById('instructor-search-clear');
-    // Add clear (X) button logic
-    if (searchClearBtn && searchInput) {
-      searchClearBtn.addEventListener('click', function() {
-        searchInput.value = '';
-        filterInstructors('');
-        searchInput.focus();
-      });
-      // Show/hide clear button based on input value
-      searchInput.addEventListener('input', function() {
+      // Team filter buttons logic
+      const filterAllBtn = document.getElementById('filter-all');
+      const filterManagementBtn = document.getElementById('filter-management');
+      const filterInstructorsBtn = document.getElementById('filter-instructors');
+      const teamSections = document.querySelectorAll('.team-section');
+
+      let currentFilter = 'all';
+      const instructorCards = document.querySelectorAll('.instructor-card');
+      const searchCount = document.getElementById('instructor-search-count');
+      const noResults = document.getElementById('instructor-no-results');
+      function applyTeamSectionFilter(type) {
+        currentFilter = type;
+        filterAllBtn.classList.remove('active');
+        filterManagementBtn.classList.remove('active');
+        filterInstructorsBtn.classList.remove('active');
+        if (type === 'all') {
+          filterAllBtn.classList.add('active');
+          teamSections.forEach(section => {
+            section.style.display = '';
+          });
+        } else if (type === 'management') {
+          filterManagementBtn.classList.add('active');
+          teamSections.forEach(section => {
+            const heading = section.querySelector('h2');
+            if (!heading) return;
+            if (heading.textContent.toLowerCase().includes('management') || heading.textContent.toLowerCase().includes('administration')) {
+              section.style.display = '';
+            } else {
+              section.style.display = 'none';
+            }
+          });
+        } else if (type === 'instructors') {
+          filterInstructorsBtn.classList.add('active');
+          teamSections.forEach(section => {
+            const heading = section.querySelector('h2');
+            if (!heading) return;
+            if (heading.textContent.toLowerCase().includes('instructor')) {
+              section.style.display = '';
+            } else {
+              section.style.display = 'none';
+            }
+          });
+        }
+        applyInstructorFilters(searchInput.value);
+      }
+
+      const searchInput = document.getElementById('instructor-search-input');
+      if (filterAllBtn && filterManagementBtn && filterInstructorsBtn) {
+        filterAllBtn.addEventListener('click', () => applyTeamSectionFilter('all'));
+        filterManagementBtn.addEventListener('click', () => applyTeamSectionFilter('management'));
+        filterInstructorsBtn.addEventListener('click', () => applyTeamSectionFilter('instructors'));
+        // Default: show all
+        applyTeamSectionFilter('all');
+      }
+      const searchClearBtn = document.getElementById('instructor-search-clear');
+      // Add clear (X) button logic
+      if (searchClearBtn && searchInput) {
+        searchClearBtn.addEventListener('click', function() {
+          searchInput.value = '';
+          filterInstructors('');
+          searchInput.focus();
+        });
+        // Show/hide clear button based on input value
+        searchInput.addEventListener('input', function() {
+          searchClearBtn.style.display = searchInput.value ? 'flex' : 'none';
+        });
+        // Initialize clear button visibility
         searchClearBtn.style.display = searchInput.value ? 'flex' : 'none';
-      });
-      // Initialize clear button visibility
-      searchClearBtn.style.display = searchInput.value ? 'flex' : 'none';
-    }
-  const modal = document.getElementById('instructor-modal');
-  if(!modal) return;
-  
-  const modalTitle = document.getElementById('instructor-modal-title');
-  const modalSubtitle = document.getElementById('instructor-modal-titleline');
-  const modalMedia = document.getElementById('instructor-modal-media');
-  const modalSummary = document.getElementById('instructor-modal-summary');
-  const modalCompetencies = document.getElementById('instructor-modal-competencies');
-  const modalContact = document.getElementById('instructor-modal-contact');
-  
-  // Search functionality
-  const searchInput = document.getElementById('instructor-search-input');
-  const searchCount = document.getElementById('instructor-search-count');
-  const noResults = document.getElementById('instructor-no-results');
-  const instructorCards = document.querySelectorAll('.instructor-card');
-  const teamSections = document.querySelectorAll('.team-section');
+      }
+      const modal = document.getElementById('instructor-modal');
+      if(!modal) return;
+      
+      const modalTitle = document.getElementById('instructor-modal-title');
+      const modalSubtitle = document.getElementById('instructor-modal-titleline');
+      const modalMedia = document.getElementById('instructor-modal-media');
+      const modalSummary = document.getElementById('instructor-modal-summary');
+      const modalCompetencies = document.getElementById('instructor-modal-competencies');
+      const modalContact = document.getElementById('instructor-modal-contact');
+      
+      // Search functionality
   
   function applyInstructorFilters(searchTerm) {
     searchTerm = (searchTerm || '').toLowerCase().trim();
@@ -47,7 +96,21 @@ document.addEventListener('DOMContentLoaded', function() {
       const name = card.querySelector('.instructor-name')?.textContent || '';
       const title = card.querySelector('h3')?.textContent || '';
       const text = `${name} ${title}`.toLowerCase();
-      const visible = !searchTerm || text.includes(searchTerm);
+      let visible = (!searchTerm || text.includes(searchTerm));
+      // Filter by current category
+      if (currentFilter === 'management') {
+        const section = card.closest('.team-section');
+        const heading = section?.querySelector('h2');
+        if (!heading || !(heading.textContent.toLowerCase().includes('management') || heading.textContent.toLowerCase().includes('administration'))) {
+          visible = false;
+        }
+      } else if (currentFilter === 'instructors') {
+        const section = card.closest('.team-section');
+        const heading = section?.querySelector('h2');
+        if (!heading || !heading.textContent.toLowerCase().includes('instructor')) {
+          visible = false;
+        }
+      }
       card.style.display = visible ? '' : 'none';
       if (visible) visibleCount++;
     });

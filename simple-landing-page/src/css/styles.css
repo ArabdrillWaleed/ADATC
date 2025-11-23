@@ -1,3 +1,28 @@
+@media (max-width: 700px) {
+  .redesigned-section .container .data-table th,
+  .redesigned-section .container #course-overview-table th {
+    color: #003c34 !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+    background: transparent !important;
+  }
+}
+@media (max-width: 700px) {
+  #course-overview-table th,
+  .data-table th {
+    color: #003c34 !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+    background: transparent !important;
+  }
+}
+@media (max-width: 700px) {
+  .course-title {
+    color: #003c34 !important;
+  }
+}
 /* Brand green for Meet Our Team category headings */
 .team-section > h2 {
   color: #003c34 !important;
