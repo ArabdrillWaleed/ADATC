@@ -1,4 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const searchClearBtn = document.getElementById('instructor-search-clear');
+    // Add clear (X) button logic
+    if (searchClearBtn && searchInput) {
+      searchClearBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        filterInstructors('');
+        searchInput.focus();
+      });
+      // Show/hide clear button based on input value
+      searchInput.addEventListener('input', function() {
+        searchClearBtn.style.display = searchInput.value ? 'flex' : 'none';
+      });
+      // Initialize clear button visibility
+      searchClearBtn.style.display = searchInput.value ? 'flex' : 'none';
+    }
   const modal = document.getElementById('instructor-modal');
   if(!modal) return;
   

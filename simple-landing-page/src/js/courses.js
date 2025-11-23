@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const searchClearBtn = document.getElementById('course-search-clear');
   const modal = document.getElementById('course-modal');
   if(!modal) return;
   
@@ -168,6 +169,20 @@ document.addEventListener('DOMContentLoaded', function() {
   // Add search input handler
   if (searchInput) {
     searchInput.addEventListener('input', (e) => filterCourses(e.target.value));
+    // Custom clear (X) button logic
+    if (searchClearBtn) {
+      searchClearBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        filterCourses('');
+        searchInput.focus();
+      });
+      // Show/hide clear button based on input value
+      searchInput.addEventListener('input', function() {
+        searchClearBtn.style.display = searchInput.value ? 'flex' : 'none';
+      });
+      // Initialize clear button visibility
+      searchClearBtn.style.display = searchInput.value ? 'flex' : 'none';
+    }
     // If a query param ?q= exists, prefill and filter
     const params = new URLSearchParams(window.location.search);
     const q = params.get('q');

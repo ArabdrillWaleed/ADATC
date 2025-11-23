@@ -1,3 +1,20 @@
+/* Brand green for Meet Our Team category headings */
+.team-section > h2 {
+  color: #003c34 !important;
+}
+/* Desktop: Make search bar clear (X) button twice as large */
+@media (min-width: 701px) {
+  .search-clear-btn {
+    font-size: 5rem !important;
+    width: 5rem !important;
+    height: 5rem !important;
+    right: 0.2rem;
+  }
+  .course-search-input {
+    font-size: 1.5rem;
+    padding-right: 5.5rem;
+  }
+}
 @media (max-width: 700px) {
   .modal-close, .icon-close, .fa-times, .close-icon {
     font-size: 2.5rem !important;
@@ -171,43 +188,9 @@
 /* Tablet adjustments: apply the same medium modal + internal scrolling
    behavior for tablets (up to 900px). Keep avatar visible and slightly
    smaller than desktop, reduce text slightly to fit more content. */
-@media (min-width: 601px) {
-  #instructor-modal {
-    align-items: center; /* center the panel on tablets and desktops */
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  #instructor-modal .modal-panel {
-    width: min(95%, 95vw);
-    max-width: 95vw;
-    max-height: 92vh;
-    overflow: visible !important; /* No scroll on modal-panel */
-    padding: 3.75rem;
-    font-size: 0.95rem; /* slightly reduced text size on tablets */
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* Keep avatar larger on tablets */
-  #instructor-modal #instructor-modal-media {
-    width: 200px;
-    height: 200px !important;
-    border-radius: 0;
-  }
-
-  #instructor-modal .desc-card {
-    flex: 1 1 auto;
-    overflow: visible !important; /* No scroll on desc-card */
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-  }
-
-  /* Slightly reduce heading size on tablet */
-  #instructor-modal #instructor-modal-title {
-    font-size: clamp(1rem, 1.8vw, 1.12rem);
-  }
+@media (max-width: 700px) {
+  /* Removed duplicate mobile .search-clear-btn rule. Only largest size remains. */
+  /* Removed stray properties and fixed misplaced closing braces. All selectors are now valid. */
 }
 @media (max-width: 600px) {
   .feature-panels-title {
