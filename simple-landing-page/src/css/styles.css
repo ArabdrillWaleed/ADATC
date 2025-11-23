@@ -1,14 +1,4 @@
 @media (max-width: 700px) {
-  .redesigned-section .container .data-table th,
-  .redesigned-section .container #course-overview-table th {
-    color: #003c34 !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.04em !important;
-    background: transparent !important;
-  }
-}
-@media (max-width: 700px) {
   #course-overview-table th,
   .data-table th {
     color: #003c34 !important;
@@ -250,6 +240,138 @@
   }
 }
 @media (max-width: 900px) {
+/* Hamburger Curtain Dropdown Menu Styles */
+@media (max-width: 900px) {
+  .curtain-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    width: 100vw;
+    height: 0;
+    background: #003c34;
+    color: #fff;
+    z-index: 9999;
+    overflow: hidden;
+    transition: height 0.35s cubic-bezier(.2,.9,.25,1);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  }
+  .curtain-nav[aria-hidden="false"] {
+    height: 100vh;
+  }
+  .curtain-nav-inner {
+    padding: 2.2rem 1.2rem 1.2rem 1.2rem;
+    max-width: 420px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .curtain-nav-close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2.5rem;
+    cursor: pointer;
+    z-index: 10001;
+    transition: color 0.18s;
+  }
+  .curtain-nav-close:hover {
+    color: #f6630c;
+  }
+  .curtain-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 2.5rem 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.18rem;
+  }
+  .curtain-nav-list > li > a {
+    display: block;
+    color: #fff;
+    font-family: 'Certo Sans', Arial, sans-serif;
+    font-size: 1.18rem;
+    font-weight: 500;
+    padding: 0.9rem 0.8rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.18s, color 0.18s;
+  }
+  .curtain-nav-list > li > a:hover {
+    color: #f6630c;
+    background: #fff1e6;
+  }
+  .curtain-section-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1.18rem;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.9rem 0.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    letter-spacing: 0.02em;
+    border-radius: 4px;
+    transition: background 0.18s, color 0.18s;
+  }
+  .curtain-section-toggle:focus {
+    outline: 2px solid #f6630c;
+  }
+  .curtain-section-toggle[aria-expanded="true"] {
+    background: #0f4c47;
+    color: #f6630c;
+  }
+  .curtain-icon {
+    font-size: 1.2em;
+    margin-left: 0.5em;
+    color: #fff;
+    font-weight: 700;
+    transition: color 0.18s;
+  }
+  .curtain-section-toggle[aria-expanded="true"] .curtain-icon {
+    color: #f6630c;
+  }
+  .curtain-submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: #f4f4f4;
+    border-bottom: 1px solid #e0e0e0;
+    border-top: 1px solid #e0e0e0;
+    border-radius: 0 0 4px 4px;
+  }
+  .curtain-submenu li {
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .curtain-submenu li:last-child {
+    border-bottom: none;
+  }
+  .curtain-submenu a {
+    display: block;
+    color: #003c34;
+    font-size: 1rem;
+    font-family: inherit;
+    font-weight: 500;
+    padding: 0.7rem 1.2rem;
+    background: transparent;
+    text-decoration: none;
+    transition: color 0.18s, background 0.18s;
+    border-radius: 4px;
+  }
+  .curtain-submenu a.active,
+  .curtain-submenu a:focus,
+  .curtain-submenu a:hover {
+    color: #f6630c;
+    background: #eaeaea;
+  }
+}
   .our-facility .image-hero.color-2 {
     min-height: 420vh;
   }
@@ -2463,9 +2585,9 @@ html{scroll-behavior:smooth}
   }
 
   /* Ensure the underlying nav list stacks vertically on mobile */
-  .site-nav .nav-list{display:flex;flex-direction:column;gap:0.5rem;align-items:stretch;margin:0;padding:0}
+  .site-nav .nav-list{display:flex;flex-direction:column;gap:0.12rem;align-items:stretch;margin:0;padding:0}
 
-  .site-nav a{width:100%;padding:0.75rem 1rem;border-radius:6px;color:var(--text);display:block}
+  .site-nav a{width:100%;padding:0.35rem 0.7rem;border-radius:6px;color:var(--text);display:block}
   
   /* Make all nav items consistent size and alignment */
   .site-nav .nav-list > .nav-item > .nav-link {
