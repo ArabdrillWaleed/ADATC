@@ -221,9 +221,10 @@
      mark non-matching cards with inline styles (display:none) so only
      matching cards are visible. Using body:not(.instructor-search-active)
      ensures we don't force show non-matches during search. */
-  body:not(.instructor-search-active) .instructors-grid .card:nth-child(n+4),
-  body:not(.instructor-search-active) .instructors-grid .instructor-card:nth-child(n+4) {
-    display: none !important;
+  @media (max-width: 900px) {
+    .instructors-grid .instructor-card {
+      display: block !important;
+    }
   }
 }
 
