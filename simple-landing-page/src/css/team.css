@@ -222,7 +222,7 @@
      matching cards are visible. Using body:not(.instructor-search-active)
      ensures we don't force show non-matches during search. */
   @media (max-width: 900px) {
-    .instructors-grid .instructor-card {
+    body:not(.instructor-search-active) .instructors-grid .instructor-card {
       display: block !important;
     }
   }

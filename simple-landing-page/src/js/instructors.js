@@ -31,35 +31,27 @@ document.addEventListener('DOMContentLoaded', function() {
   const instructorCards = document.querySelectorAll('.instructor-card');
   const teamSections = document.querySelectorAll('.team-section');
   
-  function filterInstructors(searchTerm) {
-    searchTerm = searchTerm.toLowerCase().trim();
-    // On mobile, reset zoom after search
+  function applyInstructorFilters(searchTerm) {
+    searchTerm = (searchTerm || '').toLowerCase().trim();
     if (window.innerWidth <= 700) {
       document.body.style.zoom = '';
     }
     let visibleCount = 0;
     const searchActive = Boolean(searchTerm);
-    // add a body-level class so CSS can alter layout during search (e.g., show all cards)
     if (searchActive) {
       document.body.classList.add('instructor-search-active');
     } else {
       document.body.classList.remove('instructor-search-active');
     }
-
     instructorCards.forEach(card => {
       const name = card.querySelector('.instructor-name')?.textContent || '';
       const title = card.querySelector('h3')?.textContent || '';
       const text = `${name} ${title}`.toLowerCase();
-      
-      if (!searchTerm || text.includes(searchTerm)) {
-        card.style.display = '';
-        visibleCount++;
-      } else {
-        card.style.display = 'none';
-      }
+      const visible = !searchTerm || text.includes(searchTerm);
+      card.style.display = visible ? '' : 'none';
+      if (visible) visibleCount++;
     });
-
-    // Update no results message only
+    // Show/hide no results
     noResults.style.display = visibleCount === 0 ? 'block' : 'none';
     // Hide any team section that has no visible instructor cards.
     teamSections.forEach(section => {
@@ -69,17 +61,16 @@ document.addEventListener('DOMContentLoaded', function() {
         if(c.style.display === 'none') return false;
         return window.getComputedStyle(c).display !== 'none';
       });
-      // Hide the section if no instructors are visible in it
       section.style.display = anyVisible ? '' : 'none';
     });
   }
 
   if (searchInput) {
-    searchInput.addEventListener('input', (e) => filterInstructors(e.target.value));
+    searchInput.addEventListener('input', (e) => applyInstructorFilters(e.target.value));
     // Initialize without count
     searchCount.textContent = ``;
-    // Initialize sections visibility based on full list
-    filterInstructors('');
+    // Initial filter application
+    applyInstructorFilters('');
   }
   
   function openModal(card) {
