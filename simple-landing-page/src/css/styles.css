@@ -1,3 +1,11 @@
+@media (max-width: 700px) {
+  .modal-close, .icon-close, .fa-times, .close-icon {
+    font-size: 2.5rem !important;
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    line-height: 2.5rem !important;
+  }
+}
 @media (max-width: 600px) {
   #mission-slide .mv-image,
   #mission-slide .mv-image img {

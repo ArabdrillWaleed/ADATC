@@ -90,6 +90,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function applyFilters(searchTerm) {
     searchTerm = (searchTerm || '').toLowerCase().trim();
+    // On mobile, reset zoom after search
+    if (window.innerWidth <= 700) {
+      document.body.style.zoom = '';
+    }
     let visibleCount = 0;
     courseCards.forEach(card => {
       const summary = card.querySelector('.course-summary');

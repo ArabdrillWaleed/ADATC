@@ -18,6 +18,10 @@ document.addEventListener('DOMContentLoaded', function() {
   
   function filterInstructors(searchTerm) {
     searchTerm = searchTerm.toLowerCase().trim();
+    // On mobile, reset zoom after search
+    if (window.innerWidth <= 700) {
+      document.body.style.zoom = '';
+    }
     let visibleCount = 0;
     const searchActive = Boolean(searchTerm);
     // add a body-level class so CSS can alter layout during search (e.g., show all cards)
