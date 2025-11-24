@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ...existing code...
+    // Show the first slide and activate its dot on load (after slides are initialized)
   // Check if slider exists on this page first
   const sliderContainer = document.querySelector('.mv-slider');
   if (!sliderContainer) return; // Exit early if no slider on this page
@@ -13,25 +15,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const slides = sliderContainer.querySelectorAll('.mv-slide');
   if (!slides || slides.length === 0) return; // Exit if no slides
+  if (!slides || slides.length === 0) return; // Exit if no slides
 
-  const prevBtn = sliderContainer.querySelector('.mv-nav.prev');
-  const nextBtn = sliderContainer.querySelector('.mv-nav.next');
   let currentSlide = 0;
   let autoRotateTimer;
   const ROTATE_INTERVAL = 5000; // 5 seconds
 
+  // Create dot indicators
+  const dotsContainer = document.createElement('div');
+  dotsContainer.className = 'mv-slider-dots';
+  slides.forEach((_, idx) => {
+    const dot = document.createElement('button');
+    dot.className = 'mv-slider-dot';
+    dot.setAttribute('aria-label', `Go to slide ${idx + 1}`);
+    dot.addEventListener('click', () => {
+      currentSlide = idx;
+      updateSlides();
+      startAutoRotate();
+    });
+    dotsContainer.appendChild(dot);
+  });
+  sliderContainer.appendChild(dotsContainer);
+  // Show the first slide and activate its dot on load (after dotsContainer is initialized)
+  updateSlides();
+
   function updateSlides() {
-    slides.forEach(slide => {
+    slides.forEach((slide, idx) => {
       slide.classList.remove('active');
       slide.style.transform = 'translateX(100px)';
       slide.style.opacity = '0';
       slide.style.visibility = 'hidden';
+      dotsContainer.children[idx].classList.remove('active');
     });
-
     slides[currentSlide].classList.add('active');
     slides[currentSlide].style.transform = 'translateX(0)';
     slides[currentSlide].style.opacity = '1';
     slides[currentSlide].style.visibility = 'visible';
+    dotsContainer.children[currentSlide].classList.add('active');
   }
 
   function startAutoRotate() {
@@ -77,57 +97,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Only add navigation if both buttons exist
-  const hasNavigation = prevBtn && nextBtn;
-  
-  if (hasNavigation) {
-    nextBtn.addEventListener('click', handleNextClick);
-    prevBtn.addEventListener('click', handlePrevClick);
 
-    // Hit zones: clicking left/right halves navigates slides
-    const hitLeft = document.createElement('div');
-    const hitRight = document.createElement('div');
-    hitLeft.className = 'mv-hit-zone mv-hit-left';
-    hitRight.className = 'mv-hit-zone mv-hit-right';
-
-    sliderContainer.appendChild(hitLeft);
-    sliderContainer.appendChild(hitRight);
-    hitLeft.addEventListener('click', handlePrevClick);
-    hitRight.addEventListener('click', handleNextClick);
-
-    // Pause auto-rotation when hovering over the slider
-    sliderContainer.addEventListener('mouseenter', stopAutoRotate);
-    sliderContainer.addEventListener('mouseleave', startAutoRotate);
-
-    // Only start auto-rotation if not on mobile
-    function maybeStartAutoRotate() {
-      if (window.innerWidth > 700) {
-        startAutoRotate();
-      } else {
-        stopAutoRotate();
-      }
+  // Swipe support for touch devices
+  let startX = null;
+  sliderContainer.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  });
+  sliderContainer.addEventListener('touchend', (e) => {
+    if (startX === null) return;
+    const endX = e.changedTouches[0].clientX;
+    const diff = endX - startX;
+    if (Math.abs(diff) > 50) {
+      if (diff < 0) nextSlide();
+      else prevSlide();
+      startAutoRotate();
     }
-    maybeStartAutoRotate();
-    window.addEventListener('resize', maybeStartAutoRotate);
-  } else {
-    console.log('Mission & Vision slider: Navigation buttons not found, navigation disabled');
-  }
+    startX = null;
+  });
 
-  // Only add keyboard navigation and visibility handlers if we have navigation
-  if (hasNavigation) {
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') handlePrevClick();
-      if (e.key === 'ArrowRight') handleNextClick();
-    });
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') prevSlide();
+    if (e.key === 'ArrowRight') nextSlide();
+  });
 
-    // Handle page visibility changes
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        stopAutoRotate();
-      } else {
-        maybeStartAutoRotate();
-      }
-    });
+  // Pause auto-rotation when hovering over the slider
+  sliderContainer.addEventListener('mouseenter', stopAutoRotate);
+  sliderContainer.addEventListener('mouseleave', startAutoRotate);
+
+  // Only start auto-rotation if not on mobile
+  function maybeStartAutoRotate() {
+    if (window.innerWidth > 700) {
+      startAutoRotate();
+    } else {
+      stopAutoRotate();
+    }
   }
+  maybeStartAutoRotate();
+  window.addEventListener('resize', maybeStartAutoRotate);
+
+  // Handle page visibility changes
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stopAutoRotate();
+    } else {
+      maybeStartAutoRotate();
+    }
+  });
 });

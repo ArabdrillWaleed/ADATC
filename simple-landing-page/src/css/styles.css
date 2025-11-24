@@ -1,3 +1,39 @@
+@media (max-width: 700px) {
+  .mv-slider-dot {
+    width: 2px !important;
+    height: 2px !important;
+  }
+}
+@media (max-width: 700px) {
+  .mv-slider {
+    padding-bottom: 1rem;
+  }
+}
+@media (min-width: 1024px) {
+  .mv-slider {
+    padding-bottom: 2rem;
+  }
+}
+.mv-slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+.mv-slider-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  outline: none;
+}
+.mv-slider-dot.active {
+  background: #f6630c;
+  box-shadow: none;
+}
 /* Ensure course modal title uses correct font and weight */
 #course-modal-title {
   font-family: 'Certo Sans', Arial, sans-serif !important;
@@ -113,9 +149,10 @@ body, html, * {
   display: flex;
 }
 #mission-slide .mv-image img {
-  width: 90vw !important;
-  max-width: 900px !important;
-  min-width: 350px !important;
+#mission-slide .mv-image img {
+  width: auto !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
   height: auto !important;
   display: block !important;
   margin: 0 auto !important;
@@ -126,11 +163,8 @@ body, html, * {
   align-items: center;
 }
 #mission-slide .mv-image img {
-  width: 600px !important;
-  max-width: 100% !important;
-  height: auto !important;
-  display: block !important;
-  margin: 0 auto !important;
+  /* ...existing code... */
+}
 }
 .our-facility .image-hero.color-2::before {
   content: '';
