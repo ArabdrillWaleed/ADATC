@@ -1,3 +1,7 @@
+.interactive-stats .stat-number .value,
+.interactive-stats .stat-number .unit {
+  font-weight: 400 !important;
+}
 .site-nav .nav-list > .nav-item > .nav-link {
   font-weight: 500 !important;
 }
@@ -873,10 +877,13 @@ body, html, * {
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
-  .training-overview .feature-panels-row {
-    padding: 0 1.5rem;
+  .intro-text {
+    font-size: 1.15rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 1.5rem !important;
+    color: #2f4b57 !important;
+    font-weight: 300 !important;
   }
-  
   .training-overview .feature-panels-inner {
     gap: 1.5rem;
   }
