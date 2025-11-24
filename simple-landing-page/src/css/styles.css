@@ -1,3 +1,17 @@
+.site-nav .nav-list > .nav-item > .nav-link {
+  font-weight: 500 !important;
+}
+/* Header navbar items: bold, dropdown items: medium */
+.site-nav .dropdown-menu a {
+  font-weight: 350 !important;
+}
+/* Emphasize intro text on courses page */
+.intro-text {
+  font-weight: 500 !important;
+}
+body, html, * {
+  font-family: 'Certo Sans', Arial, sans-serif !important;
+}
 @media (max-width: 700px) {
   #course-overview-table th,
   .data-table th {
@@ -119,11 +133,6 @@
 .our-facility .image-hero.color-2 {
   position: relative;
   overflow: hidden;
-}
-/* Force top-level nav titles to font-weight 280 */
-.site-nav .nav-list > .nav-item > .nav-link:not(.dropdown-trigger),
-.site-nav .nav-list > .nav-item > .nav-link.dropdown-trigger {
-  font-weight: 280 !important;
 }
 /* Feature panel bullet list and CTA styles */
 .panel-list {
@@ -1804,7 +1813,6 @@ body.site-fill main { flex: 1 0 auto; }
     margin: 0 !important;
     padding: 0.7rem 0.2rem !important;
     font-size: 1rem !important;
-    font-weight: 500 !important;
     border-radius: 8px !important;
     background: none !important;
     box-shadow: none !important;
@@ -1986,7 +1994,6 @@ body.site-fill main { flex: 1 0 auto; }
 }
 
 /* Make dropdown titles lighter (not bold) to match design request */
-.dropdown-menu a { font-weight: 400; }
 
 .dropdown-menu a:hover {
   background: rgba(246,99,12,0.05);
@@ -1999,12 +2006,6 @@ body.site-fill main { flex: 1 0 auto; }
 }
 
 /* Stronger rule: ensure dropdown links are not bold (use higher specificity and !important) */
-.nav-item.has-dropdown .dropdown-menu a,
-.nav-item.has-dropdown .dropdown-menu a:visited,
-.nav-item.has-dropdown .dropdown-menu a:active,
-.nav-item.has-dropdown .dropdown-menu a:focus {
-  font-weight: 400 !important;
-}
 
 @media (max-width:720px) {
   .nav-item.has-dropdown {
