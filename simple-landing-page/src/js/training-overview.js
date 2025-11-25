@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const ctaBtn = document.getElementById('overview-cta-btn');
   const filtersContainer = document.getElementById('overview-accreditation-filters');
   const table = document.getElementById('course-overview-table');
   if (!filtersContainer || !table) return;
@@ -17,20 +18,40 @@ document.addEventListener('DOMContentLoaded', function() {
       b.textContent = label;
       filtersContainer.appendChild(b);
     };
-    addBtn('All', 'all', true);
-    addBtn('Drilling', 'drilling');
-    addBtn('Soft Skills', 'soft-skills');
-    addBtn('Mechanical', 'mechanical');
-    addBtn('HSE', 'hse');
+    addBtn('All Portfolio', 'all', true);
+    addBtn('Drilling Portfolio', 'drilling');
+    addBtn('Soft Skills Portfolio', 'soft-skills');
+    addBtn('Mechanical Portfolio', 'mechanical');
+    addBtn('HSE Portfolio', 'hse');
 
     filtersContainer.addEventListener('click', e => {
       const btn = e.target.closest('.team-filter-btn');
       if(!btn) return;
-      currentAccreditation = btn.dataset.accreditation || 'all';
+      const value = btn.dataset.accreditation || 'all';
+      currentAccreditation = value;
       filtersContainer.querySelectorAll('.team-filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       renderRows(getFilteredCourses());
+      // Update CTA button label and link
+      if (ctaBtn) {
+        let label;
+        if (value === 'all') {
+          label = 'All Portfolio';
+          ctaBtn.href = 'courses.html';
+        } else {
+          // Remove 'Portfolio' if present, then add it
+          let base = btn.textContent.replace(/ Portfolio$/i, '');
+          label = base + ' Portfolio';
+          ctaBtn.href = `courses.html?q=&category=${encodeURIComponent(value)}`;
+        }
+        ctaBtn.textContent = label;
+      }
     });
+    // Initial CTA button state
+    if (ctaBtn) {
+      ctaBtn.textContent = 'All Portfolio';
+      ctaBtn.href = 'courses.html';
+    }
   }
 
   // Dummy data loader (replace with actual data source if needed)

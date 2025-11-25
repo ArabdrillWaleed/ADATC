@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const searchInput = document.getElementById('course-search-input');
   const searchCount = document.getElementById('course-search-count');
   const noResults = document.getElementById('course-no-results');
-  const accreditationFiltersContainer = document.getElementById('accreditation-filters');
-  let currentAccreditationFilter = 'all';
+  const filtersContainer = document.getElementById('courses-category-filters');
+  let currentCategory = 'all';
 
   function openModal(card) {
     const summary = card.querySelector('.course-summary');
@@ -46,47 +46,31 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Build accreditation filter buttons dynamically
-  function buildAccreditationFilters() {
-    if(!accreditationFiltersContainer) return;
-    const accSet = new Set();
-    courseCards.forEach(card => {
-      const summary = card.querySelector('.course-summary');
-      if(!summary) return;
-      const raw = (summary.dataset.accreditation || '').trim();
-      if(raw === '') return; // skip empty
-      // split by common separators if multiple values ever appear
-      raw.split(/[,;/]/).map(s => s.trim()).filter(Boolean).forEach(val => accSet.add(val));
+  function buildCategoryFilters() {
+    if(!filtersContainer) return;
+    filtersContainer.innerHTML = '';
+    const addBtn = (label, value, isActive=false) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'team-filter-btn' + (isActive ? ' active' : '');
+      b.dataset.category = value;
+      b.textContent = label;
+      filtersContainer.appendChild(b);
+    };
+    addBtn('All', 'all', true);
+    addBtn('Drilling', 'drilling');
+    addBtn('Soft Skills', 'soft-skills');
+    addBtn('Mechanical', 'mechanical');
+    addBtn('HSE', 'hse');
+
+    filtersContainer.addEventListener('click', e => {
+      const btn = e.target.closest('.team-filter-btn');
+      if(!btn) return;
+      currentCategory = btn.dataset.category || 'all';
+      filtersContainer.querySelectorAll('.team-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilters(searchInput ? searchInput.value : '');
     });
-    // Clear existing
-    accreditationFiltersContainer.innerHTML = '';
-    // All button first
-    const allBtn = document.createElement('button');
-    allBtn.type = 'button';
-    allBtn.className = 'accreditation-filter-btn active';
-    allBtn.dataset.accreditation = 'all';
-    allBtn.textContent = 'All';
-    accreditationFiltersContainer.appendChild(allBtn);
-    // If there are courses with no accreditation, add Unaccredited button
-    const hasUnaccredited = Array.from(courseCards).some(card => {
-      const summary = card.querySelector('.course-summary');
-      return summary && !(summary.dataset.accreditation || '').trim();
-    });
-    accSet.forEach(acc => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'accreditation-filter-btn';
-      btn.dataset.accreditation = acc;
-      btn.textContent = acc;
-      accreditationFiltersContainer.appendChild(btn);
-    });
-    if(hasUnaccredited) {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'accreditation-filter-btn';
-      btn.dataset.accreditation = '_unaccredited';
-      btn.textContent = 'Unaccredited';
-      accreditationFiltersContainer.appendChild(btn);
-    }
   }
 
   function applyFilters(searchTerm) {
@@ -101,18 +85,15 @@ document.addEventListener('DOMContentLoaded', function() {
       if(!summary) return;
       const title = (summary.dataset.title || '').toLowerCase();
       const desc = (summary.dataset.desc || '').toLowerCase();
-      const accreditationRaw = (summary.dataset.accreditation || '').trim();
-      const accreditationTokens = accreditationRaw.split(/[,;/]/).map(s => s.trim().toLowerCase()).filter(Boolean);
-      // Determine accreditation match
-      let accreditationMatch = true;
-      if(currentAccreditationFilter === '_unaccredited') {
-        accreditationMatch = accreditationRaw === '';
-      } else if(currentAccreditationFilter !== 'all') {
-        accreditationMatch = accreditationTokens.includes(currentAccreditationFilter.toLowerCase());
+      const category = (summary.dataset.category || '').toLowerCase();
+      // Determine category match
+      let categoryMatch = true;
+      if(currentCategory !== 'all') {
+        categoryMatch = category === currentCategory;
       }
       // Determine search match
       const searchMatch = !searchTerm || title.includes(searchTerm) || desc.includes(searchTerm);
-      const visible = accreditationMatch && searchMatch;
+      const visible = categoryMatch && searchMatch;
       card.style.display = visible ? '' : 'none';
       if(visible) visibleCount++;
     });
@@ -122,16 +103,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  if(accreditationFiltersContainer) {
-    buildAccreditationFilters();
-    accreditationFiltersContainer.addEventListener('click', e => {
-      const btn = e.target.closest('.accreditation-filter-btn');
-      if(!btn) return;
-      currentAccreditationFilter = btn.dataset.accreditation || 'all';
-      accreditationFiltersContainer.querySelectorAll('.accreditation-filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      applyFilters(searchInput ? searchInput.value : '');
-    });
+  if(filtersContainer) {
+    buildCategoryFilters();
   }
 
   function closeModal() {
@@ -183,17 +156,28 @@ document.addEventListener('DOMContentLoaded', function() {
       // Initialize clear button visibility
       searchClearBtn.style.display = searchInput.value ? 'flex' : 'none';
     }
-    // If a query param ?q= exists, prefill and filter
+    // If a query param ?category= exists, activate that filter
     const params = new URLSearchParams(window.location.search);
-    const q = params.get('q');
-    if (q) {
-      searchInput.value = q;
-      filterCourses(q);
+    const category = params.get('category');
+    if (category) {
+      currentCategory = category;
+      // Activate the correct button
+      if (filtersContainer) {
+        filtersContainer.querySelectorAll('.team-filter-btn').forEach(b => {
+          if (b.dataset.category === category) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+      applyFilters(searchInput ? searchInput.value : '');
+    } else {
+      // Initialize without count
+      searchCount.textContent = ``;
+      // Initial filter application
+      filterCourses('');
     }
-    // Initialize without count
-    searchCount.textContent = ``;
-    // Initial filter application
-    filterCourses('');
   }
 
   // Add event listeners for both close button and backdrop

@@ -149,7 +149,6 @@ body, html, * {
   display: flex;
 }
 #mission-slide .mv-image img {
-#mission-slide .mv-image img {
   width: auto !important;
   max-width: 100% !important;
   min-width: 0 !important;
@@ -162,10 +161,7 @@ body, html, * {
   justify-content: center;
   align-items: center;
 }
-#mission-slide .mv-image img {
-  /* ...existing code... */
-}
-}
+
 .our-facility .image-hero.color-2::before {
   content: '';
   position: absolute;
