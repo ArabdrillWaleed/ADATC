@@ -172,16 +172,15 @@
   <!-- Amenities Modal -->
   <div id="amenities-modal" class="modal" aria-hidden="true">
     <div class="modal-backdrop" data-action="close"></div>
+    <button class="modal-close modal-close-global" data-action="close" aria-label="Close">×</button>
     <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="amenities-modal-title">
-      <button class="modal-close" data-action="close" aria-label="Close">×</button>
-      <div id="amenities-modal-image"></div>
-      <div class="desc-card">
+      <div class="modal-image-top">
+        <div id="amenities-modal-image" class="modal-image-full"></div>
+      </div>
+      <div class="modal-text-content">
         <h3 id="amenities-modal-title"></h3>
-
-        <div class="modal-content-wrapper">
-          <div class="modal-body">
-            <p id="amenities-modal-description"></p>
-          </div>
+        <div class="modal-body">
+          <p id="amenities-modal-description"></p>
         </div>
       </div>
     </div>
