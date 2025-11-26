@@ -1,3 +1,15 @@
+
+/* Force mobile intro-text font size at the end for highest specificity */
+
+@media (max-width: 600px) {
+  .light,
+  .text-light,
+  .light-text {
+    font-size: 1rem !important;
+  }
+
+  
+}
 @media (min-width: 900px) {
     #amenities-modal .modal-text-content {
       align-items: flex-start !important;
@@ -5,6 +17,7 @@
   #amenities-modal .modal-body p {
     font-size: 1.33rem !important;
   }
+  
 }
 /* Global close button for amenities modal */
 .modal-close.modal-close-global {
@@ -102,6 +115,10 @@
   .mv-slider-dot {
     width: 2px !important;
     height: 2px !important;
+  
+  }
+  .privacy-policy li {
+    font-size: 1rem !important;
   }
 }
 @media (max-width: 700px) {
@@ -3258,7 +3275,7 @@ html{scroll-behavior:smooth}
   }
 
   .intro-text {
-    font-size: 1.4rem;
+    font-size: 1rem !important;
   }
 }
 
@@ -7942,9 +7959,7 @@ h3 {
   inset: 0;
   background: #003c34;
 }
-#amenities-modal .modal-panel {
-  /* removed old modal-panel rules; see desktop/laptop media query for new sizing */
-}
+
 
 /* Position close button at top-right of white panel */
 #amenities-modal .modal-close {
@@ -7973,14 +7988,7 @@ h3 {
   }
 }
 
-/* Amenities modal: image on left side */
-#amenities-modal #amenities-modal-image {
-  /* All previous constraints removed. See desktop/laptop/tablet media query for new sizing. */
-}
 
-#amenities-modal #amenities-modal-image img {
-  /* All previous constraints removed. See desktop/laptop/tablet media query for new sizing. */
-}
 
 @media (min-width: 900px) {
   #amenities-modal .modal-content-wrapper {
@@ -8032,9 +8040,7 @@ h3 {
     max-height: 100% !important;
   }
 }
-#amenities-modal .desc-card { 
-  /* moved to mobile media query below */
-}
+
 
 #amenities-modal #amenities-modal-title { 
   text-align: left !important;

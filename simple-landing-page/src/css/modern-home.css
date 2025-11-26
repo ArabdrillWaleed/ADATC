@@ -433,18 +433,15 @@
 
 @media (max-width: 600px) {
   .modern-hero {
-    min-height: 90vh;
+    min-height: 65vh;
   }
-  
   .modern-hero-badge {
     font-size: 0.8rem;
     padding: 0.4rem 1.2rem;
   }
-  
   .modern-values-grid {
     grid-template-columns: 1fr;
   }
-  
   .modern-intro-card {
     padding: 2rem;
   }
