@@ -1,3 +1,14 @@
+#instructor-modal .modal-body #instructor-modal-summary,
+#instructor-modal .modal-body #instructor-modal-competencies {
+  font-size: 1rem !important;
+}
+
+@media (max-width: 600px) {
+  #instructor-modal .modal-body #instructor-modal-summary,
+  #instructor-modal .modal-body #instructor-modal-competencies {
+    font-size: 1rem !important;
+  }
+}
 
 /* Force mobile intro-text font size at the end for highest specificity */
 
