@@ -1,3 +1,20 @@
+#instructor-modal {
+  scrollbar-width: thin;
+  scrollbar-color: #f6630c rgba(0,60,52,0.08);
+}
+#instructor-modal::-webkit-scrollbar {
+  width: 10px;
+  background: rgba(0,60,52,0.08);
+  border-radius: 6px;
+}
+#instructor-modal::-webkit-scrollbar-thumb {
+  background: #f6630c;
+  border-radius: 6px;
+  border: 2px solid rgba(0,60,52,0.08);
+}
+#instructor-modal::-webkit-scrollbar-thumb:hover {
+  background: #d45509;
+}
 #instructor-modal .modal-body #instructor-modal-summary,
 #instructor-modal .modal-body #instructor-modal-competencies {
   font-size: 1rem !important;
@@ -6251,13 +6268,15 @@ html{scroll-behavior:smooth}
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  -webkit-overflow-scrolling: touch;
+  overflow: visible !important;
   flex: 1;
   min-height: 0;
-  max-height: 60vh;
+  max-height: none;
   padding-right: 0.5rem;
+#instructor-modal {
+  max-height: 80vh;
+  overflow-y: auto;
+}
 }
 
 /* Modal body sections: left-aligned for horizontal layout */
