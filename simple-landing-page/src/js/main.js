@@ -147,6 +147,17 @@ document.addEventListener('DOMContentLoaded', function() {
             let toggle = navItem.querySelector('.dropdown-toggle');
             const dropdownMenu = navItem.querySelector('.dropdown-menu');
 
+            // Accordion behavior for mobile: only one dropdown open at a time
+            function accordionToggle(e) {
+              if(window.innerWidth <= 900){
+                e.preventDefault();
+                // Close all other dropdowns
+                document.querySelectorAll('.nav-item.has-dropdown.expanded').forEach(item => {
+                  if(item !== navItem) item.classList.remove('expanded');
+                });
+                navItem.classList.toggle('expanded');
+              }
+            }
             // If there's no explicit toggle button, create a small one for
             // mobile accessibility so taps have a clear hit-target. This
             // keeps markup stable while ensuring JS can always find a toggle.
@@ -180,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             if(trigger){
-              trigger.addEventListener('click', (e) => { e.preventDefault(); toggleDropdown(e); });
+              trigger.addEventListener('click', accordionToggle);
             }
 
             if(toggle){

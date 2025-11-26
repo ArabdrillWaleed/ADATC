@@ -1910,14 +1910,15 @@ body.site-fill main { flex: 1 0 auto; }
     position: static;
     left: auto;
     top: auto;
-    width: 100%;
+    width: 80vw;
+    max-width: 260px;
     min-width: 0;
     background: #fff;
     box-shadow: none;
     border-radius: 0;
     z-index: auto;
-    padding: 0.3rem 0.2rem;
-    margin: 0;
+    padding: 0.1rem 0.1rem;
+    margin: 0.1rem auto 0 auto;
     display: none;
   }
   .site-nav .nav-item.has-dropdown.expanded .dropdown-menu {
@@ -2226,17 +2227,21 @@ body.site-fill main { flex: 1 0 auto; }
   }
 
   .dropdown-menu {
+    
     position: static;
     box-shadow: none;
     opacity: 1;
-    visibility: hidden;
+    
     transform: none;
     height: 0;
     overflow: hidden;
+    background: #fff !important;
     padding-left: 1rem;
     margin-top: 0;
     margin-bottom: 0;
-    background: transparent;
+    width: auto;
+    
+    
     min-width: 0;
     transition: all 0.3s ease;
   }
@@ -2515,6 +2520,7 @@ html{scroll-behavior:smooth}
 
 /* Mobile styles */
 @media (max-width: 720px) {
+  
   /* Mobile cap: also increase by 35% from previous 44px -> 59px */
   .logo-img{max-height:30px} /* reduce roughly 200% smaller (half size) on mobile */
   
@@ -4415,6 +4421,7 @@ html{scroll-behavior:smooth}
     padding: 0 0 0 0.5rem;
     background: transparent;
     box-shadow: none;
+    background-color: grey !important;
   }
 
   .site-nav .nav-list .nav-item.has-dropdown .dropdown-menu li {
@@ -4425,7 +4432,9 @@ html{scroll-behavior:smooth}
   .site-nav .nav-list .nav-item.has-dropdown .dropdown-menu a {
     padding: 0.5rem 0.75rem;
     display: block;
-    font-weight: 300;
+    font-weight: 350 !important;
+    font-size: 1rem !important;
+    color: #003c34;
   }
 
   .site-nav .nav-list .nav-item.has-dropdown.expanded .dropdown-menu {
