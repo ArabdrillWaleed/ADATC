@@ -1838,6 +1838,7 @@ body.site-fill main { flex: 1 0 auto; }
   top:0;
   left:0;
   right:0;
+   box-shadow: 0 2px 8px rgba(0,0,0,0.35);
   z-index:99999; /* ensure header stays above full-bleed sections */
   background:#ffffff; /* header set to white */
   color: var(--text);
@@ -1946,15 +1947,17 @@ body.site-fill main { flex: 1 0 auto; }
         text-align: left !important;
         justify-content: flex-start !important;
         align-items: flex-start !important;
-        width: 100vw !important;
+        width: 50vw !important;
         padding: 0.8rem 0.4rem 0.8rem 0.4rem !important;
-        margin: 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 0% !important;
+        margin: 0rem !important;
         background: none !important;
         box-shadow: none !important;
         border-radius: 0 !important;
         font-size: 1rem !important;
         font-weight: 500 !important;
-        color: #003c34 !important;
+        color: #083c00 !important;
         letter-spacing: 0.2px !important;
         /* cache busting: 20251120 */
       }
@@ -2028,24 +2031,8 @@ body.site-fill main { flex: 1 0 auto; }
     padding: 0.5rem 0;
     margin: 0;
     display: none;
-    /* Mobile: force inline expansion for dropdowns */
-    .site-nav .nav-item.has-dropdown .dropdown-menu {
-      position: static !important;
-      left: auto !important;
-      top: auto !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      background: #fff !important;
-      box-shadow: none !important;
-      border-radius: 0 !important;
-      z-index: auto !important;
-      padding: 0.5rem 0 0.5rem 1.2rem !important;
-      margin: 0 !important;
-      display: none !important;
-    }
-    .site-nav .nav-item.has-dropdown.expanded .dropdown-menu {
-      display: block !important;
-    }
+   
+    
   }
   .site-nav .nav-item.has-dropdown.expanded .dropdown-menu {
     display: block !important;
@@ -2666,10 +2653,6 @@ html{scroll-behavior:smooth}
   color: inherit;
 }
 
-/* Ensure the chevron pseudo stays aligned and doesn't add extra spacing */
-.site-nav .nav-list .nav-item.has-dropdown > .nav-link.dropdown-trigger::after {
-  right: 0.6rem; /* small offset to match other anchors */
-}
 
 
 .site-header.scrolled .site-nav a:hover,
@@ -4421,7 +4404,7 @@ html{scroll-behavior:smooth}
     padding: 0 0 0 0.5rem;
     background: transparent;
     box-shadow: none;
-    background-color: grey !important;
+    background-color: rgb(255, 255, 255) !important;
   }
 
   .site-nav .nav-list .nav-item.has-dropdown .dropdown-menu li {
@@ -4432,7 +4415,7 @@ html{scroll-behavior:smooth}
   .site-nav .nav-list .nav-item.has-dropdown .dropdown-menu a {
     padding: 0.5rem 0.75rem;
     display: block;
-    font-weight: 350 !important;
+    font-weight: 400 !important;
     font-size: 1rem !important;
     color: #003c34;
   }
@@ -4440,11 +4423,14 @@ html{scroll-behavior:smooth}
   .site-nav .nav-list .nav-item.has-dropdown.expanded .dropdown-menu {
     visibility: visible;
     height: auto;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-top: 0 !important;
+    padding-bottom: 0   !important;
   }
 
-  .site-nav .nav-list .nav-item.has-dropdown { margin-bottom: 0; }
+  .site-nav .nav-list .nav-item.has-dropdown {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+     margin-bottom: 0; }
 }
 
 /* Mobile: ensure dropdown parents do not get a persistent orange color
