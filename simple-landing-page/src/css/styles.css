@@ -1,3 +1,139 @@
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+/* ========================= */
+/* Mobile Navigation Styles  */
+/* ========================= */
+@media (max-width: 700px) {
+    
+    
+  
+
+    
+   
+  body.nav-open .site-nav,
+  .site-nav.nav-open {
+    display: block !important;
+  }
+
+      
+.site-nav .nav-item.has-dropdown > .nav-link::after {
+    content: '\25BC';
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-size: 1rem;
+    vertical-align: middle;
+    opacity: 0.8;
+    transition: transform 0.22s ease;
+    color: #003c34;
+}
+.site-nav .nav-item.has-dropdown.expanded > .nav-link::after {
+    transform: rotate(180deg);
+}
+  
+    
+
+  .nav-list > .nav-item > .nav-link,
+  .nav-list > .nav-item,
+  .nav-list > .nav-item.has-dropdown .dropdown-menu li
+   
+  
+   {
+    padding-left: 0.2rem !important;
+    font-size: 1rem !important;
+    color: #003c34 !important;
+    
+  }
+
+  
+  .site-nav {
+    display: none !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 94vw;
+    background: #ea9d22;
+    z-index: 1000;
+    
+    
+  }
+  .nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 1.2rem 0.5rem;
+    margin: 0;
+    list-style: none;
+  }
+  .nav-item {
+    
+    width: 90%;
+    margin: 0;
+    padding: 0.2rem 0;
+    border-bottom: .25px solid rgb(236, 235, 235);
+  }
+  .nav-link {
+    display: block;
+    width: 100%;
+    padding: 0.8rem 0.5rem;
+    font-size: 1.15rem;
+    color: #003c34;
+    font-weight: 600;
+    text-align: left;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  
+  .nav-item.has-dropdown .dropdown-menu {
+    display: none;
+    background: #ffffff !important;
+    
+    margin: 0.2rem 0 0 0;
+    ;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0 0  ;
+    position: static;
+    width: 100%;
+    z-index: 10;
+  }
+  .nav-item.has-dropdown.expanded .dropdown-menu {
+    
+    display: block;
+    
+  }
+  .dropdown-menu li {
+    width: 100%;
+    padding: 0.4rem 0.6rem;
+    padding-left: 0;
+    text-align: left;
+    font-size: 1rem;
+    color: #003c34;
+    border-bottom: 0.25px solid rgb(236, 235, 235);
+  }
+  .dropdown-menu li:last-child {
+    border-bottom: none !important;
+  }
+
+  .nav-list > .nav-item:last-child {
+  border-bottom: none !important;
+}
+}
 #instructor-modal {
   scrollbar-width: thin;
   scrollbar-color: #f6630c rgba(0,60,52,0.08);
@@ -1894,168 +2030,7 @@ body.site-fill main { flex: 1 0 auto; }
 .site-nav a.active { color: var(--ad-gold); text-decoration: none; }
 .nav-item.has-dropdown { position: relative; }
 
-@media (max-width: 700px) {
-  .site-nav .nav-list > .nav-item {
-    margin-bottom: 1rem;
-    margin-top: 0;
-    width: 100%;
-    padding: 0;
-  }
-  .site-nav .nav-list > .nav-item:last-child {
-    margin-bottom: 0;
-  }
-  .site-nav .nav-item.has-dropdown {
-    position: relative;
-  }
-  .site-nav .nav-item.has-dropdown .dropdown-menu {
-    position: static;
-    left: auto;
-    top: auto;
-    width: 80vw;
-    max-width: 260px;
-    min-width: 0;
-    background: #fff;
-    box-shadow: none;
-    border-radius: 0;
-    z-index: auto;
-    padding: 0.1rem 0.1rem;
-    margin: 0.1rem auto 0 auto;
-    display: none;
-  }
-  .site-nav .nav-item.has-dropdown.expanded .dropdown-menu {
-    display: block;
-  }
-  .site-nav .dropdown-menu li {
-    width: 100%;
-    padding: 0.4rem 0.6rem;
-    text-align: left;
-    font-size: 0.98rem;
-    border-bottom: 1px solid #f2f2f2;
-    background: none;
-    color: #003c34;
-  }
-  .site-nav .dropdown-menu li:last-child {
-    border-bottom: none;
-  }
-      /* MAXIMUM SPECIFICITY OVERRIDE FOR MOBILE NAV */
-      .site-nav .nav-list,
-      .site-nav .nav-list > .nav-item,
-      .site-nav .nav-list > .nav-item > .nav-link,
-      .site-nav .nav-list > .nav-item > .nav-link.dropdown-trigger {
-        display: flex !important;
-        flex-direction: column !important;
-        text-align: left !important;
-        justify-content: flex-start !important;
-        align-items: flex-start !important;
-        width: 50vw !important;
-        padding: 0.8rem 0.4rem 0.8rem 0.4rem !important;
-        padding-top: 0 !important;
-        padding-bottom: 0% !important;
-        margin: 0rem !important;
-        background: none !important;
-        box-shadow: none !important;
-        border-radius: 0 !important;
-        font-size: 1rem !important;
-        font-weight: 500 !important;
-        color: #083c00 !important;
-        letter-spacing: 0.2px !important;
-        /* cache busting: 20251120 */
-      }
-    /* Force left alignment for all nav items and links in mobile nav */
-    .site-nav .nav-list,
-    .site-nav .nav-item,
-    .site-nav .nav-link,
-    .site-nav .nav-link.dropdown-trigger {
-      text-align: left !important;
-      justify-content: flex-start !important;
-      align-items: flex-start !important;
-    }
-  .site-nav {
-    width: 100vw;
-    padding: 0;
-    margin: 0;
-    background: #fff !important;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-    border-radius: 0 0 16px 16px;
-  }
-  .site-nav .nav-list {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 1.2rem !important;
-    align-items: stretch !important;
-    width: 100vw !important;
-    padding: 2rem 0.4rem 2rem 0.4rem !important;
-    margin: 0 !important;
-    background: none !important;
-    box-shadow: none !important;
-    text-align: left !important;
-  }
-  .site-nav .nav-item,
-  .site-nav .nav-link,
-  .site-nav .nav-link.dropdown-trigger {
-    text-align: left !important;
-    justify-content: flex-start !important;
-    border-radius: 0 !important;
-  }
-  .site-nav .nav-item,
-  .site-nav .nav-link,
-  .site-nav .nav-link.dropdown-trigger {
-    display: flex !important;
-    align-items: flex-start !important;
-    justify-content: center !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0.7rem 0.2rem !important;
-    font-size: 1rem !important;
-    border-radius: 8px !important;
-    background: none !important;
-    box-shadow: none !important;
-    text-align: left !important; 
-    color: #003c34 !important;
-    letter-spacing: 0.2px !important;
-  }
-  .site-nav .nav-item.has-dropdown {
-    position: relative !important;
-  }
-  .site-nav .nav-item.has-dropdown .dropdown-menu {
-    /* Desktop styles only, mobile overrides below */
-    position: absolute;
-    left: 0;
-    top: 100%;
-    width: 100vw;
-    min-width: 180px;
-    background: #fff;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-    border-radius: 0;
-    z-index: 1002;
-    padding: 0.5rem 0;
-    margin: 0;
-    display: none;
-   
-    
-  }
-  .site-nav .nav-item.has-dropdown.expanded .dropdown-menu {
-    display: block !important;
-  }
-  .site-nav .dropdown-menu li {
-    width: 100% !important;
-    padding: 0.6rem 1rem !important;
-    text-align: left !important;
-    font-size: 0.98rem !important;
-    border-bottom: 1px solid #eee !important;
-    background: none !important;
-    color: #003c34 !important;
-  }
-  .site-nav .dropdown-menu li:last-child {
-    border-bottom: none !important;
-  }
-  .site-nav .nav-link:active,
-  .site-nav .nav-link:focus {
-    background: #f6630c !important;
-    color: #fff !important;
-    outline: none !important;
-  }
-}
+
 .site-nav a{color:var(--ad-navy);font-weight:300;letter-spacing:0.6px}
 .site-nav a.search{color:var(--ad-gold)}
 .site-nav a:hover{color:var(--ad-gold)}
@@ -2183,82 +2158,8 @@ body.site-fill main { flex: 1 0 auto; }
   width: 12px;
 }
 
-/* Stronger rule: ensure dropdown links are not bold (use higher specificity and !important) */
 
-@media (max-width:720px) {
-  .nav-item.has-dropdown {
-    margin-bottom: 0;
-  }
-  
-  .nav-item.has-dropdown > .nav-link {
-    position: relative;
-    margin-bottom: 0;
-    padding-right: 2rem;
-  }
-  
-  .nav-item.has-dropdown > .nav-link::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    width: 8px;
-    height: 8px;
-    border-right: 2px solid currentColor;
-    border-bottom: 2px solid currentColor;
-    transform: translateY(-70%) rotate(45deg);
-    transition: transform 0.2s ease;
-  }
 
-  .nav-item.has-dropdown.expanded > .nav-link::after {
-    transform: translateY(-30%) rotate(-135deg);
-  }
-
-  .dropdown-menu {
-    
-    position: static;
-    box-shadow: none;
-    opacity: 1;
-    
-    transform: none;
-    height: 0;
-    overflow: hidden;
-    background: #fff !important;
-    padding-left: 1rem;
-    margin-top: 0;
-    margin-bottom: 0;
-    width: auto;
-    
-    
-    min-width: 0;
-    transition: all 0.3s ease;
-  }
-  
-  .nav-item.has-dropdown.expanded .dropdown-menu {
-    visibility: visible;
-    height: auto;
-    padding-top: 0.5rem;
-    padding-bottom: 0;
-    margin-bottom: 0.5rem;
-  }
-  
-  .dropdown-menu::before {
-    display: none;
-  }
-  
-  .dropdown-menu a {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    opacity: 0.9;
-  }
-
-  /* mobile: keep dropdown text light weight */
-  .dropdown-menu a { font-weight: 300; }
-
-  .dropdown-menu a:hover {
-    background: transparent;
-    opacity: 1;
-  }
-}
 
 
 
@@ -2444,29 +2345,8 @@ body.site-fill main { flex: 1 0 auto; }
   pointer-events: none;
 }
 
-/* Micro animation for when topline and arabic reveal */
-.header-main-row::before,
-.header-top .arabic{
-  transition: opacity 220ms cubic-bezier(.2,.9,.3,1), transform 220ms cubic-bezier(.2,.9,.3,1);
-}
 
-/* While animating, reduce pointer interactions to avoid accidental clicks mid animation */
 
-.site-header.scrolled .logo{font-size:0.9rem}
-.site-header.scrolled .logo-sub{font-size:0.75rem}
-
-/* adjust nav link colors when header is scrolled */
-.site-header.scrolled .site-nav a{color:#003c34}
-.site-header.scrolled .logo{color:var(--ad-navy)}
-.site-header.scrolled .btn-ghost{border-color:rgba(2,10,20,0.06);color:var(--text)}
-.site-header.scrolled .btn-primary{background:var(--ad-gold);color:var(--ad-dark)}
-
-/* When header is shrunk, reduce nav link size so expanded is ~50% larger */
-.site-header.scrolled .site-nav a{
-  /* When scrolled (compact), reduce nav link size */
-  font-size:.9rem; /* compact nav size */
-  padding:0.25rem 1.2rem;
-}
 
 /* smooth scrolling */
 html{scroll-behavior:smooth}
@@ -2547,6 +2427,7 @@ html{scroll-behavior:smooth}
 
 /* nav items */
 .site-nav{
+  
   display:flex;
   gap:1rem;
   align-items:center;
@@ -2655,20 +2536,7 @@ html{scroll-behavior:smooth}
 
 
 
-.site-header.scrolled .site-nav a:hover,
-.site-header.scrolled .site-nav a:active{
-  background: transparent;
-  outline: none;
-  
-  color: #f6630c;
-}
 
-
-
-.site-header.scrolled .site-nav a.active{
-  color: #f6630c;
- 
-}
 
 /* Active nav link */
 .site-nav a.active{
@@ -2715,107 +2583,12 @@ html{scroll-behavior:smooth}
   -webkit-tap-highlight-color: rgba(0,0,0,0.1);
 }
 
-/* mobile menu (hidden by default) */
-@media (max-width:720px){
-  /* show hamburger */
-  .nav-toggle{
-    display: block;
-    color: #003c34;
-    font-size: 1.5rem;
-    padding: 0.5rem;
-    position: relative;
-    z-index: 10000;
-    min-width: 44px;
-    min-height: 44px;
-  }
 
-  /* allow header items to wrap and stack nicely */
-  .header-inner{flex-wrap:wrap;align-items:center;padding-top:0.35rem;padding-bottom:0.35rem}
+ 
 
-  /* make header positioning relative so the dropdown can sit directly below */
-  .header-inner{position:relative}
+ 
 
-  /* mobile dropdown: full-width below the header (use top:100% so it always
-     sits immediately beneath the header regardless of header height) */
-  .site-nav{
-    visibility: hidden;
-    opacity: 0;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 100%;
-    background: #ffffff;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.25rem;
-    padding: 1rem;
-    z-index: 9999;
-    box-shadow: 0 8px 24px rgba(2,10,20,0.08);
-    width: 100%;
-    display: flex !important;
-    transform: translateY(-8px);
-    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
-  }
-  
-  /* Show nav when menu is open */
-  .site-header.nav-open .site-nav{
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0);
-  }
 
-  /* Ensure the underlying nav list stacks vertically on mobile */
-  .site-nav .nav-list{display:flex;flex-direction:column;gap:0.12rem;align-items:stretch;margin:0;padding:0}
-
-  .site-nav a{width:100%;padding:0.35rem 0.7rem;border-radius:6px;color:var(--text);display:block}
-  
-  /* Make all nav items consistent size and alignment */
-  .site-nav .nav-list > .nav-item > .nav-link {
-    font-size: 1rem !important;
-    font-weight: 400 !important;
-    line-height: 1.4;
-    letter-spacing: 0.3px;
-  }
-  
-  .btn-primary{width:100%;text-align:center}
-
-  /* Keep mobile nav links one consistent size (do not shrink when header toggles .scrolled) */
-  .site-nav a{
-    font-size:1rem !important; /* fixed mobile size */
-    line-height:1.4;
-  }
-
-  /* Mobile nav: use the same orange hover/focus/active color as desktop and footer */
-  .site-nav a:hover,
-  .site-nav a:focus,
-  .site-nav a:active{
-    color: #f6630c;
-    background: transparent;
-    outline: none;
-  }
-  .site-nav a.active{color:#f6630c}
-
-  /* Arabic util fallback: don't absolutely position on very small screens
-     — place it inline in the header utility row so it remains reachable. */
-  .header-top .arabic{position:static;transform:none;left:auto;top:auto;margin-left:auto;display:inline-block}
-
- }/* Extra-small phones: reduce hero height and tighten spacing */
-@media (max-width:420px){
-  .image-hero{height:38vh}
-  .header-inner{padding-top:0.25rem;padding-bottom:0.25rem}
-  .logo-img{max-height:26px}
-  .nav-toggle{font-size:1.35rem;padding:0.4rem}
-  .site-nav a{padding:0.5rem 0.6rem}
-
-  /* ensure the mobile nav still uses the same fixed font-size on very small phones */
-  .site-nav a{font-size:1rem !important}
-}
-
-/* Slightly reduce container padding for medium screens to make use of wider layout
-   while keeping the same comfortable padding on very small screens. */
-@media (min-width: 420px) and (max-width: 900px) {
-  .container { padding-left: 0.9rem; padding-right: 0.9rem; }
-}
 
 /* Tablet override: ensure iPad shows desktop navigation properly */
 @media (min-width: 721px) and (max-width: 900px) {
@@ -4371,86 +4144,9 @@ html{scroll-behavior:smooth}
   }
 }
 
-/* Site-wide mobile nav tweaks: make dropdown triggers match other items and
-   display submenu links as plain stacked items on small screens. This mirrors
-   the previous per-page fix but applies it globally. */
-@media (max-width: 720px) {
-  .site-nav .nav-list .nav-item.has-dropdown > .nav-link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* keep chevron to the far right */
-    /* Match regular mobile nav links: same padding, size and weight */
-    padding: 0.4rem 1.2rem; /* same as .site-nav a */
-    font-size: 1rem;
-    font-weight: 300;
-    letter-spacing: 0.6px;
-    width: 100%;
-    box-sizing: border-box;
-    white-space: normal;
-    pointer-events: auto;
-    line-height: 1.2;
-  }
 
-  .site-nav .nav-list .nav-item.has-dropdown > .nav-link::after {
-    right: 0.75rem;
-    top: 50%;
-    transform: translateY(-50%) rotate(45deg);
-  }
 
-  /* Submenu: remove list markers and ensure stacked plain links */
-  .site-nav .nav-list .nav-item.has-dropdown .dropdown-menu {
-    list-style: none;
-    margin: 0;
-    padding: 0 0 0 0.5rem;
-    background: transparent;
-    box-shadow: none;
-    background-color: rgb(255, 255, 255) !important;
-  }
 
-  .site-nav .nav-list .nav-item.has-dropdown .dropdown-menu li {
-    margin: 0;
-    padding: 0;
-  }
-
-  .site-nav .nav-list .nav-item.has-dropdown .dropdown-menu a {
-    padding: 0.5rem 0.75rem;
-    display: block;
-    font-weight: 400 !important;
-    font-size: 1rem !important;
-    color: #003c34;
-  }
-
-  .site-nav .nav-list .nav-item.has-dropdown.expanded .dropdown-menu {
-    visibility: visible;
-    height: auto;
-    padding-top: 0 !important;
-    padding-bottom: 0   !important;
-  }
-
-  .site-nav .nav-list .nav-item.has-dropdown {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-     margin-bottom: 0; }
-}
-
-/* Mobile: ensure dropdown parents do not get a persistent orange color
-   when tapped/expanded. Allow hover/tap feedback but reset on expanded. */
-@media (max-width: 720px) {
-  .site-nav .nav-list .nav-item.has-dropdown > .nav-link.dropdown-trigger,
-  .site-nav .nav-list .nav-item.has-dropdown > .nav-link {
-    color: #003c34; /* default dark green */
-  }
-
-  .site-nav .nav-list .nav-item.has-dropdown.expanded > .nav-link.dropdown-trigger,
-  .site-nav .nav-list .nav-item.has-dropdown.expanded > .nav-link {
-    color: #003c34 !important; /* prevent persistent orange when open */
-  }
-
-  .site-nav .nav-list .nav-item.has-dropdown > .nav-link.dropdown-trigger:active,
-  .site-nav .nav-list .nav-item.has-dropdown > .nav-link.dropdown-trigger:focus {
-    color: #003c34 !important;
-  }
-}
 
 /* Hit zones: clickable left/right halves that navigate slides */
 .mv-hit-zone {

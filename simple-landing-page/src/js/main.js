@@ -133,8 +133,8 @@ document.addEventListener('DOMContentLoaded', function() {
         initHeader._done = true;
         
         navToggle.addEventListener('click', () => {
-          headerEl.classList.toggle('nav-open');
-          const expanded = headerEl.classList.contains('nav-open');
+          document.body.classList.toggle('nav-open');
+          const expanded = document.body.classList.contains('nav-open');
           navToggle.setAttribute('aria-expanded', String(expanded));
         });
 
