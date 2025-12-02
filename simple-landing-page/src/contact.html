@@ -97,7 +97,7 @@
           <div class="form-popup" id="formPopup">
             <h3 style="color: var(--ad-navy); margin-bottom: 1rem;">Thank You!</h3>
             <p style="margin-bottom: 1.5rem;">Your message has been successfully submitted.</p>
-            <button class="btn btn-primary" onclick="closePopup()">Close</button>
+            <button class="btn btn-primary" type="button" onclick="closePopup()">Close</button>
           </div>
         </div>
 
@@ -144,6 +144,13 @@
   <!-- Footer component placeholder -->
   <div id="site-footer-placeholder"></div>
 
+  <style>
+    .field-error {
+      border: 2px solid #d32f2f !important;
+      background: #fff0f0 !important;
+      transition: border-color 0.2s, background 0.2s;
+    }
+  </style>
   <script src="js/main.js" defer></script>
   <script src="js/include-fragments.js" defer></script>
 </body>

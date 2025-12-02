@@ -1,3 +1,85 @@
+// Contact form validation logic
+document.addEventListener('DOMContentLoaded', function() {
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+
+  window.closePopup = function() {
+    var overlay = document.getElementById('popupOverlay');
+    var popup = document.getElementById('formPopup');
+    if (overlay) overlay.style.display = 'none';
+    if (popup) popup.style.display = 'none';
+  }
+
+  function highlightInvalidFields(form) {
+    let firstInvalid = null;
+    Array.from(form.elements).forEach(function(el) {
+      if ((el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) {
+        let valid = true;
+        if (el.name === 'phone') {
+          if (!/^\d+$/.test(el.value.trim())) {
+            valid = false;
+          }
+        } else if (el.type === 'email') {
+          if (!/^\S+@\S+\.\S+$/.test(el.value.trim())) {
+            valid = false;
+          }
+        } else if (el.required && !el.value.trim()) {
+          valid = false;
+        }
+        el.classList.remove('field-error');
+        if (!valid) {
+          el.classList.add('field-error');
+          if (!firstInvalid) firstInvalid = el;
+        }
+      }
+    });
+    if (firstInvalid) {
+      firstInvalid.focus();
+    }
+  }
+// Error hint style
+// Error field style
+var style = document.createElement('style');
+style.textContent = `
+.field-error {
+  border: 2px solid #d32f2f !important;
+  background: #fff0f0 !important;
+  transition: border-color 0.2s, background 0.2s;
+}
+.form-popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form-popup button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  text-align: center;
+}
+`;
+document.head.appendChild(style);
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    highlightInvalidFields(form);
+    // Check all fields
+    let valid = true;
+    Array.from(form.elements).forEach(function(el) {
+      if ((el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) {
+        if (el.classList.contains('field-error')) valid = false;
+      }
+    });
+    if (valid) {
+      var overlay = document.getElementById('popupOverlay');
+      var popup = document.getElementById('formPopup');
+      if (overlay) overlay.style.display = 'block';
+      if (popup) popup.style.display = 'block';
+      form.reset();
+    }
+  });
+});
 // Global runtime error capture — non-invasive helper to surface JS errors
 // during debugging. It logs and adds a visible banner so it's easier to
 // spot which script/line is throwing in the browser. This does not change
@@ -777,3 +859,153 @@ document.addEventListener('DOMContentLoaded', function() {
       console.warn('Initial header/footer init failed', e);
     }
 });
+
+
+
+
+
+const timelineData = [
+  { year: "1993", description: "The Establishment of Arabian Drilling Training Center in Dhahran Base.", image: "images/contactus.jpg", audio: "audio/1993.mp3" },
+  { year: "1995", description: "Deployment and operation of the CS Portable drilling and well control simulator", image: "images/1995.svg", audio: "audio/1995.mp3" },
+  { year: "2005", description: "Deployment and operation of the CS Full Size drilling and well control simulator", image: "images/Simulator.svg", audio: "audio/2005.mp3" },
+  { year: "2006", description: "Well Control - International Association of Drilling Contractors (IADC) and Well Control Accreditation Program (WellCAP)", image: "images/Simulator.svg", audio: "audio/2006.mp3" },
+  { year: "2012", description: "Deployment and operation of the of CS Cyber Chair drilling and well control simulator ", image: "images/2012.svg", audio: "audio/2012.mp3" },
+  { year: "2013", description: "The Health & Safety Institute (HSI) - First Aid and Basic Life Support (BLS)", image: "images/2013.svg", audio: "audio/2013.mp3" },
+  { year: "2015", description: "IADC WellSharp/IADC DIT - 1st training provider outside the USA to obtain this accrediation.", image: "images/contact.svg", audio: "audio/2015.mp3" },
+  { year: "2016", description: "IADC DIT - H2S Train the Trainer", image: "images/2016.png", audio: "audio/2016.mp3" },
+  { year: "2018", description: "Deployment and operation of four main simulators that are used to train and access students.", image: "images/ds600.svg", audio: "audio/2018.mp3" },
+  { year: "2019", description: "ISO:29993:2017 and ISO:9001:2015 certifications", image: "images/accreditations.svg", audio: "audio/2019.mp3" },
+  { year: "2023", description: "Acquiring Arabian Drilling Academy Training Center new building.", image: "images/adlacenter.jpg", audio: "audio/2023.mp3" },
+  { year: "2024", description: "Deployment and operation of the Bomco Full Size Cyber operator simulator.", image: "images/bomco 1.jpg", audio: "audio/2024.mp3" },
+  { year: "2025", description: "Registration with The Technical and Vocational Training Corporation.", image: "images/timeline2025voc.svg", audio: "audio/2025.mp3" },
+];
+		let currentIndex = 0;
+		const yearsContainer = document.getElementById('timelineYears');
+		const desc = document.getElementById('timelineDesc');
+		// Select section before any function uses it
+		const section = document.querySelector('.timeline-section');
+		// Windowed years rendering
+		let visibleStart = 0;
+		const VISIBLE_COUNT = 5;
+		let lastDirection = 'right';
+    function renderYears() {
+      if (!yearsContainer) return;
+      yearsContainer.innerHTML = '';
+      for (let i = visibleStart; i < Math.min(visibleStart + VISIBLE_COUNT, timelineData.length); i++) {
+        const btn = document.createElement('button');
+        btn.className = 'timeline-year' + (i === currentIndex ? ' active' : '');
+        btn.textContent = timelineData[i].year;
+        btn.dataset.index = i;
+        btn.addEventListener('click', () => {
+          lastDirection = (i > currentIndex) ? 'left' : 'right';
+          updateTimeline(i);
+        });
+        // Add animation class to active year
+        if (i === currentIndex) {
+          btn.classList.add('slide-in-' + lastDirection);
+        }
+        yearsContainer.appendChild(btn);
+      }
+    }
+    let audioPlayer = null;
+    let audioBtn = null;
+    
+    function updateTimeline(index) {
+      lastDirection = (index > currentIndex) ? 'left' : (index < currentIndex ? 'right' : lastDirection);
+      currentIndex = index;
+      if (index < visibleStart) {
+        visibleStart = index;
+      } else if (index >= visibleStart + VISIBLE_COUNT) {
+        visibleStart = index - VISIBLE_COUNT + 1;
+      }
+      renderYears();
+      // Animate description
+      if (desc) {
+        desc.classList.remove('slide-in-left', 'slide-in-right');
+        void desc.offsetWidth;
+        desc.innerHTML = '';
+        // Add description text
+        const descText = document.createElement('span');
+        descText.textContent = timelineData[index].description;
+        desc.appendChild(descText);
+        // Add audio player and button
+        if (audioPlayer) {
+          audioPlayer.pause();
+          audioPlayer.remove();
+        }
+        if (audioBtn) {
+          audioBtn.remove();
+        }
+        audioPlayer = document.createElement('audio');
+        audioPlayer.src = timelineData[index].audio;
+        audioPlayer.preload = 'auto';
+        audioPlayer.style.display = 'none';
+        desc.appendChild(audioPlayer);
+        audioBtn = document.createElement('button');
+        audioBtn.textContent = 'Play'; // Always start as 'Play' when switching years
+        audioBtn.className = 'timeline-audio-btn';
+        audioBtn.onclick = function() {
+          if (audioPlayer.paused) {
+            audioPlayer.play();
+            audioBtn.textContent = 'Pause';
+          } else {
+            audioPlayer.pause();
+            audioBtn.textContent = 'Play';
+          }
+        };
+        desc.appendChild(audioBtn);
+        audioPlayer.onended = function() {
+          audioBtn.textContent = 'Play';
+        };
+        // Do not play automatically; user must click button
+        desc.classList.add('slide-in-' + lastDirection);
+      }
+      if (section) {
+        section.style.backgroundImage = `url('${timelineData[index].image}')`;
+      }
+    }
+		function moveActiveYear(direction) {
+			let newIndex = currentIndex;
+			if (direction === 'left') {
+				newIndex = currentIndex - 1;
+				if (newIndex < 0) {
+					newIndex = timelineData.length - 1;
+				}
+				lastDirection = 'right';
+			} else if (direction === 'right') {
+				newIndex = currentIndex + 1;
+				if (newIndex >= timelineData.length) {
+					newIndex = 0;
+				}
+				lastDirection = 'left';
+			}
+			updateTimeline(newIndex);
+		}
+    const prevBtn = document.getElementById('prevBtn');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        moveActiveYear('left');
+      });
+    }
+
+    const nextBtn = document.getElementById('nextBtn');
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        moveActiveYear('right');
+      });
+    }
+		// Initial render
+		updateTimeline(0);
+
+		// Parallax effect for timeline section background
+		window.addEventListener('scroll', function() {
+			if (!section) return;
+			var rect = section.getBoundingClientRect();
+			var windowHeight = window.innerHeight;
+			if (rect.top < windowHeight && rect.bottom > 0) {
+				var scrollPercent = (windowHeight - rect.top) / (windowHeight + rect.height);
+				section.style.backgroundPosition = 'center ' + (scrollPercent * 120) + 'px';
+			} else {
+				section.style.backgroundPosition = 'center 0px';
+			}
+		});

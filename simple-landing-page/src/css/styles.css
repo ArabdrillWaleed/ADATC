@@ -15,6 +15,7 @@
 
 
 #instructor-modal {
+  
   scrollbar-width: thin;
   scrollbar-color: #f6630c rgba(0,60,52,0.08);
 }
@@ -3717,6 +3718,7 @@ html{scroll-behavior:smooth}
   flex-direction: column;
   justify-content: center;
   background: var(--muted);
+  
   position: relative;
   max-width: 100%;
   box-sizing: border-box;
@@ -4574,550 +4576,14 @@ html{scroll-behavior:smooth}
   }
 }
 
-/* Timeline Section Styles */
-.timeline-hero {
-  position: relative;
-  min-height: 90vh; /* reduced from 100vh to make hero slightly shorter */
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-  justify-content: flex-start;
-}
 
-/* Global timeline header that's shared across all slides */
-.timeline-global {
-  position: relative;
-  z-index: 3;
-  max-width: var(--max-w);
-  width: 100%;
-  padding: 0 1rem; /* reduced from 2rem */
-  margin: 0 auto;
-  text-align: center;
-  margin-top: 4rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
-/* Ensure timeline desc is centered with a reasonable max-width */
-.timeline-global .timeline-desc {
-  margin: 0 auto 2rem;
-  max-width: 1100px; /* increased from 900px */
-  text-align: center;
-}
 
-.timeline-slides {
-  position: absolute;
-  inset: 0;
-}
-
-.timeline-slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.6s ease, visibility 0.6s ease;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-}
-
-/* center slide content horizontally */
-.timeline-slide {
-  justify-content: center;
-}
-
-/* Background image lives in the ::before pseudo-element so we can animate
-   and parallax it independently from the slide content (matches STRIVE section). */
-.timeline-slide::before {
-  content: '';
-  position: absolute;
-  inset: -5%;
-  background-size: cover;
-  background-position: center;
-  transform-origin: center center;
-  animation: slow-zoom-in-out 36s ease-in-out infinite;
-  will-change: transform;
-  z-index: 0;
-  pointer-events: none;
-  backface-visibility: hidden;
-  transform: scale(1.1);
-  transition: transform 0.3s ease-out;
-  /* Add brand green shade overlay */
-  box-shadow: 0 0 0 9999px rgba(63, 80, 76, 0.85) inset; /* much darker overlay for text visibility */
-}
-
-.timeline-slide::after {
-  content: none;
-}
-
-.timeline-slide.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.slide-content {
-  position: relative;
-  z-index: 2;
-  max-width: var(--max-w);
-  margin: 8rem auto 4rem;
-  padding: 0 2rem;
-  width: 100%;
-  pointer-events: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: auto;
-  box-sizing: border-box;
-}
-
-/* make inner content a centered column so headings and paragraphs align to the center */
-.timeline-hero .slide-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-}
-
-/* center all text inside timeline slides */
-.timeline-hero .slide-content,
-.timeline-hero .timeline-title,
-.timeline-hero .timeline-desc,
-.timeline-hero .year-content,
-.timeline-subtext {
-  text-align: center;
-}
-
-/* animate slide-specific year-content when its slide becomes active */
-.year-content {
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.45s cubic-bezier(.2,.9,.25,1), transform 0.45s cubic-bezier(.2,.9,.25,1);
-}
-.timeline-slide.active .year-content {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.timeline-hero h2 {
-  /* Use brand orange for the main timeline headline to match provided art */
-  color: #f6630c; /* brand orange */
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  margin-bottom: 2rem;
-  line-height: 1.2;
-}
-
-.timeline-desc {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  max-width: 900px;
-  margin-bottom: 4rem;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.timeline-title {
-  color: #fff;
-  font-size: 1.45rem;
-  margin-bottom: 1.5rem;
-  position: relative;
-  padding-bottom: 1rem;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  /* text-shadow removed as requested */
-  font-weight: 600;
-  letter-spacing: 1.2px;
-}
-
-.timeline-title::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 0;
-  width: 180px;
-  height: 2px;
-  background: #f6630c;
-}
-
-.year-content {
-  font-size: 1.75rem; /* 1.4x larger than original */
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.95);
-  max-width: 800px;
-}
-
-/* Return to original size on mobile */
-@media (max-width: 900px) {
-  .year-content {
-    font-size: 1.25rem;
-    line-height: 1.5;
-  }
-}
-
-/* Reduce timeline typography on tablets and phones to avoid stacking and overflow
-   - 1024px: general tablet reduction
-   - 768px: smaller tablets / large phones
-   - 480px: small phones
- */
-@media (max-width: 1024px) {
-  .timeline-hero h2 {
-    /* reduce the main timeline headline slightly on tablets */
-    font-size: clamp(2rem, 3.8vw, 2.6rem);
-    margin-bottom: 1.25rem;
-  }
-
-  .timeline-title {
-    font-size: 1.4rem;
-    padding-bottom: 0.75rem;
-  }
-
-  .timeline-desc {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .year-content {
-    font-size: 1.15rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .timeline-hero h2 {
-    font-size: clamp(1.6rem, 4vw, 2.2rem);
-    margin-bottom: 1rem;
-  }
-
-  .timeline-title {
-    font-size: 1.2rem;
-    padding-bottom: 0.6rem;
-  }
-
-  .timeline-desc {
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-  }
-
-  .year-content {
-    font-size: 1rem;
-    line-height: 1.4;
-  }
-}
-
-@media (max-width: 480px) {
-  .timeline-hero h2 {
-    font-size: 1.4rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .timeline-title {
-    font-size: 1.05rem;
-    padding-bottom: 0.5rem;
-  }
-
-  .timeline-desc {
-    font-size: 0.9rem;
-    margin-bottom: 0.8rem;
-  }
-
-  .year-content {
-    font-size: 0.95rem;
-    line-height: 1.35;
-  }
-}
-
-.timeline-years {
-  position: absolute;
-  left: 50%;
-  /* move the year buttons closer to the content */
-  bottom: 12%;
-  transform: translateX(-50%);
-  z-index: 3;
-  width: 100%;
-  max-width: var(--max-w);
-  padding: 0 1rem;
-}
-
-/* ensure the year navigation and progress bar are centered inside the years container */
-.timeline-years {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.year-nav {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* Changed to flex-start to align from left */
-  margin-bottom: 1.5rem;
-  position: relative;
-  overflow: hidden;
-  /* allow the nav to size naturally on wide screens but constrain visually
-     so buttons are centered; on smaller screens we'll enable native scrolling */
-  width: 100%;
-  max-width: 580px; /* visual target width on desktop */
-  height: 80px;
-  margin: 0 auto;
-
-/* Responsive timeline adjustments for small screens to avoid overlap */
-@media (max-width: 900px) {
-  .timeline-hero { min-height: auto; padding: 2.5rem 0 4rem; }
-  .slide-content { margin: 4rem auto 0; padding: 0 1rem; min-height: auto; }
-  .timeline-desc { font-size: 1rem; margin-bottom: 2rem; max-width: 680px; }
-  .timeline-title { font-size: 1.4rem; }
-  .timeline-title::after { width: 110px; }
-  .year-content { font-size: 1.15rem; }
-
-  /* Move year navigation below content and make it horizontally scrollable */
-  .timeline-years { position: relative; left: auto; transform: none; bottom: auto; margin-top: 1.25rem; }
-  .year-nav { width: 100%; height: auto; overflow-x: auto; justify-content: flex-start; }
-  .year-nav-track { gap: 1rem; padding: 0.25rem 0.5rem; }
-  .year-nav-track::-webkit-scrollbar { height: 8px; }
-  .year-btn { font-size: 1.05rem; padding: 0.3rem 0.6rem; color: rgba(255,255,255,0.85); }
-}
-
-@media (max-width: 480px) {
-  .timeline-hero { padding: 2rem 0 3rem; }
-  .slide-content { margin: 2.5rem auto 0; padding: 0 0.75rem; }
-  .timeline-desc { font-size: 0.95rem; margin-bottom: 1.25rem; }
-  .timeline-title { font-size: 1.1rem; }
-  .timeline-title::after { width: 80px; }
-  .year-content { font-size: 1rem; }
-
-  /* Ensure year buttons remain usable on tiny screens */
-  .year-nav { padding: 0 0.25rem; }
-  .year-nav-track { gap: 0.6rem; }
-  .year-btn { font-size: 0.95rem; padding: 0.25rem 0.5rem; }
-
-  /* Make slide background less aggressive to avoid large overlays on small screens */
-  .timeline-slide::before { inset: -2%; background-position: center top; }
-  .timeline-slide::after { background: rgba(0,60,52,0.85); }
-}
-}
-
-.year-nav-track {
-  display: flex;
-  gap: 2rem;
-  position: relative;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 0;
-  margin: 0;
-  flex-wrap: nowrap;
-  will-change: transform;
-  /* Allow the track to size to its content so native horizontal scrolling works
-     on touch devices. Remove any forced transform so JS can still animate if present. */
-  width: max-content;
-  transform: translateX(0);
-}
-
-/* Tablet & mobile: enable native horizontal scrolling and nicer touch behavior */
-@media (max-width: 1024px) {
-  .year-nav {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch; /* smooth native momentum scrolling on iOS */
-    max-width: 100%;
-  }
-
-  .year-nav-track {
-    gap: 1rem;
-    padding: 0.25rem 0.5rem;
-    width: max-content;
-  }
-
-  /* help the buttons snap into place while scrolling */
-  .year-nav { scroll-snap-type: x proximity; }
-  .year-btn { scroll-snap-align: center; }
-}
-
-@media (max-width: 900px) {
-  /* on smaller screens ensure the nav height is automatic and track spacing reduced */
-  .year-nav { height: auto; }
-  .year-nav-track { gap: 0.75rem; padding-right: 1rem; }
-}
-
-.year-btn {
-  background: none;
-  border: none;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 2rem;
-  font-weight: bold;
-  /* ensure the year/date buttons use the same site font */
-  font-family: 'Certo Sans', sans-serif;
-  cursor: pointer;
-  padding: 0.5rem;
-  position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  white-space: nowrap;
-}
-
-/* make buttons not shrink so layout is consistent when many years exist */
-.year-btn { flex: 0 0 auto; }
-
-/* hide the floating arrow control; we removed the DOM nodes but keep this rule as a safeguard */
-.timeline-nav { display: none !important; }
-
-.year-btn::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: -20px;
-  width: 2px;
-  height: 16px;
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateX(-50%) scaleY(0);
-  transform-origin: top;
-  transition: transform 0.3s ease;
-}
-
-.year-btn:hover {
-  color: white;
-  transform: translateY(-2px);
-}
-
-.year-btn.active {
-  color: #f6630c;
-  transform: scale(1.2);
-}
-
-.year-btn.active::after {
-  background: #f6630c;
-  transform: translateX(-50%) scaleY(1);
-}
-
-.year-progress {
-  position: relative;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.2);
-  margin-top: 0.5rem;
-  width: 100%;
-  max-width: 600px; /* limit width of progress bar */
-  margin: 0 auto;
-}
-
-.progress-bar {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  background: #f6630c;
-  width: 25%;
-  transition: width 0.3s ease;
-}
-
-/* caption/subtext shown under the year navigation */
-.timeline-subtext {
-  text-align: center;
-  margin-top: 0.75rem;
-  color: rgba(255,255,255,0.9);
-  font-size: 1.05rem;
-  /* ensure subtext under the years matches the site font */
-  font-family: 'Certo Sans', sans-serif;
-}
-
-/* Timeline "Learn More" link: white by default, no underline, hover becomes brand orange */
-.timeline-hero .learn-more,
-.timeline-slide .learn-more {
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 1.1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  border: none;
-  transition: color 180ms ease, background-color 180ms ease;
-}
-.timeline-hero .learn-more:hover,
-.timeline-slide .learn-more:hover {
-  color: #f6630c;
-  text-decoration: none;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.timeline-nav {
-  position: absolute;
-  bottom: 15%;
-  right: 2rem;
-  display: flex;
-  gap: 1rem;
-  z-index: 3;
-}
-
-.nav-arrow {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: white;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.nav-arrow:hover {
-  background: #f6630c;
-  border-color: #f6630c;
-  transform: translateY(-2px);
-}
-
-@media (max-width: 768px) {
-  .timeline-hero {
-    min-height: 120vh;
-    height: auto;
-  }
   
-  .timeline-years {
-    bottom: 2rem;
-    padding: 0 1rem;
-  }
   
-  .year-btn {
-    font-size: 1rem;
-    padding: 0.5rem 0.75rem;
-  }
-  
-  .timeline-nav {
-    display: none;
-  }
 
-  .year-content {
-    padding: 0 1rem;
-  }
-  
-  .slide-content {
-    margin: 3rem auto;
-    padding: 0 1rem;
-  }
-}
 
-@media (max-width: 768px) {
-  .timeline-track {
-    flex-direction: column;
-    gap: 3rem;
-  }
-  
-  .timeline-track::before {
-    width: 2px;
-    height: 100%;
-    left: 2.5rem;
-    top: 0;
-  }
-  
-  .timeline-year {
-    padding-left: 5rem;
-  }
-  
-  .timeline-year .year {
-    position: absolute;
-    left: 0;
-    font-size: 1.5rem;
-  }
-}
+
 
 /* FAQ page: increase content size by 20% for improved readability.
    Apply scaling only to content panels (avoid scaling hero area so hero size
@@ -6660,327 +6126,8 @@ body.modal-open .site-footer{pointer-events:none}
   }
 }
 
-/* --------------------------------------------------
-   Vertical timeline (left/right alternating)
-   Scoped to facility pages via `.facility` to avoid leaking styles.
-   Add markup in `src/facility/timeline.html` using the .vertical-timeline class.
-   -------------------------------------------------- */
-.facility .vertical-timeline {
-  position: relative;
-  padding: 2rem 0 3rem;
-}
-
-.facility .vertical-timeline::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 6px;
-  bottom: 6px;
-  width: 4px;
-  background: #003c34;
-  transform: translateX(-50%);
-  border-radius: 4px;
-}
-
-/* Circle cap at the top of the vertical line */
 
 
-.facility .vertical-timeline .timeline-item{
-  position: relative;
-  width: 50%;
-  padding: 1rem 2rem;
-  box-sizing: border-box;
-}
-
-.facility .vertical-timeline .timeline-item .timeline-content{
-  background: #e6eceb;
-  color: #003c34; /* ensure timeline content text is the brand green */
-  border-radius: 8px;
-  padding: 1rem 1.25rem;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-  border: 1px solid rgba(255,255,255,0.06);
-  position: relative;
-  transform: translateY(0) scale(1);
-  transition: background 220ms ease, color 220ms ease, box-shadow 260ms cubic-bezier(.2,.9,.3,1), transform 260ms cubic-bezier(.2,.9,.3,1);
-  will-change: transform, box-shadow, background;
-}
-
-.facility .vertical-timeline .timeline-item .timeline-content h3,
-.facility .vertical-timeline .timeline-item .timeline-content p,
-.facility .vertical-timeline .timeline-item .timeline-content .timeline-year{
-  color: inherit; /* follow the container color so hover flips everything */
-}
-
-/* Stronger override: ensure all timeline card headings and body text use
-   the brand dark green by default (keeps hover behavior intact). */
-.facility .vertical-timeline .timeline-item .timeline-content h3,
-.facility .vertical-timeline .timeline-item .timeline-content p,
-.facility .vertical-timeline .timeline-item .timeline-content li {
-  color: #003c34;
-}
-
-
-/* Left column items: align content to the right of the stage */
-.facility .vertical-timeline .timeline-item.left{
-  left: 0;
-  text-align: right;
-  padding-right: 3rem;
-}
-.facility .vertical-timeline .timeline-item.left .timeline-content{margin-left:auto}
-
-/* Right column items: align content to the left of the stage */
-.facility .vertical-timeline .timeline-item.right{
-  left: 50%;
-  text-align: left;
-  padding-left: 3rem;
-}
-.facility .vertical-timeline .timeline-item.right .timeline-content{margin-right:auto}
-
-/* Remove markers but keep spacing for visual rhythm */
-.facility .vertical-timeline .timeline-item{
-  position: relative;
-  margin: 1.5rem 0;
-}
-
-/* Ensure content stays aligned properly without markers */
-.facility .vertical-timeline .timeline-item.left .timeline-content{
-  margin-right: 2rem;
-}
-.facility .vertical-timeline .timeline-item.right .timeline-content{
-  margin-left: 2rem;
-}
-
-/* Pointer lines from the center vertical line to each content box */
-.facility .vertical-timeline .timeline-item .timeline-content::before{
-  content: '';
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px; /* length of pointer — increased to match larger boxes */
-  height: 2px;
-  background: #003c34; /* fixed brand dark green — keep same color always */
-  border-radius: 2px;
-  transition: opacity 220ms ease, transform 260ms cubic-bezier(.2,.9,.3,1);
-  will-change: transform, opacity;
-}
-
-/* Left items: pointer extends from content's right toward center */
-.facility .vertical-timeline .timeline-item.left .timeline-content::before{
-  right: -28px; /* sit between content box and center line */
-}
-
-/* Right items: pointer extends from content's left toward center */
-.facility .vertical-timeline .timeline-item.right .timeline-content::before{
-  left: -28px;
-}
-
-.facility .vertical-timeline .timeline-item h3{margin:0 0 .5rem;color:var(--heading)}
-.facility .vertical-timeline .timeline-item p{margin:0;color:var(--text)}
-
-/* small year label, positioned near the content */
-.facility .vertical-timeline .timeline-year{
-  font-weight:700;color:#003c34;margin-top:.6rem;font-size:0.95rem;opacity:.95
-}
-
-/* Hover interaction: lift + slightly scale + stronger shadow, color flip handled by color/background */
-.facility .vertical-timeline .timeline-item .timeline-content:hover{
-  /* Keep hover lift and shadow but avoid forcing a solid brand color when
-     a background image is present. We only change transform/shadow here. */
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 20px 48px rgba(0,60,52,0.20);
-}
-
-/* Keep pointer bar the same color even when the content flips color on hover */
-.facility .vertical-timeline .timeline-item .timeline-content:hover::before{
-  background: #003c34 !important;
-}
-
-/* Helper class: when you want an image background on a timeline box,
-   add `class="timeline-content bg-image"` and set the image using a
-   custom property on the element, for example:
-
-     <div class="timeline-content bg-image" style="--bg-image: url('images/rig2.jpg')">
-
-   The image is drawn in ::before so it can be faded in/out independently
-   from the content and overlay. */
-.facility .vertical-timeline .timeline-item .timeline-content:hover{
-  background: #003c34;
-  color: #ffffff;
-}
-
-.facility .vertical-timeline .timeline-item .timeline-content:hover h3,
-.facility .vertical-timeline .timeline-item .timeline-content:hover p {
-  color: #ffffff;
-}
-
-/* Timeline year color */
-.facility .vertical-timeline .timeline-item .timeline-content .timeline-year {
-  color: #f6630c !important;
-}
-
-.facility .vertical-timeline .timeline-item .timeline-content:hover .timeline-year {
-  color: #f6630c !important;
-}
-
-/* Respect reduced motion preference */
-@media (prefers-reduced-motion: reduce){
-  .facility .vertical-timeline .timeline-item .timeline-content,
-  .facility .vertical-timeline .timeline-item .timeline-content::before{
-    transition: none !important;
-    transform: none !important;
-  }
-}
-
-/* responsive: on narrow screens stack items and move the line to the left */
-@media (max-width:900px){
-  /* Container adjustments for mobile */
-  .facility .vertical-timeline {
-    position: relative;
-    padding: 2rem 0;
-    margin-left: 20px;  /* Add left margin to account for the line */
-  }
-
-  /* Vertical line positioning */
-  .facility .vertical-timeline::before{
-    left: 0;
-    transform: none;
-    width: 2px;
-    background: #003c34;
-  }
-
-  /* Top cap positioning */
-  .facility .vertical-timeline::after{
-    left: -13px;  /* Center the 28px wide cap on the 2px line */
-    width: 28px;
-    height: 4px;
-  }
-
-  /* Bottom cap positioning */
-  .facility .vertical-timeline .timeline-cap-bottom{
-    left: -13px;
-    transform: none;
-    width: 28px;
-    height: 4px;
-  }
-
-  /* Stack items in a single column */
-  .facility .vertical-timeline .timeline-item{
-    width: 100%;
-    padding: 1.5rem 0 1.5rem 2rem;
-    margin-bottom: 0.5rem;
-  }
-
-  /* Reset alignment for both left and right items */
-  .facility .vertical-timeline .timeline-item.left,
-  .facility .vertical-timeline .timeline-item.right{
-    left: 0;
-    text-align: left;
-    padding-left: 2rem;
-    padding-right: 0;
-  }
-
-  /* Content box styling */
-  .facility .vertical-timeline .timeline-item .timeline-content{
-    margin: 0;
-    padding: 1.25rem;
-    max-width: calc(100vw - 80px);  /* Prevent overflow on small screens */
-  }
-
-  /* Mobile: pointer lines should be short and originate from the left line */
-  .facility .vertical-timeline .timeline-item .timeline-content::before{
-    left: -20px;
-    width: 20px;
-    height: 2px;
-    right: auto;
-  }
-
-  /* Typography adjustments */
-  .facility .vertical-timeline .timeline-item h3{
-    font-size: 1.1rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .facility .vertical-timeline .timeline-item p{
-    font-size: 0.95rem;
-    line-height: 1.5;
-  }
-
-  .facility .vertical-timeline .timeline-year{
-    font-size: 0.9rem;
-    margin-top: 0.75rem;
-  }
-}
-
-/* Additional adjustments for very small screens */
-@media (max-width:480px){
-  .facility .vertical-timeline {
-    margin-left: 16px;
-  }
-
-  .facility .vertical-timeline::before{
-    width: 2px;
-  }
-
-
-
-  .facility .vertical-timeline .timeline-item{
-    padding: 1.25rem 0 1.25rem 1.5rem;
-  }
-
-  .facility .vertical-timeline .timeline-item .timeline-content{
-    padding: 1rem;
-    max-width: calc(100vw - 60px);
-  }
-}
-
-/* Additional mobile optimizations for very small screens */
-@media (max-width:480px){
-  .facility .vertical-timeline .timeline-item{
-    padding: 1rem 0 1rem 32px;
-  }
-
-  .facility .vertical-timeline::before{
-    left: 12px;
-  }
-
-  .facility .vertical-timeline::after{
-    left: 12px;
-    width: 24px;
-  }
-
-  .facility .vertical-timeline .timeline-item::after{
-    left: 12px;
-    width: 12px;
-    height: 12px;
-  }
-
-  .facility .vertical-timeline .timeline-item.left::after,
-  .facility .vertical-timeline .timeline-item.right::after{
-    left: 12px;
-  }
-
-  .facility .vertical-timeline .timeline-item.left,
-  .facility .vertical-timeline .timeline-item.right{
-    padding-left: 32px;
-    padding-right: 0.75rem;
-  }
-
-  .facility .vertical-timeline .timeline-item .timeline-content{
-    padding: 0.85rem;
-  }
-
-  .facility .vertical-timeline .timeline-item h3{
-    font-size: 1rem;
-  }
-
-  .facility .vertical-timeline .timeline-item p{
-    font-size: 0.9rem;
-  }
-
-  .facility .vertical-timeline .timeline-year{
-    font-size: 0.85rem;
-  }
-}
 
 /* bottom cap element (for end of the vertical line) */
 @media (max-width:900px){
@@ -7133,115 +6280,7 @@ body.facility .image-hero .hero-contact-subtitle{
   body.facility .image-hero .hero-contact-subtitle{font-size:14px}
 }
 
-/* Timeline styles */
-.vertical-timeline {
-  position: relative;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 0;
-}
 
-.vertical-timeline::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 2px;
-  height: 100%;
-  background: #f6630c;
-  transform: translateX(-50%);
-}
-
-.timeline-item {
-  width: 50%;
-  position: relative;
-  margin-bottom: 3rem;
-}
-
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  top: 20px;
-  width: 16px;
-  height: 16px;
-  background: #f6630c;
-  border-radius: 50%;
-  z-index: 1;
-}
-
-.timeline-item.left::before {
-  right: -8px;
-}
-
-.timeline-item.right {
-  margin-left: 50%;
-}
-
-.timeline-item.right::before {
-  left: -8px;
-}
-
-.timeline-content {
-  position: relative;
-  padding: 2rem;
-  margin: 0 3rem;
-  background: #ffffff;
-  border-radius: 4px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
-}
-
-.timeline-content:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-}
-
-.timeline-content.bg-image {
-  background-size: cover;
-  background-position: center;
-  color: #ffffff;
-  position: relative;
-}
-
-.timeline-content.bg-image::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 60, 52, 0.8);
-  border-radius: 4px;
-}
-
-.timeline-inner {
-  position: relative;
-  z-index: 1;
-}
-
-.timeline-content h3 {
-  margin: 0 0 1rem;
-  color: #f6630c;
-  font-size: 1.5rem;
-}
-
-.timeline-content p {
-  margin: 0;
-  line-height: 1.6;
-}
-
-.timeline-year {
-  position: absolute;
-  top: -30px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #003c34;
-  background: #ffffff;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
 
 /* ====== Training Overview: moved from inline styles in training-overview.html ====== */
 .training-overview .image-hero{
@@ -7409,20 +6448,6 @@ body.facility .image-hero .hero-contact-subtitle{
 /* Small utility for content-panel padding used on privacy/disclaimer pages */
 .privacy-policy .content-panel, .disclaimer .content-panel { padding:2rem 0; }
 
-/* Timeline per-year backgrounds (migrated from inline <style> blocks) */
-.timeline-slide[data-year="1993"]::before { background-image: url('../images/faq.svg'); }
-.timeline-slide[data-year="1995"]::before { background-image: url('../images/1995.svg'); }
-.timeline-slide[data-year="2005"]::before { background-image: url('../images/Simulator.svg'); }
-.timeline-slide[data-year="2006"]::before { background-image: url('../images/Simulator.svg'); }
-.timeline-slide[data-year="2012"]::before { background-image: url('../images/2012.svg'); }
-.timeline-slide[data-year="2013"]::before { background-image: url('../images/2013.svg'); }
-.timeline-slide[data-year="2015"]::before { background-image: url('../images/contact.svg'); }
-.timeline-slide[data-year="2016"]::before { background-image: url('../images/2016.svg'); }
-.timeline-slide[data-year="2018"]::before { background-image: url('../images/ds600.svg'); }
-.timeline-slide[data-year="2019"]::before { background-image: url('../images/accreditations.svg'); }
-.timeline-slide[data-year="2023"]::before { background-image: url('../images/ADLAcenter.svg'); }
-.timeline-slide[data-year="2024"]::before { background-image: url('../images/Bomco\ 1.jpg'); }
-.timeline-slide[data-year="2025"]::before { background-image: url('../images/timeline2025voc.svg'); }
 
 /* Keep these site-migrated rules last so they can override defaults if needed */
 
@@ -7460,12 +6485,6 @@ h3 {
   overflow-wrap: anywhere;
 }
 
-/* Timeline-specific header safeguards */
-.timeline-title {
-  max-width: 100%;
-  word-break: break-word;
-  overflow-wrap: anywhere;
-}
 
 /* Site header: respect fold safe areas and avoid content touching device edges */
 .site-header {
@@ -7481,9 +6500,7 @@ h3 {
   .site-header .header-inner { padding-left: 0.6rem; padding-right: 0.6rem; }
 }
 
-@media (max-width: 420px) {
-  .timeline-title { font-size: 1rem; }
-}
+
 
 .text-center .learn-more {
   display: inline-flex;
@@ -7501,47 +6518,7 @@ h3 {
   color: #003c34;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .timeline-item {
-    width: 100%;
-    margin-left: 0;
-  }
-  
-  .timeline-item.right {
-    margin-left: 0;
-  }
-  
-  .vertical-timeline::before {
-    left: 0;
-  }
-  
-  .timeline-item::before {
-    left: -8px;
-  }
-  
-  .timeline-content {
-    margin-left: 2rem;
-    margin-right: 1rem;
-  }
-}
 
-@media (max-width: 480px) {
-  .timeline-content {
-    margin-left: 1.5rem;
-    margin-right: 0.5rem;
-    padding: 1.5rem;
-  }
-  
-  .timeline-content h3 {
-    font-size: 1.2rem;
-  }
-  
-  .timeline-year {
-    font-size: 1rem;
-    padding: 0.4rem 0.8rem;
-  }
-}
 
 /* Amenities modal styling */
 #amenities-modal {
@@ -8147,6 +7124,7 @@ body.our-facility .feature-panels-grid .panel-overlay {
   }
 
   
+   
   .site-nav {
     display: none !important;
     position: absolute;
@@ -8224,3 +7202,423 @@ body.our-facility .feature-panels-grid .panel-overlay {
 
 
 }
+
+/* Engagement Gallery Image Slider */
+.gallery-image-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(0,60,52,0.38) 60%, rgba(0,60,52,0.62) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+  .engagement-gallery {
+    width: 100vw;
+    min-height: 540px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+  }
+  .gallery-slider {
+    position: relative;
+    width: 100vw;
+    height: 70vw;
+    min-height: 340px;
+    max-height: 700px;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    color: #fff;
+    border: none;
+    font-size: 2.5rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .gallery-arrow.left {
+    left: 1.5vw;
+  }
+  .gallery-arrow.right {
+    right: 1.5vw;
+  }
+  
+  .gallery-arrow:hover {
+    color: #f6630c;
+  }
+  .gallery-image-container {
+    
+    
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    min-height: 600px;
+    border: none;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    overflow:hidden;
+    z-index: 1;
+    position: relative !important;
+  }
+  .gallery-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: 1;
+    display: block;
+    
+    
+  }
+  .gallery-title {
+    color: #f6630c;
+    z-index: 5;
+    
+  }
+  .gallery-image.active {
+    opacity: 1;
+    z-index: 2;
+  }
+  .gallery-image-overlay {
+    
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    background: linear-gradient(180deg, rgba(0,60,52,0.0) 20%, rgba(0,60,52,0.7) 100%);
+    color: #fff;
+    padding: 2rem 2vw 2.5rem 2vw;
+    box-sizing: border-box;
+    z-index: 5;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(.22,.9,.3,1);
+    will-change: transform;
+  }
+  /* Parallax effect for overlay text using scroll */
+  .gallery-image-overlay[data-parallax] {
+    transform: translateY(var(--gallery-parallax, 0px));
+  }
+  
+  .gallery-image-desc {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    padding-bottom: 7rem;
+  }
+  @media (max-width: 700px) {
+    .engagement-gallery {
+      min-height: 180px;
+    }
+    .gallery-slider {
+      height: 100vw;
+      min-height: 320px;
+      max-height: 540px;
+    }
+    .gallery-image-container {
+      width: 100vw;
+      height: 100vw;
+      min-height: 320px;
+      max-height: 540px;
+    }
+    .gallery-arrow {
+      font-size: 2rem;
+      width: 38px;
+      height: 38px;
+      left: auto;
+      right: auto;
+    }
+    .gallery-arrow.left {
+      left: 2vw;
+      right: auto;
+    }
+    .gallery-arrow.right {
+      right: 2vw;
+      left: auto;
+    }
+    .gallery-image-desc {
+      font-size: 1rem;
+      padding-bottom: 0.5rem;
+    }
+    .gallery-image-overlay {
+      padding: 1rem 1vw 1.5rem 1vw;
+    }
+  }
+  @media (max-width: 480px) {
+    .engagement-gallery {
+      min-height: 90px;
+    }
+    .gallery-slider {
+      height: 100vw;
+      min-height: 220px;
+      max-height: 400px;
+    }
+    .gallery-image-container {
+      width: 100vw;
+      height: 100vw;
+      min-height: 220px;
+      max-height: 400px;
+    }
+    .gallery-arrow {
+      font-size: 1.5rem;
+      width: 28px;
+      height: 28px;
+      left: auto;
+      right: auto;
+    }
+    .gallery-arrow.left {
+      left: 2vw;
+      right: auto;
+    }
+    .gallery-arrow.right {
+      right: 2vw;
+      left: auto;
+    }
+    .gallery-image-desc {
+      font-size: 0.95rem;
+    }
+    .gallery-image-overlay {
+      padding: 0.5rem 0.5vw 1rem 0.5vw;
+    }
+  }
+
+
+  /* Animation for timeline year buttons */
+				.timeline-year.slide-in-left, .timeline-description.slide-in-left {
+					animation: slideInLeft 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+				}
+				.timeline-year.slide-in-right, .timeline-description.slide-in-right {
+					animation: slideInRight 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+				}
+				@keyframes slideInLeft {
+					from { transform: translateX(-40px); opacity: 0; }
+					to { transform: translateX(0); opacity: 1; }
+				}
+				@keyframes slideInRight {
+					from { transform: translateX(40px); opacity: 0; }
+					to { transform: translateX(0); opacity: 1; }
+				}
+		
+		.timeline-section {
+						position: relative;
+			position: relative;
+			width: 100%;
+			min-height: 800px;
+			padding: 3rem 1rem 2rem 1rem;
+			box-sizing: border-box;
+			overflow: hidden;
+			background-size: cover;
+			background-position: center;
+			background-attachment: fixed;
+			background-color: #0a2a2a; /* fallback color */
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+		.timeline-section::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(7, 25, 19, 0.7);
+			z-index: 1;
+			pointer-events: none;
+		}
+		.timeline-title {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			font-size: 5rem;
+			color: #f6630c;
+			font-weight: 700;
+			text-align: center;
+			margin: 0;
+			
+			z-index: 10;
+			padding: 2rem 0 1.5rem 0;
+		}
+		.timeline-nav {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 0.5rem;
+			margin-bottom: 1.5rem;
+			position: absolute;
+			left: 0;
+			bottom: 2rem;
+			width: 100%;
+			z-index: 10;
+			
+			
+			padding: 1rem 0;
+		}
+		.timeline-arrow {
+            padding-bottom: 0.8rem;
+			width: 44px;
+			height: 44px;
+			border-radius: 50%;
+			border: none;
+			background: transparent;
+			color: #fff;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 3rem;
+			
+			transition: background 0.3s, color 0.3s;
+		}
+		.timeline-arrow:hover {
+			
+			color: #f6630c;
+		}
+		.timeline-years {
+			display: flex;
+			align-items: center;
+			gap: 1.2rem;
+			overflow-x: hidden;
+			flex-wrap: nowrap;
+			max-width: 600px;
+			padding-bottom: 0.5rem;
+		}
+        .timeline-year:hover{
+            color: #f6630c;
+            opacity: 1;
+            
+        }
+		.timeline-year {
+			font-size: 2.3rem;
+			font-family: 'Certo Sans', Arial, sans-serif;
+			font-weight: 300;
+			color: #fff;
+			opacity: 1;
+			cursor: pointer;
+			transition: color 0.3s, opacity 0.3s;
+			padding: 0.2rem 0.7rem;
+			border-radius: 6px;
+			background: none;
+			border: none;
+		}
+		.timeline-year.active {
+      color: #f6630c;
+      opacity: 1;
+      pointer-events: none;
+      cursor: pointer;
+			
+		}
+		.timeline-description {
+			position: relative;
+			width: 100%;
+			max-width: 1500px;
+			
+			color: #fff;
+			font-size: 2.5rem;
+			
+            
+			box-sizing: border-box;
+			z-index: 2;
+			text-align: center;
+			font-weight: 200;
+			letter-spacing: 0.01em;
+			margin-bottom: .5rem;
+			margin-top: 5.5rem;
+			border-radius: 8px;
+		}
+
+    /* Timeline audio button styling */
+.timeline-audio-btn {
+  background: #ea9d22;
+  color: #003c34;
+  border: none;
+  border-radius: 0;
+  
+  padding: 0.5rem 1.2rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s;
+  margin: 1.5rem auto 0.5rem auto;
+  display: block;
+}
+.timeline-audio-btn:hover {
+  background: #f6630c;
+  color: #fff;
+  opacity: 1;
+}
+
+		@media (max-width: 900px) {
+			.timeline-title {
+				font-size: 1.5rem;
+			}
+			.timeline-year {
+				font-size: 1rem;
+			}
+			.timeline-description {
+				font-size: 1rem;
+				padding: 1rem 0.7rem;
+			}
+		}
+		@media (max-width: 700px) {
+      .timeline-audio-btn{
+        font-size: 0.855rem;
+        padding: 0.04rem 0.2rem;
+        margin-top: 0.18rem;
+        min-height: 2em;
+        
+      }
+      
+            
+			.timeline-section {
+				min-height: 420px;
+				padding: rem 0.5rem 1rem 0.5rem;
+                max-width: 100%;
+                
+            }
+			.timeline-years {
+				gap: 0.5rem;
+			}
+			.timeline-year {
+				font-size: 0.9rem;
+				padding: 0.1rem 0.3rem;
+			}
+			.timeline-arrow {
+                padding-bottom: 0.8rem;
+                padding-top: 0.2rem;
+				width: 36px;
+				height: 36px;
+				font-size: 1.5rem;
+			}
+		}
+
+  

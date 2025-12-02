@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Arabian Drilling Corporate History Timeline</title>
+	<style>
+				/* Animation for timeline year buttons */
+				.timeline-year.slide-in-left, .timeline-description.slide-in-left {
+					animation: slideInLeft 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+				}
+				.timeline-year.slide-in-right, .timeline-description.slide-in-right {
+					animation: slideInRight 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+				}
+				@keyframes slideInLeft {
+					from { transform: translateX(-40px); opacity: 0; }
+					to { transform: translateX(0); opacity: 1; }
+				}
+				@keyframes slideInRight {
+					from { transform: translateX(40px); opacity: 0; }
+					to { transform: translateX(0); opacity: 1; }
+				}
+		
+		.timeline-section {
+						position: relative;
+			position: relative;
+			width: 100%;
+			min-height: 600px;
+			padding: 3rem 1rem 2rem 1rem;
+			box-sizing: border-box;
+			overflow: hidden;
+			background-size: cover;
+			background-position: center;
+			background-attachment: fixed;
+			background-color: #0a2a2a; /* fallback color */
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+		.timeline-section::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(7, 25, 19, 0.7);
+			z-index: 1;
+			pointer-events: none;
+		}
+		.timeline-title {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			font-size: 2.2rem;
+			color: #f6630c;
+			font-weight: 700;
+			text-align: center;
+			margin: 0;
+			
+			z-index: 10;
+			padding: 2rem 0 1.5rem 0;
+		}
+		.timeline-nav {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 0.5rem;
+			margin-bottom: 1.5rem;
+			position: absolute;
+			left: 0;
+			bottom: 2rem;
+			width: 100%;
+			z-index: 10;
+			
+			
+			padding: 1rem 0;
+		}
+		.timeline-arrow {
+            padding-bottom: 0.8rem;
+			width: 44px;
+			height: 44px;
+			border-radius: 50%;
+			border: none;
+			background: transparent;
+			color: #fff;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 3rem;
+			
+			transition: background 0.3s, color 0.3s;
+		}
+		.timeline-arrow:hover {
+			
+			color: #f6630c;
+		}
+		.timeline-years {
+			display: flex;
+			align-items: center;
+			gap: 1.2rem;
+			overflow-x: hidden;
+			flex-wrap: nowrap;
+			max-width: 600px;
+			padding-bottom: 0.5rem;
+		}
+        .timeline-year:hover{
+            color: #f6630c;
+            opacity: 1;
+            
+        }
+		.timeline-year {
+			font-size: 2rem;
+			font-family: 'Certo Sans', Arial, sans-serif;
+			font-weight: 300;
+			color: #fff;
+			opacity: 1;
+			cursor: pointer;
+			transition: color 0.3s, opacity 0.3s;
+			padding: 0.2rem 0.7rem;
+			border-radius: 6px;
+			background: none;
+			border: none;
+		}
+		.timeline-year.active {
+			color: #f6630c;
+			opacity: 1;
+			
+		}
+		.timeline-description {
+			position: relative;
+			width: 100%;
+			max-width: 900px;
+			
+			color: #fff;
+			font-size: 1.5rem;
+			padding: 1.2rem 1.5rem;
+            
+			box-sizing: border-box;
+			z-index: 2;
+			text-align: center;
+			font-weight: 200;
+			letter-spacing: 0.01em;
+			margin-bottom: .5rem;
+			margin-top: 5.5rem;
+			border-radius: 8px;
+		}
+		@media (max-width: 900px) {
+			.timeline-title {
+				font-size: 1.5rem;
+			}
+			.timeline-year {
+				font-size: 1rem;
+			}
+			.timeline-description {
+				font-size: 1rem;
+				padding: 1rem 0.7rem;
+			}
+		}
+		@media (max-width: 700px) {
+            
+			.timeline-section {
+				min-height: 420px;
+				padding: 2rem 0.5rem 1rem 0.5rem;
+                max-width: 100%;
+                
+            }
+			.timeline-years {
+				gap: 0.5rem;
+			}
+			.timeline-year {
+				font-size: 0.9rem;
+				padding: 0.1rem 0.3rem;
+			}
+			.timeline-arrow {
+                padding-bottom: 0.8rem;
+                padding-top: 0.2rem;
+				width: 36px;
+				height: 36px;
+				font-size: 1.5rem;
+			}
+		}
+	</style>
+</head>
+<body>
+	<section class="timeline-section">
+		<div class="timeline-title">Arabian Drilling Training Center History</div>
+        <div class="timeline-description" id="timelineDesc"></div>
+		<div class="timeline-nav">
+            
+			<button class="timeline-arrow" id="prevBtn">&#8249;</button>
+			<div class="timeline-years" id="timelineYears">
+				<!-- Years will be injected here -->
+			</div>
+			<button class="timeline-arrow" id="nextBtn">&#8250;</button>
+		</div>
+		
+	</section>
+	<script>
+		
+		const timelineData = [
+			{ year: "1993", description: "The Establishment of Arabian Drilling Training Center in Dhahran Base.", image: "images/contactus.jpg" },
+			{ year: "1995", description: "Deployment and operation of the CS Portable drilling and well control simulator", image: "images/1995.svg" },
+			{ year: "2005", description: "Deployment and operation of the CS Full Size drilling and well control simulator", image: "images/Simulator.svg" },
+			{ year: "2006", description: "Well Control - International Association of Drilling Contractors (IADC) and Well Control Accreditation Program (WellCAP)", image: "images/Simulator.svg" },
+			{ year: "2012", description: "Deployment and operation of the of CS Cyber Chair drilling and well control simulator ", image: "images/2012.svg" },
+			{ year: "2013", description: "The Health & Safety Institute (HSI) - First Aid and Basic Life Support (BLS)", image: "images/2013.svg" },
+			{ year: "2015", description: "IADC WellSharp - 1st training provider outside the USA to obtain this accrediation. IADC DIT - Accident Investigation and Drilling Technology.", image: "images/contact.svg" },
+			{ year: "2016", description: "IADC DIT - H2S Train the Trainer", image: "images/2016.png" },
+			{ year: "2018", description: "Deployment and operation of four main simulators that are used to train and access students.", image: "images/ds600.svg" },
+			{ year: "2019", description: "ISO:29993:2017 and ISO:9001:2015 certifications", image: "images/2013.jpg" },
+			{ year: "2023", description: "Acquiring Arabian Drilling Academy Training Center new building.", image: "images/2016.jpg" },
+			{ year: "2024", description: "Deployment and operation of the Bomco Full Size Cyber operator simulator.", image: "images/2017.jpg" },
+			{ year: "2025", description: "Registration with The Technical and Vocational Training Corporation.", image: "images/timeline2025voc.svg" },
+			
+		];
+		let currentIndex = 0;
+		const yearsContainer = document.getElementById('timelineYears');
+		const desc = document.getElementById('timelineDesc');
+		// Select section before any function uses it
+		const section = document.querySelector('.timeline-section');
+		// Windowed years rendering
+		let visibleStart = 0;
+		const VISIBLE_COUNT = 5;
+		let lastDirection = 'right';
+		function renderYears() {
+			yearsContainer.innerHTML = '';
+			for (let i = visibleStart; i < Math.min(visibleStart + VISIBLE_COUNT, timelineData.length); i++) {
+				const btn = document.createElement('button');
+				btn.className = 'timeline-year' + (i === currentIndex ? ' active' : '');
+				btn.textContent = timelineData[i].year;
+				btn.dataset.index = i;
+				btn.addEventListener('click', () => {
+					lastDirection = (i > currentIndex) ? 'left' : 'right';
+					updateTimeline(i);
+				});
+				// Add animation class to active year
+				if (i === currentIndex) {
+					btn.classList.add('slide-in-' + lastDirection);
+				}
+				yearsContainer.appendChild(btn);
+			}
+		}
+		function updateTimeline(index) {
+			// Determine direction for animation
+			lastDirection = (index > currentIndex) ? 'left' : (index < currentIndex ? 'right' : lastDirection);
+			currentIndex = index;
+			// If selected year is outside visible window, adjust window
+			if (index < visibleStart) {
+				visibleStart = index;
+			} else if (index >= visibleStart + VISIBLE_COUNT) {
+				visibleStart = index - VISIBLE_COUNT + 1;
+			}
+			renderYears();
+			// Animate description
+			desc.classList.remove('slide-in-left', 'slide-in-right');
+			void desc.offsetWidth; // Force reflow
+			desc.textContent = timelineData[index].description;
+			desc.classList.add('slide-in-' + lastDirection);
+			// Change background image for each year
+			section.style.backgroundImage = `url('${timelineData[index].image}')`;
+		}
+		function moveActiveYear(direction) {
+			let newIndex = currentIndex;
+			if (direction === 'left') {
+				newIndex = currentIndex - 1;
+				if (newIndex < 0) {
+					newIndex = timelineData.length - 1;
+				}
+				lastDirection = 'right';
+			} else if (direction === 'right') {
+				newIndex = currentIndex + 1;
+				if (newIndex >= timelineData.length) {
+					newIndex = 0;
+				}
+				lastDirection = 'left';
+			}
+			updateTimeline(newIndex);
+		}
+		document.getElementById('prevBtn').addEventListener('click', () => {
+			moveActiveYear('left');
+		});
+		document.getElementById('nextBtn').addEventListener('click', () => {
+			moveActiveYear('right');
+		});
+		// Initial render
+		updateTimeline(0);
+
+		// Parallax effect for timeline section background
+		window.addEventListener('scroll', function() {
+			if (!section) return;
+			var rect = section.getBoundingClientRect();
+			var windowHeight = window.innerHeight;
+			if (rect.top < windowHeight && rect.bottom > 0) {
+				var scrollPercent = (windowHeight - rect.top) / (windowHeight + rect.height);
+				section.style.backgroundPosition = 'center ' + (scrollPercent * 120) + 'px';
+			} else {
+				section.style.backgroundPosition = 'center 0px';
+			}
+		});
+	</script>
+</body>
+</html>
