@@ -875,8 +875,8 @@ const timelineData = [
   { year: "2016", description: "IADC DIT - H2S Train the Trainer", image: "images/2016.png", audio: "audio/2016.mp3" },
   { year: "2018", description: "Deployment and operation of four main simulators that are used to train and access students.", image: "images/ds600.svg", audio: "audio/2018.mp3" },
   { year: "2019", description: "ISO:29993:2017 and ISO:9001:2015 certifications", image: "images/accreditations.svg", audio: "audio/2019.mp3" },
-  { year: "2023", description: "Acquiring Arabian Drilling Academy Training Center new building.", image: "images/ADLAcenter.jpg", audio: "audio/2023.mp3" },
-  { year: "2024", description: "Deployment and operation of the Bomco Full Size Cyber operator simulator.", image: "images/Bomco 1.jpg", audio: "audio/2024dep.mp3" },
+  { year: "2023", description: "Acquiring Arabian Drilling Academy Training Center new building.", image: "images/ADLAcenter.svg", audio: "audio/2023.mp3" },
+  { year: "2024", description: "Deployment and operation of the Bomco Full Size Cyber operator simulator.", image: "images/Bomco1.png", audio: "audio/2024dep.mp3" },
   { year: "2025", description: "Registration with The Technical and Vocational Training Corporation.", image: "images/timeline2025voc.svg", audio: "audio/2025.mp3" },
 ];
 		let currentIndex = 0;
