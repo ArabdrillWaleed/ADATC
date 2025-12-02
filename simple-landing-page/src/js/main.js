@@ -1,6 +1,11 @@
 // Contact form validation logic
 document.addEventListener('DOMContentLoaded', function() {
   var form = document.getElementById('contactForm');
+  var overlay = document.getElementById('popupOverlay');
+  var popup = document.getElementById('formPopup');
+  // Ensure popup and overlay are hidden on page load
+  if (overlay) overlay.style.display = 'none';
+  if (popup) popup.style.display = 'none';
   if (!form) return;
 
   window.closePopup = function() {
