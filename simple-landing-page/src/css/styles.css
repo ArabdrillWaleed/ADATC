@@ -2153,7 +2153,7 @@ body.site-fill main { flex: 1 0 auto; }
   /* keep heading clickable but add 10% more space below */
   margin: 0 0 1.1rem;
   font-size: 1.2em;
-  font-weight: 300;
+  font-weight: 100 !important;
   font-family: 'Certo Sans', sans-serif;
   transition: color 0.18s ease;
   cursor: pointer;
