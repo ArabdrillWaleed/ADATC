@@ -1,5 +1,32 @@
 // Contact form validation logic
+let observerInitialized = false;
+let audioPlayer = null;
+let audioBtn = null;
+let autoPlayActive = false;
+let autoPlayPaused = false;
+  // let currentIndex = 0; // Removed duplicate declaration
+// ...existing code...
 document.addEventListener('DOMContentLoaded', function() {
+          // Always start timeline at initial slide and play audio on refresh
+          currentIndex = 0;
+          visibleStart = 0;
+          updateTimeline(0);
+          // Remove auto-play on refresh; only play when timeline section enters viewport
+        // Ensure audio is paused and button text is reset on refresh
+        if (audioPlayer) {
+          audioPlayer.pause();
+          audioPlayer.currentTime = 0;
+        }
+        if (audioBtn) {
+          audioBtn.textContent = 'Play';
+        }
+      // Always start timeline at initial slide on refresh
+      currentIndex = 0;
+      visibleStart = 0;
+      updateTimeline(0);
+    // Reset auto-play state on refresh
+    autoPlayActive = false;
+    autoPlayPaused = false;
   var form = document.getElementById('contactForm');
   var overlay = document.getElementById('popupOverlay');
   var popup = document.getElementById('formPopup');
@@ -19,6 +46,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let firstInvalid = null;
     Array.from(form.elements).forEach(function(el) {
       if ((el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) {
+  let audioPlayer = null;
+  let audioBtn = null;
+  let autoPlayActive = false;
+  let autoPlayPaused = false;
+  let observerInitialized = false;
         let valid = true;
         if (el.name === 'phone') {
           if (!/^\d+$/.test(el.value.trim())) {
@@ -107,6 +139,24 @@ window.addEventListener('error', function (evt) {
       b.style.zIndex = '2147483647';
       b.style.fontFamily = 'sans-serif';
       b.textContent = 'JavaScript error: ' + (evt.message || evt.error && evt.error.message || 'see console');
+    // Intersection Observer for timeline auto-play
+    if (!observerInitialized && section) {
+      observerInitialized = true;
+      let hasAutoPlayed = false;
+      const observer = new window.IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !hasAutoPlayed && !autoPlayPaused) {
+            hasAutoPlayed = true;
+            autoPlayActive = true;
+            if (audioPlayer) {
+              audioPlayer.play();
+              if (audioBtn) audioBtn.textContent = 'Pause';
+            }
+          }
+        });
+      }, { threshold: 0.3 });
+      observer.observe(section);
+    }
       b.addEventListener('click', () => b.parentNode && b.parentNode.removeChild(b));
       document.body.appendChild(b);
     }
@@ -902,6 +952,23 @@ const timelineData = [
         btn.textContent = timelineData[i].year;
         btn.dataset.index = i;
         btn.addEventListener('click', () => {
+          if (i === visibleStart && visibleStart > 0) {
+            visibleStart--;
+            // Animate all year buttons to the right
+            Array.from(yearsContainer.children).forEach((el) => {
+              el.classList.remove('slide-nav-left', 'slide-nav-right');
+              el.classList.add('slide-nav-right');
+              setTimeout(() => el.classList.remove('slide-nav-right'), 400);
+            });
+          } else if (i === visibleStart + VISIBLE_COUNT - 1 && visibleStart + VISIBLE_COUNT < timelineData.length) {
+            visibleStart++;
+            // Animate all year buttons to the left
+            Array.from(yearsContainer.children).forEach((el) => {
+              el.classList.remove('slide-nav-left', 'slide-nav-right');
+              el.classList.add('slide-nav-left');
+              setTimeout(() => el.classList.remove('slide-nav-left'), 400);
+            });
+          }
           lastDirection = (i > currentIndex) ? 'left' : 'right';
           updateTimeline(i);
         });
@@ -912,8 +979,8 @@ const timelineData = [
         yearsContainer.appendChild(btn);
       }
     }
-    let audioPlayer = null;
-    let audioBtn = null;
+    // let audioPlayer = null; // Removed duplicate
+    // let audioBtn = null; // Removed duplicate
     
     function updateTimeline(index) {
       lastDirection = (index > currentIndex) ? 'left' : (index < currentIndex ? 'right' : lastDirection);
@@ -961,6 +1028,18 @@ const timelineData = [
         desc.appendChild(audioBtn);
         audioPlayer.onended = function() {
           audioBtn.textContent = 'Play';
+          // Auto-advance to next year if auto-play is active and not paused
+          if (autoPlayActive && !autoPlayPaused) {
+            if (currentIndex < timelineData.length - 1) {
+              updateTimeline(currentIndex + 1);
+              setTimeout(() => {
+                if (audioPlayer) {
+                  audioPlayer.play();
+                  if (audioBtn) audioBtn.textContent = 'Pause';
+                }
+              }, 100);
+            }
+          }
         };
         // Do not play automatically; user must click button
         desc.classList.add('slide-in-' + lastDirection);
@@ -989,28 +1068,81 @@ const timelineData = [
     const prevBtn = document.getElementById('prevBtn');
     if (prevBtn) {
       prevBtn.addEventListener('click', () => {
-        moveActiveYear('left');
+        let didShift = false;
+        if (visibleStart > 0) {
+          visibleStart--;
+          didShift = true;
+          // Animate all year buttons to the right
+          Array.from(yearsContainer.children).forEach((el) => {
+            el.classList.remove('slide-nav-left', 'slide-nav-right');
+            el.classList.add('slide-nav-right');
+            setTimeout(() => el.classList.remove('slide-nav-right'), 400);
+          });
+        }
+        // Move to previous year, wrap to last if at first
+        let newIndex = currentIndex - 1;
+        if (newIndex < 0) newIndex = timelineData.length - 1;
+        updateTimeline(newIndex);
       });
     }
 
     const nextBtn = document.getElementById('nextBtn');
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
-        moveActiveYear('right');
+        let didShift = false;
+        if (visibleStart + VISIBLE_COUNT < timelineData.length) {
+          visibleStart++;
+          didShift = true;
+          // Animate all year buttons to the left
+          Array.from(yearsContainer.children).forEach((el) => {
+            el.classList.remove('slide-nav-left', 'slide-nav-right');
+            el.classList.add('slide-nav-left');
+            setTimeout(() => el.classList.remove('slide-nav-left'), 400);
+          });
+        }
+        // Move to next year, wrap to first if at last
+        let newIndex = currentIndex + 1;
+        if (newIndex >= timelineData.length) newIndex = 0;
+        updateTimeline(newIndex);
       });
     }
 		// Initial render
-		updateTimeline(0);
-
-		// Parallax effect for timeline section background
-		window.addEventListener('scroll', function() {
-			if (!section) return;
-			var rect = section.getBoundingClientRect();
-			var windowHeight = window.innerHeight;
-			if (rect.top < windowHeight && rect.bottom > 0) {
-				var scrollPercent = (windowHeight - rect.top) / (windowHeight + rect.height);
-				section.style.backgroundPosition = 'center ' + (scrollPercent * 120) + 'px';
-			} else {
-				section.style.backgroundPosition = 'center 0px';
-			}
-		});
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log("Timeline script loaded");
+      updateTimeline(0);
+      // Intersection Observer for timeline auto-play (correct placement)
+      if (!observerInitialized && section) {
+        observerInitialized = true;
+        let hasAutoPlayed = false;
+        const observer = new window.IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !hasAutoPlayed && !autoPlayPaused) {
+              console.log("Timeline section entered viewport");
+              hasAutoPlayed = true;
+              autoPlayActive = true;
+              // Always play the current audio after timeline re-render
+              setTimeout(() => {
+                console.log("audioPlayer:", audioPlayer);
+                if (audioPlayer) {
+                  audioPlayer.play();
+                  if (audioBtn) audioBtn.textContent = 'Pause';
+                }
+              }, 100);
+            }
+          });
+        }, { threshold: 0.3 });
+        observer.observe(section);
+      }
+      // Parallax effect for timeline section background
+      window.addEventListener('scroll', function() {
+          if (!section) return;
+          var rect = section.getBoundingClientRect();
+          var windowHeight = window.innerHeight;
+          if (rect.top < windowHeight && rect.bottom > 0) {
+              var scrollPercent = (windowHeight - rect.top) / (windowHeight + rect.height);
+              section.style.backgroundPosition = 'center ' + (scrollPercent * 120) + 'px';
+          } else {
+              section.style.backgroundPosition = 'center 0px';
+          }
+      });
+    });

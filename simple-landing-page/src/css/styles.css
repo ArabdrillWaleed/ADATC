@@ -1,3 +1,31 @@
+/* FAQ link style: bold, orange, no underline, orange brand on hover */
+.faq-link {
+  color: #003c34;
+  font-weight: 400;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.faq-link:hover, .faq-link:focus {
+  color: #f6630c;
+  text-decoration: none;
+}
+/* Timeline year sliding animation */
+.timeline-year.slide-nav-left {
+  animation: slideNavLeft 0.4s cubic-bezier(.4,.8,.4,1);
+}
+.timeline-year.slide-nav-right {
+  animation: slideNavRight 0.4s cubic-bezier(.4,.8,.4,1);
+}
+@keyframes slideNavLeft {
+  0% { transform: translateX(0); opacity: 1; }
+  40% { transform: translateX(40px); opacity: 0.7; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+@keyframes slideNavRight {
+  0% { transform: translateX(0); opacity: 1; }
+  40% { transform: translateX(-40px); opacity: 0.7; }
+  100% { transform: translateX(0); opacity: 1; }
+}
 
 
 
@@ -2124,8 +2152,8 @@ body.site-fill main { flex: 1 0 auto; }
   color: #003c34;
   /* keep heading clickable but add 10% more space below */
   margin: 0 0 1.1rem;
-  font-size: 1.05rem;
-  font-weight: 250;
+  font-size: 1.2em;
+  font-weight: 300;
   font-family: 'Certo Sans', sans-serif;
   transition: color 0.18s ease;
   cursor: pointer;
@@ -2145,11 +2173,11 @@ body.site-fill main { flex: 1 0 auto; }
 }
 
 .faq-card p {
-  color: #2f4b57;
+  color: #003c34 !important;
   margin: 0;
   line-height: 1.6;
-  font-size: 0.95rem;
-  font-weight: 300;
+  font-size: 1rem;
+  font-weight: 100 !important;
   /* hidden by default for accordion behavior */
   max-height: 0;
   overflow: hidden;
