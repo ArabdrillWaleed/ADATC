@@ -1045,7 +1045,24 @@ const timelineData = [
         desc.classList.add('slide-in-' + lastDirection);
       }
       if (section) {
-        section.style.backgroundImage = `url('${timelineData[index].image}')`;
+        // Lazy load and preload timeline images
+        const imgUrl = timelineData[index].image;
+        // Preload current image
+        const preloadImg = new window.Image();
+        preloadImg.src = imgUrl;
+        preloadImg.onload = function() {
+          section.style.backgroundImage = `url('${imgUrl}')`;
+        };
+        // Preload next image in background
+        if (timelineData[index + 1]) {
+          const nextImg = new window.Image();
+          nextImg.src = timelineData[index + 1].image;
+        }
+        // Preload previous image in background
+        if (timelineData[index - 1]) {
+          const prevImg = new window.Image();
+          prevImg.src = timelineData[index - 1].image;
+        }
       }
     }
 		function moveActiveYear(direction) {
