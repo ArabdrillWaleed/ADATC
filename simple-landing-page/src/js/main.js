@@ -1021,25 +1021,10 @@ const timelineData = [
         desc.classList.add('slide-in-' + lastDirection);
       }
       if (section) {
-        // Lazy load and preload timeline images
+        // Set background image directly for the active year
         const imgUrl = timelineData[index].image;
-        // Preload current image and only set background after load
-        const preloadImg = new window.Image();
-        preloadImg.onload = function() {
-          section.style.backgroundImage = `url('${imgUrl}')`;
-          section.offsetHeight;
-        };
-        preloadImg.src = imgUrl;
-        // Preload next image in background
-        if (timelineData[index + 1]) {
-          const nextImg = new window.Image();
-          nextImg.src = timelineData[index + 1].image;
-        }
-        // Preload previous image in background
-        if (timelineData[index - 1]) {
-          const prevImg = new window.Image();
-          prevImg.src = timelineData[index - 1].image;
-        }
+        section.style.backgroundImage = `url('${imgUrl}')`;
+        section.offsetHeight;
       }
     }
 		function moveActiveYear(direction) {
