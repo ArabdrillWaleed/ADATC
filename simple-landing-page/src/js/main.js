@@ -24,6 +24,12 @@ document.addEventListener('DOMContentLoaded', function() {
       currentIndex = 0;
       visibleStart = 0;
       updateTimeline(0);
+      // On mobile, force background image to display immediately
+      var isMobile = window.innerWidth < 900 || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (isMobile && section && timelineData[0] && timelineData[0].image) {
+        section.style.backgroundImage = `url('${timelineData[0].image}')`;
+        section.offsetHeight;
+      }
     // Reset auto-play state on refresh
     autoPlayActive = false;
     autoPlayPaused = false;
@@ -1028,13 +1034,22 @@ const timelineData = [
         audioBtn = document.createElement('button');
         audioBtn.textContent = 'Play'; // Always start as 'Play' when switching years
         audioBtn.className = 'timeline-audio-btn';
+        audioBtn.disabled = false;
         audioBtn.onclick = function() {
-          if (audioPlayer.paused) {
+          // Always enable play on first tap
+          if (audioPlayer.readyState >= 2) {
+            if (audioPlayer.paused) {
+              audioPlayer.play();
+              audioBtn.textContent = 'Pause';
+            } else {
+              audioPlayer.pause();
+              audioBtn.textContent = 'Play';
+            }
+          } else {
+            // If not ready, try to load and play
+            audioPlayer.load();
             audioPlayer.play();
             audioBtn.textContent = 'Pause';
-          } else {
-            audioPlayer.pause();
-            audioBtn.textContent = 'Play';
           }
         };
         desc.appendChild(audioBtn);
@@ -1150,7 +1165,8 @@ const timelineData = [
         let hasAutoPlayed = false;
         const observer = new window.IntersectionObserver((entries) => {
           entries.forEach(entry => {
-            if (entry.isIntersecting && !hasAutoPlayed && !autoPlayPaused) {
+            var isMobile = window.innerWidth < 900 || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            if (!isMobile && entry.isIntersecting && !hasAutoPlayed && !autoPlayPaused) {
               console.log("Timeline section entered viewport");
               hasAutoPlayed = true;
               autoPlayActive = true;
