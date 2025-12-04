@@ -938,7 +938,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 const timelineData = [
-  { year: "1995", description: "Deployment and operation of the CS Portable drilling and well control simulator", image: "images/1995.svg", audio: "audio/1995.mp3" },
+  { year: "1993", description: "The Establishment of Arabian Drilling Training Center in Dhahran Base.", image: "images/contactus.jpg", audio: "audio/1993.mp3" },
   { year: "1995", description: "Deployment and operation of the CS Portable drilling and well control simulator", image: "images/1995.svg", audio: "audio/1995.mp3" },
   { year: "2005", description: "Deployment and operation of the CS Full Size drilling and well control simulator", image: "images/Simulator.svg", audio: "audio/2005.mp3" },
   { year: "2006", description: "Well Control - International Association of Drilling Contractors (IADC) and Well Control Accreditation Program (WellCAP)", image: "images/Simulator.svg", audio: "audio/2006.mp3" },
