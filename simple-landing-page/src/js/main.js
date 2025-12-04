@@ -1014,61 +1014,10 @@ const timelineData = [
         desc.classList.remove('slide-in-left', 'slide-in-right');
         void desc.offsetWidth;
         desc.innerHTML = '';
-        // Add description text
+        // Add description text only
         const descText = document.createElement('span');
         descText.textContent = timelineData[index].description;
         desc.appendChild(descText);
-        // Add audio player and button
-        if (audioPlayer) {
-          audioPlayer.pause();
-          audioPlayer.remove();
-        }
-        if (audioBtn) {
-          audioBtn.remove();
-        }
-        audioPlayer = document.createElement('audio');
-        audioPlayer.src = timelineData[index].audio;
-        audioPlayer.preload = 'auto';
-        audioPlayer.style.display = 'none';
-        desc.appendChild(audioPlayer);
-        audioBtn = document.createElement('button');
-        audioBtn.textContent = 'Play'; // Always start as 'Play' when switching years
-        audioBtn.className = 'timeline-audio-btn';
-        audioBtn.disabled = false;
-        audioBtn.onclick = function() {
-          // Always enable play on first tap
-          if (audioPlayer.readyState >= 2) {
-            if (audioPlayer.paused) {
-              audioPlayer.play();
-              audioBtn.textContent = 'Pause';
-            } else {
-              audioPlayer.pause();
-              audioBtn.textContent = 'Play';
-            }
-          } else {
-            // If not ready, try to load and play
-            audioPlayer.load();
-            audioPlayer.play();
-            audioBtn.textContent = 'Pause';
-          }
-        };
-        desc.appendChild(audioBtn);
-        audioPlayer.onended = function() {
-          audioBtn.textContent = 'Play';
-          // Auto-advance to next year if auto-play is active and not paused
-          if (autoPlayActive && !autoPlayPaused) {
-            if (currentIndex < timelineData.length - 1) {
-              updateTimeline(currentIndex + 1);
-              setTimeout(() => {
-                if (audioPlayer) {
-                  audioPlayer.play();
-                  if (audioBtn) audioBtn.textContent = 'Pause';
-                }
-              }, 100);
-            }
-          }
-        };
-        // Do not play automatically; user must click button
         desc.classList.add('slide-in-' + lastDirection);
       }
       if (section) {
