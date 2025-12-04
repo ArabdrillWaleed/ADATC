@@ -243,8 +243,18 @@ document.addEventListener('DOMContentLoaded', function() {
           // Wait for window.onload as final step
           if (document.readyState === 'complete') {
             revealSite();
+              // Ensure timeline is initialized after all resources/fragments
+              if (typeof updateTimeline === 'function') {
+                updateTimeline(0);
+              }
           } else {
             window.addEventListener('load', revealSite);
+              // Also initialize timeline after window load
+              window.addEventListener('load', function() {
+                if (typeof updateTimeline === 'function') {
+                  updateTimeline(0);
+                }
+              });
           }
         });
       }
