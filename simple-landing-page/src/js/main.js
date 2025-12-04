@@ -1023,17 +1023,13 @@ const timelineData = [
       if (section) {
         // Lazy load and preload timeline images
         const imgUrl = timelineData[index].image;
-        // Preload current image
+        // Preload current image and only set background after load
         const preloadImg = new window.Image();
-        preloadImg.src = imgUrl;
         preloadImg.onload = function() {
           section.style.backgroundImage = `url('${imgUrl}')`;
-            // Force reflow to ensure background is painted (especially on mobile)
-            section.offsetHeight;
-        };
-          // Set background immediately as well (not just onload)
-          section.style.backgroundImage = `url('${imgUrl}')`;
           section.offsetHeight;
+        };
+        preloadImg.src = imgUrl;
         // Preload next image in background
         if (timelineData[index + 1]) {
           const nextImg = new window.Image();
