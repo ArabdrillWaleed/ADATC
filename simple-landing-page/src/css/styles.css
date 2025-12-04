@@ -1709,6 +1709,35 @@ p { animation-delay: 0.7s; }
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Certo Sans';
+  src: url('../fonts/CertoSans-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Certo Sans';
+  src: url('../fonts/CertoSans-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Certo Sans';
+  src: url('../fonts/CertoSans-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Certo Sans';
+  src: url('../fonts/CertoSans-Heavy.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 html,body{
   height:100%;
   margin:0;
