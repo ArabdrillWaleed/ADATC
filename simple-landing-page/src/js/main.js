@@ -145,7 +145,9 @@ window.addEventListener('error', function (evt) {
       let hasAutoPlayed = false;
       const observer = new window.IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting && !hasAutoPlayed && !autoPlayPaused) {
+          // Disable auto-play on mobile devices
+          var isMobile = window.innerWidth < 900 || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+          if (entry.isIntersecting && !hasAutoPlayed && !autoPlayPaused && !isMobile) {
             hasAutoPlayed = true;
             autoPlayActive = true;
             if (audioPlayer) {
