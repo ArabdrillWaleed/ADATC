@@ -1062,7 +1062,12 @@ const timelineData = [
         preloadImg.src = imgUrl;
         preloadImg.onload = function() {
           section.style.backgroundImage = `url('${imgUrl}')`;
+            // Force reflow to ensure background is painted (especially on mobile)
+            section.offsetHeight;
         };
+          // Set background immediately as well (not just onload)
+          section.style.backgroundImage = `url('${imgUrl}')`;
+          section.offsetHeight;
         // Preload next image in background
         if (timelineData[index + 1]) {
           const nextImg = new window.Image();
