@@ -7563,7 +7563,7 @@ body.our-facility .feature-panels-grid .panel-overlay {
 		.timeline-years {
 			display: flex;
 			align-items: center;
-			gap: 1.2rem;
+			gap: 1rem;
 			overflow-x: hidden;
 			flex-wrap: nowrap;
 			max-width: 600px;
@@ -7577,7 +7577,7 @@ body.our-facility .feature-panels-grid .panel-overlay {
 		.timeline-year {
 			font-size: 2.3rem;
 			font-family: 'Certo Sans', Arial, sans-serif;
-			font-weight: 300;
+			font-weight: 200;
 			color: #fff;
 			opacity: 1;
 			cursor: pointer;
