@@ -452,7 +452,7 @@
 /* Interactive Stats Section */
 .interactive-stats {
   position: relative;
-  background: linear-gradient(135deg, #003c34 0%, #005046 100%);
+  background: #003c34;
   color: #fff;
   padding: clamp(2rem, 6vw, 4rem) 0; /* add vertical breathing room */
 }
