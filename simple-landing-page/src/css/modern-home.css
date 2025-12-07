@@ -1,17 +1,6 @@
 /* Certo Sans font-face setup */
 @font-face {
   font-family: 'Certo Sans';
-  src: url('../fonts/CertoSans-Regular.woff2') format('woff2'),
-       url('../fonts/CertoSans-Regular.woff') format('woff'),
-       url('../fonts/CertoSans-Regular.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-
-/* Certo Sans font-face setup */
-@font-face {
-  font-family: 'Certo Sans';
   src: url('../../fonts/CertoSans-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
@@ -42,12 +31,14 @@
 
 /* Modern Hero Section */
 .modern-hero {
+  
+ 
   position: relative;
   min-height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #003c34 0%, #005046 100%);
+  
   background-image: url('../images/adlanew.png');
   background-size: 100% 100%;
   background-position: center;
@@ -63,7 +54,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, rgba(0, 40, 50, 0.95) 0%, rgba(0, 60, 70, 0.75) 50%, rgba(0, 80, 90, 0.5) 100%);
+  background: linear-gradient(to right, rgba(0, 0, 0,.7) , rgba(0, 0, 0,0.5) , transparent);
   z-index: 1;
 }
 
