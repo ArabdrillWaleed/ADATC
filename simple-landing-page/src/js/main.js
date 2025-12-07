@@ -1018,15 +1018,62 @@ const timelineData = [
         visibleStart = index - VISIBLE_COUNT + 1;
       }
       renderYears();
-      // Animate description
+      // Animate description and add play button
       if (desc) {
         desc.classList.remove('slide-in-left', 'slide-in-right');
         void desc.offsetWidth;
         desc.innerHTML = '';
-        // Add description text only
+        // Add description text
         const descText = document.createElement('span');
         descText.textContent = timelineData[index].description;
         desc.appendChild(descText);
+        // Add play button for audio
+        if (timelineData[index].audio) {
+          // Remove any existing audio player
+          let oldAudio = desc.querySelector('audio');
+          if (oldAudio) oldAudio.remove();
+          // Create audio element but don't autoplay
+          const audio = document.createElement('audio');
+          audio.src = timelineData[index].audio;
+          audio.preload = 'auto';
+          audio.style.display = 'none';
+          desc.appendChild(audio);
+
+          // Create play/pause button
+          const playBtn = document.createElement('button');
+          playBtn.className = 'timeline-play-btn';
+          playBtn.textContent = 'Play';
+          playBtn.style.marginLeft = '1em';
+          let isPlaying = false;
+
+          playBtn.onclick = function() {
+            if (!isPlaying) {
+              audio.play();
+              playBtn.textContent = 'Pause';
+              isPlaying = true;
+            } else {
+              audio.pause();
+              playBtn.textContent = 'Play';
+              isPlaying = false;
+            }
+          };
+
+          // Sync button state if audio ends or is paused by other means
+          audio.addEventListener('ended', function() {
+            playBtn.textContent = 'Play';
+            isPlaying = false;
+          });
+          audio.addEventListener('pause', function() {
+            playBtn.textContent = 'Play';
+            isPlaying = false;
+          });
+          audio.addEventListener('play', function() {
+            playBtn.textContent = 'Pause';
+            isPlaying = true;
+          });
+
+          desc.appendChild(playBtn);
+        }
         desc.classList.add('slide-in-' + lastDirection);
       }
       if (section) {
