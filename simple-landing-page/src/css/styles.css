@@ -1,8 +1,5 @@
-/* Smooth transition for timeline background image */
-.timeline-section {
-  background-color: #fff;
-  transition: background-image 0.3s ease;
-}
+
+
 /* FAQ link style: bold, orange, no underline, orange brand on hover */
 .faq-link {
   color: #003c34;
@@ -7529,6 +7526,9 @@ body.our-facility .feature-panels-grid .panel-overlay {
 				}
 		
 		.timeline-section {
+       background-image: url('images/contactus.jpg');
+  background-size: cover;
+  background-position: center;
 						position: relative;
 			position: relative;
 			width: 100%;
