@@ -24,6 +24,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (isMobile && section && timelineData[0] && timelineData[0].image) {
       section.style.backgroundImage = `url('${timelineData[0].image}')`;
       section.offsetHeight;
+      // Render the first timeline year, image, and description (no auto-play)
+      updateTimeline(0);
+      timelineAutoPlay = false;
+      timelineAutoPlayStopped = true;
     }
   var form = document.getElementById('contactForm');
   var overlay = document.getElementById('popupOverlay');
