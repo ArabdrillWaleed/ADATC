@@ -7,6 +7,15 @@ let autoPlayPaused = false;
   // let currentIndex = 0; // Removed duplicate declaration
 // ...existing code...
 document.addEventListener('DOMContentLoaded', function() {
+          // Preload all timeline images
+          if (window.timelineData && Array.isArray(window.timelineData)) {
+            window.timelineData.forEach(item => {
+              if (item.image) {
+                const img = new window.Image();
+                img.src = item.image;
+              }
+            });
+          }
           // Always start timeline at initial slide and play audio on refresh
           currentIndex = 0;
           visibleStart = 0;

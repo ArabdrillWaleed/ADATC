@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     addBtn('All Portfolio', 'all', true);
     addBtn('Drilling Portfolio', 'drilling');
+    addBtn('Electrical Portfolio', 'electrical');
     addBtn('Soft Skills Portfolio', 'soft-skills');
     addBtn('Mechanical Portfolio', 'mechanical');
     addBtn('HSE Portfolio', 'hse');

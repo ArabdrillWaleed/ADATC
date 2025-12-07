@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
   addBtn('Soft Skills', 'soft-skills');
   addBtn('Mechanical', 'mechanical');
   addBtn('HSE', 'hse');
+  addBtn('Electrical', 'electrical');
 
     filtersContainer.addEventListener('click', e => {
       const btn = e.target.closest('.team-filter-btn');

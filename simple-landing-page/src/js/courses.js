@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     addBtn('All', 'all', true);
     addBtn('Drilling', 'drilling');
+    addBtn('Electrical', 'electrical');
     addBtn('Soft Skills', 'soft-skills');
     addBtn('Mechanical', 'mechanical');
     addBtn('HSE', 'hse');

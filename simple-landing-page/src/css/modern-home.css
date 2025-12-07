@@ -54,7 +54,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to right, rgba(0, 0, 0,.7) , rgba(0, 0, 0,0.5) , transparent);
+  background: linear-gradient(147deg, rgba(0, 14, 13, 0.5) 17%, rgba(0, 15, 13, 0.3701855742) 70%);
   z-index: 1;
 }
 
