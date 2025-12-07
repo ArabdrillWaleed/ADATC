@@ -7527,24 +7527,21 @@ body.our-facility .feature-panels-grid .panel-overlay {
 				}
 		
 		.timeline-section {
+        background-repeat: no-repeat;
        background-image: url('images/contactus.jpg');
   background-size: cover;
   background-position: center;
-						position: relative;
-			position: relative;
-			width: 100%;
-			min-height: 800px;
-			padding: 3rem 1rem 2rem 1rem;
-			box-sizing: border-box;
-			overflow: hidden;
-			background-size: cover;
-			background-position: center;
-			background-attachment: fixed;
-			background-color: #0a2a2a; /* fallback color */
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
+  position: relative;
+  width: 100%;
+  min-height: 800px;
+  padding: 3rem 1rem 2rem 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: #0a2a2a; /* fallback color */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 		}
 		.timeline-section::before {
 			content: "";

@@ -995,20 +995,22 @@ const timelineData = [
         visibleStart = index - VISIBLE_COUNT + 1;
       }
       renderYears();
-      // Always visually highlight and scroll the active year button after update
-      setTimeout(() => {
-        const yearsContainer = document.getElementById('timelineYears');
-        const activeBtn = yearsContainer ? yearsContainer.querySelector('.timeline-year.active') : null;
-        if (activeBtn) {
-          activeBtn.classList.add('year-flash');
-          if (typeof activeBtn.scrollIntoView === 'function') {
-            activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      // On mobile, do NOT scroll or focus the timeline year button
+      if (!(window.innerWidth < 900 || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent))) {
+        setTimeout(() => {
+          const yearsContainer = document.getElementById('timelineYears');
+          const activeBtn = yearsContainer ? yearsContainer.querySelector('.timeline-year.active') : null;
+          if (activeBtn) {
+            activeBtn.classList.add('year-flash');
+            if (typeof activeBtn.scrollIntoView === 'function') {
+              activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
+            setTimeout(() => {
+              activeBtn.classList.remove('year-flash');
+            }, 600);
           }
-          setTimeout(() => {
-            activeBtn.classList.remove('year-flash');
-          }, 600);
-        }
-      }, 120);
+        }, 120);
+      }
       // Animate description and add play button
       if (desc) {
         desc.classList.remove('slide-in-left', 'slide-in-right');
