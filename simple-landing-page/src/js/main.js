@@ -1,47 +1,30 @@
 // Contact form validation logic
 let observerInitialized = false;
-let audioPlayer = null;
-let audioBtn = null;
-let autoPlayActive = false;
-let autoPlayPaused = false;
+// Removed old global audioPlayer/audioBtn/autoPlayActive/autoPlayPaused logic
+let timelineAutoPlay = false;
+let timelineAutoPlayStopped = false;
   // let currentIndex = 0; // Removed duplicate declaration
 // ...existing code...
 document.addEventListener('DOMContentLoaded', function() {
-          // Preload all timeline images
-          if (window.timelineData && Array.isArray(window.timelineData)) {
-            window.timelineData.forEach(item => {
-              if (item.image) {
-                const img = new window.Image();
-                img.src = item.image;
-              }
-            });
-          }
-          // Always start timeline at initial slide and play audio on refresh
-          currentIndex = 0;
-          visibleStart = 0;
-          updateTimeline(0);
-          // Remove auto-play on refresh; only play when timeline section enters viewport
-        // Ensure audio is paused and button text is reset on refresh
-        if (audioPlayer) {
-          audioPlayer.pause();
-          audioPlayer.currentTime = 0;
+    // Always scroll to top on page load/refresh
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    // Preload all timeline images
+    if (window.timelineData && Array.isArray(window.timelineData)) {
+      window.timelineData.forEach(item => {
+        if (item.image) {
+          const img = new window.Image();
+          img.src = item.image;
         }
-        if (audioBtn) {
-          audioBtn.textContent = 'Play';
-        }
-      // Always start timeline at initial slide on refresh
-      currentIndex = 0;
-      visibleStart = 0;
-      updateTimeline(0);
-      // On mobile, force background image to display immediately
-      var isMobile = window.innerWidth < 900 || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-      if (isMobile && section && timelineData[0] && timelineData[0].image) {
-        section.style.backgroundImage = `url('${timelineData[0].image}')`;
-        section.offsetHeight;
-      }
-    // Reset auto-play state on refresh
-    autoPlayActive = false;
-    autoPlayPaused = false;
+      });
+    }
+    // Do NOT start timeline or call updateTimeline(0) on page load
+    // Only initialize timeline when user scrolls to section (IntersectionObserver)
+    // On mobile, force background image to display immediately
+    var isMobile = window.innerWidth < 900 || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (isMobile && section && timelineData[0] && timelineData[0].image) {
+      section.style.backgroundImage = `url('${timelineData[0].image}')`;
+      section.offsetHeight;
+    }
   var form = document.getElementById('contactForm');
   var overlay = document.getElementById('popupOverlay');
   var popup = document.getElementById('formPopup');
@@ -61,11 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let firstInvalid = null;
     Array.from(form.elements).forEach(function(el) {
       if ((el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) {
-  let audioPlayer = null;
-  let audioBtn = null;
-  let autoPlayActive = false;
-  let autoPlayPaused = false;
-  let observerInitialized = false;
+  // Removed old local audioPlayer/audioBtn/autoPlayActive/autoPlayPaused logic
         let valid = true;
         if (el.name === 'phone') {
           if (!/^\d+$/.test(el.value.trim())) {
@@ -154,21 +133,15 @@ window.addEventListener('error', function (evt) {
       b.style.zIndex = '2147483647';
       b.style.fontFamily = 'sans-serif';
       b.textContent = 'JavaScript error: ' + (evt.message || evt.error && evt.error.message || 'see console');
-    // Intersection Observer for timeline auto-play
+    // Intersection Observer for timeline auto-play (only timeline system)
     if (!observerInitialized && section) {
       observerInitialized = true;
-      let hasAutoPlayed = false;
       const observer = new window.IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          // Disable auto-play on mobile devices
           var isMobile = window.innerWidth < 900 || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-          if (entry.isIntersecting && !hasAutoPlayed && !autoPlayPaused && !isMobile) {
-            hasAutoPlayed = true;
-            autoPlayActive = true;
-            if (audioPlayer) {
-              audioPlayer.play();
-              if (audioBtn) audioBtn.textContent = 'Pause';
-            }
+          if (!isMobile && entry.isIntersecting && !timelineAutoPlayStopped) {
+            timelineAutoPlay = true;
+            updateTimeline(currentIndex);
           }
         });
       }, { threshold: 0.3 });
@@ -1018,6 +991,20 @@ const timelineData = [
         visibleStart = index - VISIBLE_COUNT + 1;
       }
       renderYears();
+      // Always visually highlight and scroll the active year button after update
+      setTimeout(() => {
+        const yearsContainer = document.getElementById('timelineYears');
+        const activeBtn = yearsContainer ? yearsContainer.querySelector('.timeline-year.active') : null;
+        if (activeBtn) {
+          activeBtn.classList.add('year-flash');
+          if (typeof activeBtn.scrollIntoView === 'function') {
+            activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          }
+          setTimeout(() => {
+            activeBtn.classList.remove('year-flash');
+          }, 600);
+        }
+      }, 120);
       // Animate description and add play button
       if (desc) {
         desc.classList.remove('slide-in-left', 'slide-in-right');
@@ -1027,12 +1014,12 @@ const timelineData = [
         const descText = document.createElement('span');
         descText.textContent = timelineData[index].description;
         desc.appendChild(descText);
-        // Add play button for audio
+        // Add play/pause button for audio
         if (timelineData[index].audio) {
           // Remove any existing audio player
           let oldAudio = desc.querySelector('audio');
           if (oldAudio) oldAudio.remove();
-          // Create audio element but don't autoplay
+          // Create audio element
           const audio = document.createElement('audio');
           audio.src = timelineData[index].audio;
           audio.preload = 'auto';
@@ -1046,31 +1033,83 @@ const timelineData = [
           playBtn.style.marginLeft = '1em';
           let isPlaying = false;
 
+          // Play/pause logic
           playBtn.onclick = function() {
             if (!isPlaying) {
               audio.play();
               playBtn.textContent = 'Pause';
               isPlaying = true;
+              timelineAutoPlay = true;
+              timelineAutoPlayStopped = false;
             } else {
               audio.pause();
               playBtn.textContent = 'Play';
               isPlaying = false;
+              timelineAutoPlay = false;
+              timelineAutoPlayStopped = true;
             }
           };
 
-          // Sync button state if audio ends or is paused by other means
+          // Auto-advance to next year when audio ends (if auto-play is active)
           audio.addEventListener('ended', function() {
             playBtn.textContent = 'Play';
             isPlaying = false;
+            if (timelineAutoPlay && !timelineAutoPlayStopped) {
+              let nextIndex = currentIndex + 1;
+              if (nextIndex >= timelineData.length) nextIndex = 0;
+              timelineAutoPlay = true;
+              timelineAutoPlayStopped = false;
+              updateTimeline(nextIndex);
+              // Play next audio and update play button state
+              setTimeout(() => {
+                const newDesc = document.getElementById('timelineDesc');
+                const nextAudio = newDesc ? newDesc.querySelector('audio') : null;
+                const nextPlayBtn = newDesc ? newDesc.querySelector('.timeline-play-btn') : null;
+                if (nextAudio && nextPlayBtn) {
+                  nextAudio.play();
+                  nextPlayBtn.textContent = 'Pause';
+                  nextPlayBtn.isPlaying = true;
+                  nextPlayBtn.onclick = function() {
+                    if (!nextPlayBtn.isPlaying) {
+                      nextAudio.play();
+                      nextPlayBtn.textContent = 'Pause';
+                      nextPlayBtn.isPlaying = true;
+                      timelineAutoPlay = true;
+                      timelineAutoPlayStopped = false;
+                    } else {
+                      nextAudio.pause();
+                      nextPlayBtn.textContent = 'Play';
+                      nextPlayBtn.isPlaying = false;
+                      timelineAutoPlay = false;
+                      timelineAutoPlayStopped = true;
+                    }
+                  };
+                }
+              }, 200);
+            }
           });
-          audio.addEventListener('pause', function() {
+          audio.addEventListener('pause', function(e) {
             playBtn.textContent = 'Play';
             isPlaying = false;
+            // Only stop auto-play if pause was triggered by user (not by audio ending)
+            if (!audio.ended) {
+              timelineAutoPlay = false;
+              timelineAutoPlayStopped = true;
+            }
           });
           audio.addEventListener('play', function() {
             playBtn.textContent = 'Pause';
             isPlaying = true;
+            timelineAutoPlay = true;
+            timelineAutoPlayStopped = false;
           });
+
+          // If auto-play is active, start playing immediately
+          if (timelineAutoPlay && !timelineAutoPlayStopped) {
+            audio.play();
+            playBtn.textContent = 'Pause';
+            isPlaying = true;
+          }
 
           desc.appendChild(playBtn);
         }
@@ -1144,26 +1183,18 @@ const timelineData = [
 		// Initial render
     document.addEventListener('DOMContentLoaded', function() {
       console.log("Timeline script loaded");
-      updateTimeline(0);
-      // Intersection Observer for timeline auto-play (correct placement)
+      // Do NOT initialize timeline on page load
+      // Intersection Observer for robust timeline auto-play
       if (!observerInitialized && section) {
         observerInitialized = true;
-        let hasAutoPlayed = false;
+        let timelineStarted = false;
         const observer = new window.IntersectionObserver((entries) => {
           entries.forEach(entry => {
             var isMobile = window.innerWidth < 900 || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-            if (!isMobile && entry.isIntersecting && !hasAutoPlayed && !autoPlayPaused) {
-              console.log("Timeline section entered viewport");
-              hasAutoPlayed = true;
-              autoPlayActive = true;
-              // Always play the current audio after timeline re-render
-              setTimeout(() => {
-                console.log("audioPlayer:", audioPlayer);
-                if (audioPlayer) {
-                  audioPlayer.play();
-                  if (audioBtn) audioBtn.textContent = 'Pause';
-                }
-              }, 100);
+            if (!isMobile && entry.isIntersecting && !timelineAutoPlayStopped && !timelineStarted) {
+              timelineAutoPlay = true;
+              updateTimeline(currentIndex);
+              timelineStarted = true;
             }
           });
         }, { threshold: 0.3 });
