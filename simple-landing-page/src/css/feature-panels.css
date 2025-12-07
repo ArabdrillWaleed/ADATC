@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'Certo Sans';
+  src: url('../fonts/CertoSans-Regular.woff2') format('woff2'),
+       url('../fonts/CertoSans-Regular.woff') format('woff'),
+       url('../fonts/CertoSans-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Feature Panels Grid Styles */
 .feature-panels-grid {
   display: grid;

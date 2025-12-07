@@ -11,6 +11,14 @@
   background: #ffffff;
   border: 2px solid rgba(0, 60, 52, 0.1);
   border-radius: 0;
+  @font-face {
+    font-family: 'Certo Sans';
+    src: url('../fonts/CertoSans-Regular.woff2') format('woff2'),
+         url('../fonts/CertoSans-Regular.woff') format('woff'),
+         url('../fonts/CertoSans-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
