@@ -435,7 +435,7 @@
 
 @media (max-width: 600px) {
   .modern-hero {
-    min-height: 65vh;
+    min-height: 45vh;
   }
   .modern-hero-badge {
     font-size: 0.8rem;
