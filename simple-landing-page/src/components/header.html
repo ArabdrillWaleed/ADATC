@@ -11,7 +11,13 @@
 				<img src="images/logo.svg.png" alt="Arabian Drilling logo" class="logo-img">
 			</a>
 		</div>
-		<button id="nav-toggle" class="nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+		<button id="nav-toggle" class="nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+			<div id="nav-icon1">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</button>
 		<nav id="main-nav" class="site-nav" role="navigation" aria-label="Main Navigation">
 			<ul class="nav-list">
 				<li class="nav-item"><a class="nav-link" href="index.html">HOME</a></li>
@@ -37,3 +43,33 @@
 		</nav>
 	</div>
 </header>
+<style>
+#nav-icon1 span {
+  display: block;
+  height: 4px;
+  width: 30px;
+  background: #003c34;
+  margin: 6px 0;
+  transition: 0.4s;
+  border-radius: 2px;
+}
+.nav-toggle.open #nav-icon1 span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.nav-toggle.open #nav-icon1 span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle.open #nav-icon1 span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var navToggle = document.getElementById('nav-toggle');
+  if(navToggle) {
+    navToggle.addEventListener('click', function() {
+      this.classList.toggle('open');
+    });
+  }
+});
+</script>
