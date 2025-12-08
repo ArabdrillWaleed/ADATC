@@ -1245,6 +1245,8 @@ body, html, * {
   text-align: center;
 }
 @media (max-width: 900px) {
+ 
+  
   .feature-panels-inner {
     flex-direction: column;
     gap: 1.5rem;
@@ -1434,6 +1436,9 @@ p { animation-delay: 0.7s; }
   border-spacing: 0; 
   font-size: 0.975rem; 
 }
+
+
+
 .training-overview .data-table thead th { 
   position: sticky; 
   top: 0; 
@@ -1457,7 +1462,7 @@ p { animation-delay: 0.7s; }
 .training-overview .data-table tbody td[data-label="Accreditation"],
 .training-overview .data-table tbody td[data-label="Accreditation"] .badge { 
   color: #f6630c; 
-  font-weight: 600; 
+  font-weight: 400; 
 }
 /* Make the intro text on training overview brand green */
 .training-overview .feature-panels-header .intro-text {
@@ -1479,9 +1484,11 @@ p { animation-delay: 0.7s; }
   border-bottom: none; 
 }
 .training-overview .data-table .cell-title .course-name { 
-  font-weight: 600; 
+  font-weight: 400; 
   color: #003c34; 
 }
+
+
 .training-overview .badge { 
   display: inline; 
   padding: 0; 
@@ -1507,7 +1514,8 @@ p { animation-delay: 0.7s; }
 }
 
 @media (max-width: 640px) {
-  .training-overview .data-table thead { display: none; }
+  .training-overview .data-table thead { 
+    display: none; }
   .training-overview .data-table, 
   .training-overview .data-table tbody { 
     display: block; 
@@ -1547,15 +1555,15 @@ p { animation-delay: 0.7s; }
   }
   
   /* Label styling */
-  .training-overview .data-table tbody td::before { 
-    content: attr(data-label); 
-    display: block; 
-    font-weight: 700; 
+  .training-overview .data-table tbody td::before {
+    content: attr(data-label);
+    display: block;
+    font-weight: 700;
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: rgba(0,60,52,0.5); 
-    margin-bottom: 0.5rem; 
+    color: #003c34;
+    margin-bottom: 0.5rem;
   }
   
   .training-overview .data-table tbody td:first-child::before { content: 'Course'; }
@@ -1564,7 +1572,7 @@ p { animation-delay: 0.7s; }
   
   /* Course name styling */
   .training-overview .data-table tbody td:first-child {
-    font-weight: 600;
+    font-weight: 600 ;
     font-size: 1.05rem;
     color: #003c34;
   }
