@@ -78,11 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Fixed category buttons
   addBtn('All', 'all', true);
-  addBtn('Drilling', 'drilling');
-  addBtn('Soft Skills', 'soft-skills');
-  addBtn('Mechanical', 'mechanical');
   addBtn('HSE', 'hse');
+  addBtn('Drilling', 'drilling');
   addBtn('Electrical', 'electrical');
+  addBtn('Mechanical', 'mechanical');
+  addBtn('Soft Skills', 'soft-skills');
 
     filtersContainer.addEventListener('click', e => {
       const btn = e.target.closest('.team-filter-btn');

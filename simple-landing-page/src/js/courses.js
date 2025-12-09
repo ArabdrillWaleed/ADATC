@@ -58,11 +58,13 @@ document.addEventListener('DOMContentLoaded', function() {
       filtersContainer.appendChild(b);
     };
     addBtn('All', 'all', true);
+     addBtn('HSE', 'hse');
     addBtn('Drilling', 'drilling');
     addBtn('Electrical', 'electrical');
-    addBtn('Soft Skills', 'soft-skills');
     addBtn('Mechanical', 'mechanical');
-    addBtn('HSE', 'hse');
+    addBtn('Soft Skills', 'soft-skills');
+    
+   
 
     filtersContainer.addEventListener('click', e => {
       const btn = e.target.closest('.team-filter-btn');
