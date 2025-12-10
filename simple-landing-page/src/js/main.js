@@ -1,3 +1,28 @@
+// --- Simulation Center Page: Play Audio Overview Button Logic ---
+document.addEventListener('DOMContentLoaded', function() {
+  var playBtn = document.getElementById('playOverviewAudioBtn');
+  var audio = document.getElementById('overviewAudio');
+  if (playBtn && audio) {
+    playBtn.addEventListener('click', function() {
+      if (audio.paused) {
+        audio.play();
+        playBtn.textContent = '\u23F8 Pause Audio Overview';
+      } else {
+        audio.pause();
+        playBtn.textContent = '\u25B6 Play Audio Overview';
+      }
+    });
+    audio.addEventListener('ended', function() {
+      playBtn.textContent = '\u25B6 Play Audio Overview';
+    });
+    audio.addEventListener('pause', function() {
+      playBtn.textContent = '\u25B6 Play Audio Overview';
+    });
+    audio.addEventListener('play', function() {
+      playBtn.textContent = '\u23F8 Pause Audio Overview';
+    });
+  }
+});
 // Contact form validation logic
 let observerInitialized = false;
 // Removed old global audioPlayer/audioBtn/autoPlayActive/autoPlayPaused logic
