@@ -46,8 +46,14 @@
 
     <!-- Quick course overview: modern, table-like summary -->
     <section class="redesigned-section">
-      <div class="container">
-              <p class="intro-text">Fast summary of key courses with duration and accreditation for quick reference.</p>
+    <div class="container">
+      <div class="audio-overview-center">
+        <button id="playOverviewAudioBtn" class="audio-overview-btn">
+          ▶ Play Audio Overview 
+        </button>
+        <audio id="overviewAudio" src="audio/training-overview.mp3" preload="auto" style="display:none;"></audio>
+      </div>
+      <p class="intro-text">Fast summary of key courses with duration and accreditation for quick reference.</p>
               <!-- New category filter buttons styled like Meet Our Team -->
               <div class="team-filter-buttons" id="overview-accreditation-filters" style="margin-bottom:2rem;"></div>
 

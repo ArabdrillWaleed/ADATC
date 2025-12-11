@@ -1,3 +1,28 @@
+// --- MV Slider: Small Audio Button Logic ---
+document.addEventListener('DOMContentLoaded', function() {
+  var playBtnSmall = document.getElementById('playMVOverviewAudioSmallBtn');
+  var audioSmall = document.getElementById('mvOverviewAudioSmall');
+  if (playBtnSmall && audioSmall) {
+    playBtnSmall.addEventListener('click', function() {
+      if (audioSmall.paused) {
+        audioSmall.play();
+        playBtnSmall.innerHTML = '&#x23F8;'; // Pause icon
+      } else {
+        audioSmall.pause();
+        playBtnSmall.innerHTML = '&#x1F50A;'; // Speaker icon
+      }
+    });
+    audioSmall.addEventListener('ended', function() {
+      playBtnSmall.innerHTML = '&#x1F50A;';
+    });
+    audioSmall.addEventListener('pause', function() {
+      playBtnSmall.innerHTML = '&#x1F50A;';
+    });
+    audioSmall.addEventListener('play', function() {
+      playBtnSmall.innerHTML = '&#x23F8;';
+    });
+  }
+});
 // --- Simulation Center Page: Play Audio Overview Button Logic ---
 document.addEventListener('DOMContentLoaded', function() {
   var playBtn = document.getElementById('playOverviewAudioBtn');
