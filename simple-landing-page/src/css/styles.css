@@ -1092,7 +1092,7 @@ body, html, * {
 
 /* Learning Solutions Section Styles */
 .learning-solutions-section {
-  background: #003c34;
+  background: #f8f9fb;
   padding: 3rem 0;
   width: 100%;
   margin: 0;
@@ -1107,7 +1107,8 @@ body, html, * {
 }
 
 .learning-solutions-title {
-  color: #f6630c;
+  color: #003c34 !important;
+  text-align: center;
 }
 
 .learning-solutions-section .learning-solutions-intro {
