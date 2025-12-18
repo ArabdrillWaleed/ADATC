@@ -1,3 +1,107 @@
+/* Course card ratings and registered count */
+.course-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.05rem;
+}
+.star-rating {
+  color: #f6b70a;
+  font-size: 1.1em;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  vertical-align: middle;
+}
+.star-rating .star-half {
+  color: #f6b70a;
+  opacity: 0.5;
+}
+.course-registered {
+  color: #ffffff;
+  font-size: 0.98em;
+  opacity: 0.85;
+}
+
+.modern-value-card:hover .course-registered {
+  color: #003c34;
+  font-size: 0.98em;
+  opacity: 0.85;
+}
+/* Trusted by Customers Section */
+.trusted-by-section {
+  background: #f8f9fb;
+  padding: 3rem 0 2.5rem 0;
+  margin-bottom: 0;
+}
+.trusted-by-title {
+  text-align: center;
+  color: #3a4251;
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+.trusted-by-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 3.5rem;
+}
+.trusted-by-logos img {
+  max-height: 54px;
+  max-width: 120px;
+  opacity: 0.7;
+  filter: grayscale(1);
+  transition: opacity 0.2s, filter 0.2s;
+}
+.trusted-by-logos img:hover {
+  opacity: 1;
+  filter: grayscale(0);
+}
+
+/* Accreditations Section */
+.accreditations-section {
+  background: #f8f9fb;
+  padding: 2.5rem 0 2.5rem 0;
+}
+.accreditations-title {
+  text-align: center;
+  color: #003c34;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+.accreditations-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+}
+.accreditations-logos img {
+  max-height: 54px;
+  max-width: 120px;
+  opacity: 0.85;
+  filter: grayscale(0.2);
+  transition: opacity 0.2s, filter 0.2s;
+}
+.accreditations-logos img:hover {
+  opacity: 1;
+  filter: grayscale(0);
+}
+/* Section padding utility for vertical spacing */
+.section-padding {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media (max-width: 700px) {
+  .section-padding {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
 /* Certo Sans font-face setup */
 @font-face {
   font-family: 'Certo Sans';
@@ -222,7 +326,7 @@
 
 /* Modern Intro Section */
 .modern-intro {
-  background: #fafafa;
+  background: #f8f9fb;
   padding: 4rem 0;
 }
 
@@ -253,7 +357,7 @@
 
 .modern-text {
   font-size: 1.1rem;
-  color: #666;
+  color: #003c34;
   line-height: 1.8;
   margin: 0 0 2rem;
 }
@@ -264,7 +368,7 @@
   gap: 0.5rem;
   font-size: 1rem;
   font-weight: 600;
-  color: #003c34;
+  color: #f6630c;
   text-decoration: none;
   transition: all 0.3s ease;
 }
@@ -319,7 +423,7 @@
 
 .modern-card-label {
   font-size: 0.875rem;
-  color: #999;
+  color: #003c34;
   font-weight: 500;
 }
 
@@ -332,12 +436,13 @@
 
 .modern-card-desc {
   font-size: 0.95rem;
-  color: #666;
+  color: #003c34;
 }
 
 /* Modern Values Section */
 .modern-values {
-  background: #fff;
+  background: #f8f9fb;
+  margin-top: 3rem;
 }
 
 .modern-section-header {
@@ -352,7 +457,7 @@
 }
 
 .modern-value-card {
-  background: #fafafa;
+  background: #003c34;
   border: 2px solid transparent;
   border-radius: 16px;
   padding: 2.5rem 2rem;
@@ -360,6 +465,7 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  margin-bottom: 3rem;
 }
 
 .modern-value-card::before {
@@ -368,7 +474,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: 3px;
   background: linear-gradient(90deg, #f6630c 0%, #ff8c42 100%);
   transform: scaleX(0);
   transition: transform 0.3s ease;
@@ -376,41 +482,69 @@
 
 .modern-value-card:hover {
   border-color: #f6630c;
-  background: #fff;
+  background: #f1eeee;
   transform: translateY(-8px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
 }
+
+/* Make all text inside course card brand green on hover */
+.modern-value-card:hover .modern-value-title,
+.modern-value-card:hover .modern-value-desc,
+
+.modern-value-card:hover .modern-value-letter {
+  color: #003c34 !important;
+}
+.modern-value-card:hover .modern-link svg {
+  stroke: #003c34;
+}
+.modern-link:hover{
+  color: #003c34;
+}
+  
+
 
 .modern-value-card:hover::before {
   transform: scaleX(1);
 }
 
-.modern-value-letter {
-  font-size: 4rem;
-  font-weight: 800;
-  color: #f6630c;
-  line-height: 1;
-  margin-bottom: 1rem;
-  opacity: 0.2;
-  transition: opacity 0.3s ease;
-}
 
-.modern-value-card:hover .modern-value-letter {
-  opacity: 1;
+/* Full-width image for course cards */
+.modern-value-image {
+  
+  width: calc(100% + 4rem);
+  margin-left: -2rem;
+  margin-right: -2rem;
+  margin-top: -2.5rem;
+  margin-bottom: 1.5rem;
+  height: 200px;
+  overflow: hidden;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  display: block;
+  padding: 1rem 1rem 0;
+}
+.modern-value-image img {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .modern-value-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #003c34;
+  color: #ffffff;
   margin: 0 0 0.75rem;
 }
 
 .modern-value-desc {
   font-size: 0.95rem;
-  color: #666;
+  color: #ffffff;
   line-height: 1.6;
   margin: 0;
+  padding-bottom: 1rem;
 }
 
 /* Responsive Adjustments */
@@ -452,15 +586,14 @@
 /* Interactive Stats Section */
 .interactive-stats {
   position: relative;
-  background: #003c34;
+  background: #f8f9fb;
   color: #fff;
   padding: clamp(2rem, 6vw, 4rem) 0; /* add vertical breathing room */
 }
 
 .stats-header { margin-bottom: 2rem; }
 
-.interactive-stats .modern-heading { color: #fff; }
-.interactive-stats .modern-label { color: #f6630c; }
+
 
 .stats-grid {
   display: grid;
@@ -470,11 +603,10 @@
 
 .stat-card {
   position: relative;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  
   border-radius: 0;
   padding: 1.25rem 1.25rem 1rem;
-  color: #fff;
+  color: #003c34;
   backdrop-filter: blur(6px);
   transform-style: preserve-3d;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -491,16 +623,13 @@
   height: 2.5rem;
   display: block;
   object-fit: contain;
-  filter: brightness(0) saturate(100%) invert(100%);
+  
 }
 
-.stat-card:hover {
-  border-color: rgba(246, 99, 12, 0.6);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.25), 0 0 0 1px rgba(246, 99, 12, 0.25) inset;
-}
+
 
 .stat-meta { margin-bottom: 0.5rem; }
-.stat-label { font-size: 0.95rem; opacity: 0.9; letter-spacing: 0.3px; color: #fff; }
+.stat-label { font-size: 0.95rem; opacity: 0.9; letter-spacing: 0.3px; color: #003c34; }
 
 .stat-main { display: flex; align-items: center; gap: 0.85rem; }
 .stat-number { font-size: clamp(1.75rem, 3.6vw, 2.5rem); font-weight: 800; line-height: 1; }
