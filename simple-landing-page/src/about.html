@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About | Arabian Drilling Academy</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/modern-home.css">
+</head>
+<body class="about-page">
+  <div id="site-header-placeholder"></div>
+  <main>
+    <!-- Hero Section -->
+    <section class="modern-hero" aria-label="About Arabian Drilling Academy" style="background-image: url('images/adlanew.png');">
+      <div class="modern-hero-overlay"></div>
+      <div class="modern-hero-content container">
+        <h1 class="modern-hero-title">
+          <div class="hero-line"><span class="accent">About</span> <span class="accent">Arabian Drilling Academy</span></div>
+          <div class="hero-line"><span>Excellence in Training &amp; Development</span></div>
+        </h1>
+      </div>
+    </section>
+    <!-- Mission & Vision Toggle Section -->
+    <section class="about-mission-vision section-padding">
+      <div class="container">
+        <div class="mv-toggle-btns">
+          <button class="mv-toggle-btn active" data-target="mission">Mission</button>
+          <button class="mv-toggle-btn" data-target="vision">Vision</button>
+        </div>
+        <div class="mv-toggle-content">
+          <div class="mv-panel mv-mission active">
+            <h2 class="modern-heading">Our Mission</h2>
+            <p class="modern-text">To cultivate excellence in technical knowledge, operational proficiency, and safety practices through innovative curricula, advanced facilities, and strategic partnerships. We aim to develop a highly skilled and competent workforce for the oil and gas industry in Saudi Arabia and the region.</p>
+          </div>
+          <div class="mv-panel mv-vision">
+            <h2 class="modern-heading">Our Vision</h2>
+            <p class="modern-text">Arabian Drilling Academy Training Center (ADATC) aims to be the leading training institution and preferred partner for industry leaders in Saudi Arabia and the region, recognized for its outstanding quality of education and hands-on training in the energy sector.</p>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Timeline Section -->
+  <section class="timeline-section">
+		<div class="timeline-title">Arabian Drilling Training Center History</div>
+        <div class="timeline-description" id="timelineDesc"></div>
+		<div class="timeline-nav">
+            
+			<button class="timeline-arrow" id="prevBtn">&#8249;</button>
+			<div class="timeline-years" id="timelineYears">
+				
+			</div>
+			<button class="timeline-arrow" id="nextBtn">&#8250;</button>
+		</div>
+		
+	</section> 
+  
+  </main>
+  <div id="site-footer-placeholder"></div>
+   <script src="js/main.js" defer></script>
+  <script src="js/smooth-scroll.js" defer></script>
+  <script src="js/stats.js" defer></script>
+  <script src="js/mv-slider.js" defer></script>
+  <script src="js/include-fragments.js" defer></script>
+  <script>
+    // Mission/Vision toggle logic
+    document.addEventListener('DOMContentLoaded', function () {
+      const btns = document.querySelectorAll('.mv-toggle-btn');
+      const panels = document.querySelectorAll('.mv-panel');
+      btns.forEach(btn => {
+        btn.addEventListener('click', function () {
+          btns.forEach(b => b.classList.remove('active'));
+          panels.forEach(p => p.classList.remove('active'));
+          btn.classList.add('active');
+          const target = btn.getAttribute('data-target');
+          document.querySelector('.mv-' + target).classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
