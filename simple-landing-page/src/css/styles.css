@@ -1121,7 +1121,7 @@ body, html, * {
   align-items: flex-start;
   gap: 1rem;
   padding-bottom: 0.75rem;
-  border-bottom: 2px solid #f6630c;
+  border-bottom: 2px solid #003c34;
 }
 
 .overview-card-header h3 {
