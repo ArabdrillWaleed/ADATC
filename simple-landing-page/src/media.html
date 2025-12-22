@@ -4,7 +4,7 @@
     <link rel="apple-touch-icon" href="images/favicon.png">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Disclaimer | Arabian Drilling</title>
+  <title>Media | Arabian Drilling</title>
 
   <!-- Montserrat to match Arabian Drilling -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" as="style" onload="this.rel='stylesheet'">
@@ -43,11 +43,41 @@
 
     
     <section class="content-panel container">
-             <h2 class="modern-heading">Media Gallery</h2>
+             
 
-      <p class="intro-text">Explore our collection of images and videos showcasing our training facilities, courses, and events.</p>
+     
 
-      <a> TO BE ADDED</a>
+      <div class="media-gallery">
+               <h2 class="modern-heading">Videos</h2>
+
+        <div class="media-videos">
+          <div class="media-video-item">
+            <iframe width="360" height="215" src="https://www.youtube.com/embed/M6RBbVkO4LY" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class="media-video-item">
+            <iframe width="360" height="215" src="https://www.youtube.com/embed/XnpK_ENQQbM" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+                <h2 class="modern-heading">Images</h2>
+
+        <div class="media-images-grid">
+          <div class="media-img-wrap"><img src="images/rigwork.jpg" alt="Rig Work" class="media-img" /><span class="media-magnifier"></span></div>
+          <div class="media-img-wrap"><img src="images/ADLA.JPG" alt="ADLA" class="media-img" /><span class="media-magnifier"></span></div>
+          <div class="media-img-wrap"><img src="images/classroom.png" alt="Classroom" class="media-img" /><span class="media-magnifier"></span></div>
+          <div class="media-img-wrap"><img src="images/Sim.jpg" alt="Simulator" class="media-img" /><span class="media-magnifier"></span></div>
+          <div class="media-img-wrap"><img src="images/overview.png" alt="Overview" class="media-img" /><span class="media-magnifier"></span></div>
+          <div class="media-img-wrap"><img src="images/teaching2.jpg" alt="Teaching" class="media-img" /><span class="media-magnifier"></span></div>
+          <div class="media-img-wrap"><img src="images/rig1.jpg" alt="Rig 1" class="media-img" /><span class="media-magnifier"></span></div>
+          <div class="media-img-wrap"><img src="images/rig2.jpg" alt="Rig 2" class="media-img" /><span class="media-magnifier"></span></div>
+          <div class="media-img-wrap"><img src="images/conference.JPG" alt="Conference" class="media-img" /><span class="media-magnifier"></span></div>
+          <div class="media-img-wrap"><img src="images/amenities.jpeg" alt="Amenities" class="media-img" /><span class="media-magnifier"></span></div>
+          <div class="media-img-wrap"><img src="images/DS5000.svg" alt="DS5000" class="media-img" /><span class="media-magnifier"></span></div>
+         
+          <div class="media-img-wrap"><img src="images/facility.svg" alt="Facility" class="media-img" /><span class="media-magnifier"></span></div>
+          <div class="media-img-wrap"><img src="images/ourteam.png" alt="Our Team" class="media-img" /><span class="media-magnifier"></span></div>
+        </div>
+        
+      </div>
   </main>
 
   <!-- Footer component placeholder -->
@@ -55,5 +85,65 @@
 
   <script src="js/main.js" defer></script>
   <script src="js/include-fragments.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Custom fullscreen lightbox for media images
+      const images = document.querySelectorAll('.media-img');
+      let lightbox = document.getElementById('media-fullscreen-lightbox');
+      if (!lightbox) {
+        lightbox = document.createElement('div');
+        lightbox.id = 'media-fullscreen-lightbox';
+        lightbox.style.position = 'fixed';
+        lightbox.style.top = 0;
+        lightbox.style.left = 0;
+        lightbox.style.width = '100vw';
+        lightbox.style.height = '100vh';
+        lightbox.style.background = 'rgba(0,0,0,0.97)';
+        lightbox.style.display = 'flex';
+        lightbox.style.alignItems = 'center';
+        lightbox.style.justifyContent = 'center';
+        lightbox.style.zIndex = 2147483647;
+        lightbox.style.visibility = 'hidden';
+        lightbox.style.opacity = 0;
+        lightbox.style.transition = 'opacity 0.2s';
+        lightbox.innerHTML = '<button id="media-fullscreen-x" style="position:absolute;top:32px;right:48px;font-size:2.5rem;color:#fff;background:none;border:none;cursor:pointer;z-index:2147483648;">&times;</button><img id="media-fullscreen-img" src="" alt="" style="max-width:98vw;max-height:96vh;border-radius:10px;box-shadow:0 4px 32px #0007;">';
+        document.body.appendChild(lightbox);
+      }
+      // Also force header to be below the lightbox
+      var header = document.getElementById('site-header-placeholder');
+      if (header) {
+        header.style.position = 'relative';
+        header.style.zIndex = 1;
+      }
+      const imgEl = lightbox.querySelector('#media-fullscreen-img');
+      const closeBtn = lightbox.querySelector('#media-fullscreen-x');
+      function showLightbox(src, alt) {
+        imgEl.src = src;
+        imgEl.alt = alt || '';
+        lightbox.style.visibility = 'visible';
+        lightbox.style.opacity = 1;
+      }
+      function hideLightbox() {
+        lightbox.style.opacity = 0;
+        setTimeout(() => {
+          lightbox.style.visibility = 'hidden';
+          imgEl.src = '';
+        }, 200);
+      }
+      images.forEach(img => {
+        img.addEventListener('click', function(e) {
+          e.preventDefault();
+          showLightbox(img.src, img.alt);
+        });
+      });
+      closeBtn.addEventListener('click', hideLightbox);
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) hideLightbox();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lightbox.style.visibility === 'visible') hideLightbox();
+      });
+    });
+  </script>
 </body>
 </html>
