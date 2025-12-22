@@ -109,8 +109,9 @@
   border-color: #f6630c;
 }
 .about-mission-vision .mv-toggle-content {
-  max-width: 700px;
+  max-width: 1000px;
   margin: 0 auto;
+ 
 }
 .about-mission-vision .mv-panel {
   display: none;

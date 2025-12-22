@@ -5039,6 +5039,9 @@ html{scroll-behavior:smooth}
 }
 
 
+
+
+
 .course-card:hover,
 .course-card:focus-within{
   /* Only translate for a subtle lift. Removing scale avoids text and image blurring
@@ -5047,6 +5050,7 @@ html{scroll-behavior:smooth}
   box-shadow: 0 6px 24px rgba(0,60,52,0.18), 0 1.5px 6px rgba(0,60,52,0.12);
   will-change: transform, box-shadow;
   backface-visibility: hidden;
+  
 }
 
 /* Course card text highlight on hover */
