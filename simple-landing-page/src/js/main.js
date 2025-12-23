@@ -1210,15 +1210,36 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
+        if (entry.intersectionRatio > .55) { // Require more of the item in view
           entry.target.classList.add('in-view');
           obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.08 });
+    }, { threshold: .55 }); // Trigger when 35% of item is visible
     items.forEach((el, i) => {
       el.style.animationDelay = (i * 0.5 + 0.1) + 's'; // 0.5s stagger, start at 0.1s
       observer.observe(el);
     });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Set generic download name for media images
+  document.querySelectorAll('.media-img').forEach(function(img, i) {
+    // Wrap image in a link with download attribute if not already
+    if (!img.parentElement || img.parentElement.tagName.toLowerCase() !== 'a') {
+      var link = document.createElement('a');
+      link.href = img.src;
+      link.download = 'ADTC-media-' + (i+1) + '.jpg';
+      img.parentNode.insertBefore(link, img);
+      link.appendChild(img);
+      // Move magnifier if present
+      var mag = link.nextSibling;
+      if (mag && mag.classList && mag.classList.contains('media-magnifier')) {
+        link.appendChild(mag);
+      }
+    } else {
+      img.parentElement.download = 'ADTC-media-' + (i+1) + '.jpg';
+    }
   });
 });
