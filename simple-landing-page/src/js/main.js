@@ -1243,3 +1243,40 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+
+
+// Media Gallery Filter Logic
+// Show/hide videos/images based on filter button
+
+document.addEventListener('DOMContentLoaded', function() {
+  const filterBtns = document.querySelectorAll('.media-filter-btn');
+  const videosSection = document.querySelector('.media-videos');
+  const imagesSection = document.querySelector('.media-images-grid');
+
+  function setActive(btn) {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      setActive(btn);
+      const filter = btn.getAttribute('data-filter');
+      if (filter === 'all') {
+        videosSection.style.display = '';
+        imagesSection.style.display = '';
+      } else if (filter === 'videos') {
+        videosSection.style.display = '';
+        imagesSection.style.display = 'none';
+      } else if (filter === 'images') {
+        videosSection.style.display = 'none';
+        imagesSection.style.display = '';
+      }
+    });
+  });
+  // Set default active on page load
+  if (filterBtns[0]) {
+    filterBtns[0].classList.add('active');
+  }
+});

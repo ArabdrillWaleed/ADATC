@@ -48,7 +48,14 @@
      
 
       <div class="media-gallery">
-               <h2 class="modern-heading">Videos</h2>
+               <!-- Media Filter Buttons -->
+        <div class="media-filters" style="display: flex; gap: 1.2rem; margin-bottom: 1.2rem;">
+          <button class="media-filter-btn" data-filter="all">All</button>
+          <button class="media-filter-btn" data-filter="videos">Videos</button>
+          <button class="media-filter-btn" data-filter="images">Images</button>
+        </div>
+        <hr class="media-filters-divider" style="border: none; border-top: 2px solid #eee; margin: 0 0 2.2rem 0;">
+
 
         <div class="media-videos">
           <div class="media-video-item">
@@ -58,8 +65,7 @@
             <iframe width="360" height="215" src="https://www.youtube.com/embed/XnpK_ENQQbM" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
           </div>
         </div>
-                <h2 class="modern-heading">Images</h2>
-
+        <hr class="media-gallery-divider" style="border: none; border-top: 2px solid #eee; margin: 2.2rem 0;">
         <div class="media-images-grid">
           <div class="media-img-wrap"><img src="images/rigwork.jpg" alt="Rig Work" class="media-img" /><span class="media-magnifier"></span></div>
           <div class="media-img-wrap"><img src="images/ADLA.JPG" alt="ADLA" class="media-img" /><span class="media-magnifier"></span></div>

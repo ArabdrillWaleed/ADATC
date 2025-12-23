@@ -1,3 +1,37 @@
+
+.media-filter-btn{
+  background: #f4f4f4;
+  color: #003c34;
+  border: 2px solid #003c34;
+  border-radius: 0;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+ 
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+  outline: none;
+
+}
+
+.media-filter-btn.active{
+  background: #003c34;
+  color: #ffffff;
+  border-color: #003c34;
+}
+
+.media-filter-btn:hover {
+  background: #f6630c;
+  color: #fff;
+  border-color: #f6630c;
+}
+
+
+
+
+
+
+
 /* Small round audio button for MV slider */
 .audio-overview-btn-small {
   position: absolute;
