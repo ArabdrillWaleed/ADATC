@@ -53,6 +53,41 @@ document.addEventListener('DOMContentLoaded', function() {
     lightbox.appendChild(ditNavContainer);
     document.body.appendChild(lightbox);
     
+    // Media gallery lightbox navigation for images
+    const mediaImages = Array.from(document.querySelectorAll('.media-img'));
+    let mediaIndex = 0;
+    let isMediaMode = false;
+
+    // Create navigation arrows for media images
+    const mediaNavContainer = document.createElement('div');
+    mediaNavContainer.className = 'media-nav-container';
+    mediaNavContainer.style.display = 'none';
+    const mediaPrevBtn = document.createElement('button');
+    mediaPrevBtn.className = 'media-nav-btn media-nav-prev';
+    mediaPrevBtn.innerHTML = '←';
+    mediaPrevBtn.setAttribute('aria-label', 'Previous Image');
+    const mediaNextBtn = document.createElement('button');
+    mediaNextBtn.className = 'media-nav-btn media-nav-next';
+    mediaNextBtn.innerHTML = '→';
+    mediaNextBtn.setAttribute('aria-label', 'Next Image');
+    mediaNavContainer.appendChild(mediaPrevBtn);
+    mediaNavContainer.appendChild(mediaNextBtn);
+    lightbox.appendChild(mediaNavContainer);
+
+    function showMediaImage(idx) {
+        mediaIndex = (idx + mediaImages.length) % mediaImages.length;
+        isMediaMode = true;
+        lightboxImage.src = mediaImages[mediaIndex].src;
+        lightboxImage.alt = mediaImages[mediaIndex].alt || '';
+        lightboxImage.style.width = '';
+        lightboxImage.style.height = '';
+        mediaNavContainer.style.display = 'flex';
+        ditNavContainer.style.display = 'none';
+        captionDiv.style.display = 'none';
+        lightbox.classList.add('active');
+        window.addEventListener('resize', boundLightboxResize);
+    }
+
     // Add click handlers to all accreditation images
     const boundLightboxResize = () => {
         if(!lightbox.classList.contains('active')) return;
@@ -177,6 +212,16 @@ document.addEventListener('DOMContentLoaded', function() {
         startDitAutoCycle();
     });
     
+    // Media navigation handlers
+    mediaPrevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        showMediaImage(mediaIndex - 1);
+    });
+    mediaNextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        showMediaImage(mediaIndex + 1);
+    });
+    
     // Close lightbox when clicking close button or outside the image
     closeButton.addEventListener('click', closeLightbox);
     
@@ -194,6 +239,14 @@ document.addEventListener('DOMContentLoaded', function() {
             closeLightbox();
         }
     });
+    
+    // When closing, reset media mode
+    const originalCloseLightbox = closeLightbox;
+    closeLightbox = function() {
+        originalCloseLightbox();
+        isMediaMode = false;
+        mediaNavContainer.style.display = 'none';
+    }
     
     function closeLightbox() {
         lightbox.classList.remove('active');

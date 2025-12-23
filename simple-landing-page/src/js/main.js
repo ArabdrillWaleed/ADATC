@@ -1187,3 +1187,38 @@ const timelineData = [
           }
       });
     });
+
+// Homepage in-view animation logic
+// Animate homepage items only when in view, with staggered delays for each card
+let homepageObserverInitialized = false;
+document.addEventListener('DOMContentLoaded', function() {
+  if (homepageObserverInitialized) return;
+  homepageObserverInitialized = true;
+  // Select homepage items to animate
+  const selectors = [
+    '.modern-intro-card',
+    '.modern-value-card',
+    '.stat-card',
+    '.overview-card',
+    '.trusted-by-logos img'
+  ];
+  selectors.forEach(sel => {
+    const items = Array.from(document.querySelectorAll(sel));
+    if (!items.length || !('IntersectionObserver' in window)) {
+      items.forEach(el => el.classList.add('in-view'));
+      return;
+    }
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    items.forEach((el, i) => {
+      el.style.animationDelay = (i * 0.5 + 0.1) + 's'; // 0.5s stagger, start at 0.1s
+      observer.observe(el);
+    });
+  });
+});

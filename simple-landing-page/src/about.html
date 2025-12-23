@@ -104,7 +104,7 @@
   
   </main>
   <div id="site-footer-placeholder"></div>
-   <script src="js/main.js" defer></script>
+  <script src="js/main.js" defer></script>
   <script src="js/smooth-scroll.js" defer></script>
   <script src="js/stats.js" defer></script>
   <script src="js/mv-slider.js" defer></script>
@@ -123,6 +123,20 @@
           document.querySelector('.mv-' + target).classList.add('active');
         });
       });
+
+      // S.T.R.I.V.E animation on in-view
+      const striveGrid = document.querySelector('.strive-values-grid');
+      if (striveGrid) {
+        const observer = new window.IntersectionObserver(function(entries) {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              striveGrid.classList.add('strive-animate');
+              observer.disconnect();
+            }
+          });
+        }, { threshold: 0.3 });
+        observer.observe(striveGrid);
+      }
     });
   </script>
 </body>
