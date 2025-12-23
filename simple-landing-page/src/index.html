@@ -29,22 +29,133 @@
 
   <main>
 
-  <!-- Modern hero section with gradient overlay -->
-  <section class="modern-hero" aria-label="Welcome to Arabian Drilling Academy"  style="background-image: url('images/adlanew.png');">
-    <div class="modern-hero-overlay"></div>
-    <div class="modern-hero-content container">
-      <h1 class="modern-hero-title">
-        <div class="hero-line"><span class="accent">Building</span> <span class="accent">Capabilities</span></div>
-        <div class="hero-line"><span>Transforming Talent Through Innovative Training</span></div>
-      </h1>
+  <!-- Slideshow Hero Section -->
+  <section class="slideshow-hero" aria-label="Welcome to Arabian Drilling Academy">
+    <div class="slideshow-hero-bg">
+      <div class="slideshow-hero-slide active" style="background-image: url('images/adlanew.png');"></div>
+      <div class="slideshow-hero-slide" style="background-image: url('images/rigwork.jpg');"></div>
+      <div class="slideshow-hero-slide" style="background-image: url('images/disclaimers.JPG');"></div>
+      <div class="slideshow-hero-overlay"></div>
     </div>
-    <div class="modern-hero-scroll">
+    <div class="slideshow-hero-content container">
+      <h1 class="slideshow-hero-title">
+        <span class="typewriter-text" id="hero-typewriter"></span>
+        <span class="typewriter-text typewriter-white" id="hero-typewriter-white" style="display:none;"></span>
+      </h1>
+      <!-- Unique CTAs for each slide -->
+      <a href="about.html" class="slideshow-hero-cta" id="hero-cta-0" style="display:none;">Who Are We</a>
+      <a href="#courses" class="slideshow-hero-cta" id="hero-cta-1" style="display:none;">Explore Courses</a>
+      <a href="simulation-center.html" class="slideshow-hero-cta" id="hero-cta-2" style="display:none;">View Our Simulators</a>
+    </div>
+    <div class="slideshow-hero-dots" id="slideshow-hero-dots" aria-label="Slideshow navigation" role="tablist"></div>
+    <div class="slideshow-hero-scroll">
       <span>Scroll to explore</span>
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
         <path d="M10 3V17M10 17L4 11M10 17L16 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
   </section>
+
+  <script>
+    // Typewriter effect for hero headline (two lines, second line white)
+    document.addEventListener('DOMContentLoaded', function() {
+      const el1 = document.getElementById('hero-typewriter');
+      const el2 = document.getElementById('hero-typewriter-white');
+      const phrases = [
+        {text: 'Building Capabilities.', el: el1},
+        {text: 'Transforming Talent Through Innovative Training.', el: el2}
+      ];
+      let i = 0, j = 0, isDeleting = false, current = '';
+      function type() {
+        const phraseObj = phrases[i % phrases.length];
+        phrases.forEach((p, idx) => p.el.style.display = idx === (i % phrases.length) ? '' : 'none');
+        if (!isDeleting) {
+          current = phraseObj.text.substring(0, j+1);
+          j++;
+          if (j === phraseObj.text.length) {
+            isDeleting = true;
+            setTimeout(type, 1200);
+            return;
+          }
+        } else {
+          current = phraseObj.text.substring(0, j-1);
+          j--;
+          if (j === 0) {
+            isDeleting = false;
+            i++;
+          }
+        }
+        phraseObj.el.textContent = current;
+        setTimeout(type, isDeleting ? 40 : 90);
+      }
+      if (el1 && el2) type();
+    });
+
+    // Slideshow logic (dots only, robust)
+    document.addEventListener('DOMContentLoaded', function() {
+      const slides = document.querySelectorAll('.slideshow-hero-slide');
+      const dotsContainer = document.getElementById('slideshow-hero-dots');
+      const ctas = [
+        document.getElementById('hero-cta-0'),
+        document.getElementById('hero-cta-1'),
+        document.getElementById('hero-cta-2')
+      ];
+      let current = 0;
+      let interval = null;
+      // Remove any existing dots
+      dotsContainer.innerHTML = '';
+      // Create dots
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'slideshow-hero-dot';
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        dot.addEventListener('click', () => showSlide(i));
+        dotsContainer.appendChild(dot);
+      });
+      const dots = dotsContainer.querySelectorAll('.slideshow-hero-dot');
+      function showSlide(idx, animate = true) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === idx);
+        });
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === idx);
+        });
+        ctas.forEach((cta, i) => {
+          if (!cta) return;
+          if (i === idx) {
+            cta.style.display = '';
+            // Remove all animation classes first
+            cta.classList.remove('slide-in');
+            // Force reflow for restart
+            void cta.offsetWidth;
+            cta.classList.add('visible');
+            if (animate) {
+              cta.classList.add('slide-in');
+            }
+          } else {
+            cta.classList.remove('visible', 'slide-in');
+            cta.style.display = 'none';
+          }
+        });
+        current = idx;
+      }
+      function nextSlide() {
+        showSlide((current + 1) % slides.length);
+      }
+      function startInterval() {
+        if (interval) clearInterval(interval);
+        interval = setInterval(nextSlide, 5000);
+      }
+      // Pause on hover
+      const hero = document.querySelector('.slideshow-hero');
+      hero.addEventListener('mouseenter', () => clearInterval(interval));
+      hero.addEventListener('mouseleave', startInterval);
+      // Initial load: slide in the first CTA
+      showSlide(0, true);
+      startInterval();
+    });
+  </script>
   
  
 
