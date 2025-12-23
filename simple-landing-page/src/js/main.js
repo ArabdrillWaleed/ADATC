@@ -1245,7 +1245,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
 // Media Gallery Filter Logic
 // Show/hide videos/images based on filter button
 
@@ -1253,6 +1252,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const filterBtns = document.querySelectorAll('.media-filter-btn');
   const videosSection = document.querySelector('.media-videos');
   const imagesSection = document.querySelector('.media-images-grid');
+  const divider = document.querySelector('.media-gallery-divider');
 
   function setActive(btn) {
     filterBtns.forEach(b => b.classList.remove('active'));
@@ -1266,17 +1266,21 @@ document.addEventListener('DOMContentLoaded', function() {
       if (filter === 'all') {
         videosSection.style.display = '';
         imagesSection.style.display = '';
+        if (divider) divider.style.display = '';
       } else if (filter === 'videos') {
         videosSection.style.display = '';
         imagesSection.style.display = 'none';
+        if (divider) divider.style.display = 'none';
       } else if (filter === 'images') {
         videosSection.style.display = 'none';
         imagesSection.style.display = '';
+        if (divider) divider.style.display = 'none';
       }
     });
   });
   // Set default active on page load
   if (filterBtns[0]) {
     filterBtns[0].classList.add('active');
+    if (divider) divider.style.display = '';
   }
 });
