@@ -43,7 +43,7 @@
         <span class="typewriter-text typewriter-white" id="hero-typewriter-white" style="display:none;"></span>
       </h1>
       <!-- Unique CTAs for each slide -->
-      <a href="about.html" class="slideshow-hero-cta" id="hero-cta-0" style="display:none;">Who Are We</a>
+      <a href="about.html" class="slideshow-hero-cta" id="hero-cta-0" style="display:none;">Who We Are</a>
       <a href="#courses" class="slideshow-hero-cta" id="hero-cta-1" style="display:none;">Explore Courses</a>
       <a href="simulation-center.html" class="slideshow-hero-cta" id="hero-cta-2" style="display:none;">View Our Simulators</a>
     </div>
@@ -114,6 +114,16 @@
         dotsContainer.appendChild(dot);
       });
       const dots = dotsContainer.querySelectorAll('.slideshow-hero-dot');
+      function clearSlideshowInterval() {
+        if (interval) {
+          clearInterval(interval);
+          interval = null;
+        }
+      }
+      function startInterval() {
+        clearSlideshowInterval();
+        interval = setInterval(nextSlide, 5000);
+      }
       function showSlide(idx, animate = true) {
         slides.forEach((slide, i) => {
           slide.classList.toggle('active', i === idx);
@@ -125,9 +135,7 @@
           if (!cta) return;
           if (i === idx) {
             cta.style.display = '';
-            // Remove all animation classes first
             cta.classList.remove('slide-in');
-            // Force reflow for restart
             void cta.offsetWidth;
             cta.classList.add('visible');
             if (animate) {
@@ -139,17 +147,15 @@
           }
         });
         current = idx;
+        // Restart interval after manual navigation
+        startInterval();
       }
       function nextSlide() {
         showSlide((current + 1) % slides.length);
       }
-      function startInterval() {
-        if (interval) clearInterval(interval);
-        interval = setInterval(nextSlide, 5000);
-      }
-      // Pause on hover
+      // Pause on hover (desktop only)
       const hero = document.querySelector('.slideshow-hero');
-      hero.addEventListener('mouseenter', () => clearInterval(interval));
+      hero.addEventListener('mouseenter', clearSlideshowInterval);
       hero.addEventListener('mouseleave', startInterval);
       // Initial load: slide in the first CTA
       showSlide(0, true);

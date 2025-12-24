@@ -11,6 +11,9 @@
     word-break: break-word !important;
     text-align: left !important;
     padding-right: 0 !important;
+    white-space: normal !important;
+    display: block !important;
+    overflow-wrap: anywhere !important;
   }
 }
 /* Slideshow Hero Dots */
@@ -102,6 +105,7 @@
   letter-spacing: 0.01em;
   min-height: 3.5em;
 }
+/* Responsive typewriter text: stack on small screens */
 .typewriter-text {
   border-right: 0.12em solid #f6630c;
   padding-right: 0.2em;
@@ -109,9 +113,20 @@
   overflow: hidden;
   display: inline-block;
   font-size: 2.7rem;
- 
   font-weight: 900;
   color: #f6630c;
+  max-width: 100%;
+  word-break: break-word;
+}
+@media (max-width: 700px) {
+  .typewriter-text {
+    white-space: normal !important;
+    display: block !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    border-right: none !important;
+    padding-right: 0 !important;
+  }
 }
 .typewriter-white {
   color: #fff !important;
@@ -1452,3 +1467,5 @@
   
   color: #f6630c !important;
 }
+
+
