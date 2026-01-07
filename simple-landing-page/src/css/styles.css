@@ -355,7 +355,7 @@
 }
 /* Ensure course modal title uses correct font and weight */
 #course-modal-title {
-  font-family: 'Certo Sans', Arial, sans-serif !important;
+  font-family: 'Aptos', Arial, sans-serif !important;
   font-weight: 500 !important;
   color: #003c34 !important;
 }
@@ -369,13 +369,14 @@
 /* Header navbar items: bold, dropdown items: medium */
 .site-nav .dropdown-menu a {
   font-weight: 350 !important;
+  color: #003c34 !important;
 }
 /* Emphasize intro text on courses page */
 .intro-text {
   font-weight: 400 !important;
 }
 body, html, * {
-  font-family: 'Certo Sans', Arial, sans-serif !important;
+  font-family: 'Aptos', Arial, sans-serif !important;
 }
 @media (max-width: 700px) {
   #course-overview-table th,
@@ -616,7 +617,7 @@ body, html, * {
     top: 0; left: 0; right: 0;
     width: 100vw;
     height: 0;
-    background: #003c34;
+    background: #ffffff;
     color: #fff;
     z-index: 9999;
     overflow: hidden;
@@ -660,7 +661,7 @@ body, html, * {
   .curtain-nav-list > li > a {
     display: block;
     color: #fff;
-    font-family: 'Certo Sans', Arial, sans-serif;
+    font-family: 'Aptos', Arial, sans-serif;
     font-size: 1.18rem;
     font-weight: 500;
     padding: 0.9rem 0.8rem;
@@ -1728,12 +1729,6 @@ p { animation-delay: 0.7s; }
 }
 
 /* Header spacer styling */
-#header-spacer {
-  height: var(--header-height);
-  display: block;
-  content: '';
-  width: 100%;
-}
 
 /* Hero section height calculations including header */
 .image-hero {
@@ -1819,9 +1814,9 @@ p { animation-delay: 0.7s; }
     - AFDiwa-Bold.woff
   If you can't or don't want to upload the files, the site will fall back to Montserrat.
 */
-/* Import Certo Sans fonts */
+/* Import Aptos fonts */
 @font-face {
-  font-family: 'Certo Sans';
+  font-family: 'Aptos';
   src: url('fonts/CertoSans-Light.woff2') format('woff2'),
        url('fonts/CertoSans-Light.woff') format('woff');
   font-weight: 300;
@@ -1830,7 +1825,7 @@ p { animation-delay: 0.7s; }
 }
 
 @font-face {
-  font-family: 'Certo Sans';
+  font-family: 'Aptos';
   src: url('fonts/CertoSans-Regular.woff2') format('woff2'),
        url('fonts/CertoSans-Regular.woff') format('woff');
   font-weight: normal;
@@ -1839,7 +1834,7 @@ p { animation-delay: 0.7s; }
 }
 
 @font-face {
-  font-family: 'Certo Sans';
+  font-family: 'Aptos';
   src: url('fonts/CertoSans-Bold.woff2') format('woff2'),
        url('fonts/CertoSans-Bold.woff') format('woff');
   font-weight: bold;
@@ -1848,28 +1843,28 @@ p { animation-delay: 0.7s; }
 }
 
 @font-face {
-  font-family: 'Certo Sans';
+  font-family: 'Aptos';
   src: url('fonts/CertoSans-Light.otf') format('opentype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Certo Sans';
+  font-family: 'Aptos';
   src: url('fonts/CertoSans-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Certo Sans';
+  font-family: 'Aptos';
   src: url('fonts/CertoSans-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Certo Sans';
+  font-family: 'Aptos';
   src: url('fonts/CertoSans-Heavy.otf') format('opentype');
   font-weight: 900;
   font-style: normal;
@@ -1879,7 +1874,7 @@ p { animation-delay: 0.7s; }
 html,body{
   height:100%;
   margin:0;
-  font-family:'Certo Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family:'Aptos', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-weight: 300; /* Set light weight as default */
   color:var(--text);
   background:var(--bg-surface);
@@ -1900,7 +1895,7 @@ p { color: var(--text-muted); }
   line-height: 1.5;
   margin-bottom: 2rem;
   color: var(--text);
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
 }
@@ -1917,7 +1912,7 @@ p { color: var(--text-muted); }
   line-height: 1.5;
   margin-bottom: 2rem;
   color: var(--text);
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   font-weight: 200;
   opacity: 0.7;
   -webkit-font-smoothing: antialiased;
@@ -1944,7 +1939,7 @@ p { color: var(--text-muted); }
 .privacy-policy .content-panel ul li {
   list-style: disc;
   margin-bottom: 0.6rem;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   font-size: 1.4rem;
   line-height: 1.5;
   color: var(--text);
@@ -1971,7 +1966,7 @@ p { color: var(--text-muted); }
 .privacy-policy .content-panel ul.socials li {
   display: list-item; /* force each item to its own line */
   margin-bottom: 0.9rem; /* add vertical spacing between social items */
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   font-size: 1.4rem;
   line-height: 1.5;
   color: var(--text);
@@ -1986,7 +1981,7 @@ p { color: var(--text-muted); }
 
 /* Global font settings */
 body {
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
 }
 
 /* Light weight for all paragraph content and normal text */
@@ -2010,7 +2005,7 @@ p,
 .nav-link,
 .intro-text,
 .dropdown-menu a {
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   font-weight: 300;
 }
 
@@ -2031,7 +2026,7 @@ h1, h2, h3,
 .team-section h2,
 .simulator-meta strong,
 .hero-contact-subtitle {
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   font-weight: 250;
   color: var(--heading);
 }
@@ -2050,10 +2045,12 @@ body.site-fill main { flex: 1 0 auto; }
   top:0;
   left:0;
   right:0;
-   box-shadow: 0 2px 8px rgba(0,0,0,0.35);
-  z-index:99999; /* ensure header stays above full-bleed sections */
-  background:#ffffff; /* header set to white */
-  color: var(--text);
+  z-index:10;
+
+  
+
+  color: #fff;
+  
   transform: translateY(0);
   will-change: transform, box-shadow, background-color;
   transform: translateZ(0);
@@ -2062,7 +2059,7 @@ body.site-fill main { flex: 1 0 auto; }
 }
 
 /* Two-row header: top utility row and main nav row */
-.header-top{padding:0;background:#fff;position:relative}
+.header-top{padding:0;background:transparent !important;position:relative}
 .header-utility{display:flex;justify-content:space-between;align-items:center;padding:0.4rem 0;font-size:.85rem}
 .header-utility a{color:var(--ad-navy);text-decoration:none;margin-right:1rem;font-weight:700}
 .header-utility .util-left a:last-child{margin-right:0}
@@ -2087,7 +2084,7 @@ body.site-fill main { flex: 1 0 auto; }
   /* full-width border removed to avoid overlapping the custom topline ::before
      the visual topline is now drawn by .header-main-row::before which starts
      at the COMPANY link and spans to INSTRUCTORS */
-  background:#fff;
+  background:transparent !important;
 }
 .header-main-row{position:relative}
 
@@ -2097,14 +2094,16 @@ body.site-fill main { flex: 1 0 auto; }
   gap: 1.6rem;
   white-space: nowrap;
   display: flex;
-  /* Remove center alignment for desktop nav */
   align-items: flex-start;
+  background: transparent !important;
+  box-shadow: none !important;
 }
-.site-nav a { color: var(--ad-navy); font-weight: 300; letter-spacing: 0.6px; }
-.site-nav a.search { color: var(--ad-gold); }
-.site-nav a:hover { color: var(--ad-gold); }
-.site-nav a.active { color: var(--ad-gold); text-decoration: none; }
-.nav-item.has-dropdown { position: relative; }
+.site-nav a { color: var(--ad-navy); font-weight: 300; letter-spacing: 0.6px; background: transparent !important; }
+
+/* .site-nav a.search { color: var(--ad-gold); } */
+ .site-nav a:hover { color: #f6630c !important; text-decoration: none; }
+ .site-nav a.active { color: #fff; text-decoration: none; }
+.nav-item.has-dropdown { position: relative;  }
 
 
 .site-nav a{color:var(--ad-navy);font-weight:300;letter-spacing:0.6px}
@@ -2115,6 +2114,7 @@ body.site-fill main { flex: 1 0 auto; }
 /* Dropdown menu styles */
 /* Nav item and dropdown styles */
 .nav-item.has-dropdown {
+  
   position: relative;
 }
 
@@ -2169,9 +2169,9 @@ body.site-fill main { flex: 1 0 auto; }
   position: absolute;
   top: calc(100% + 6px);
   left: 0;
-  background: #ffffff;
+  background: white;
   min-width: 220px;
-  border-radius: 0;
+  border-radius: 5px;
   box-shadow: 0 4px 20px rgba(2,10,20,0.1);
   opacity: 0;
   visibility: hidden;
@@ -2189,13 +2189,14 @@ body.site-fill main { flex: 1 0 auto; }
   left: 20px;
   width: 12px;
   height: 12px;
-  background: #ffffff;
+  background: transparent !important;
   transform: rotate(45deg);
   border-radius: 0; /* make the little pointer square */
   box-shadow: -2px -2px 6px rgba(2,10,20,0.05);
 }
 
 .dropdown-menu li {
+    background: transparent !important;
   list-style: none;
 }
 
@@ -2241,7 +2242,6 @@ body.site-fill main { flex: 1 0 auto; }
 
 
 /* spacer inserted by JS to preserve document flow when header is fixed */
-#header-spacer{display:block;height:0;content:'';width:100%}
 .header-inner{
   display:flex;
   align-items:center;
@@ -2293,7 +2293,7 @@ body.site-fill main { flex: 1 0 auto; }
 .faq-section h2 {
     color: var(--ad-navy);
     margin: 0 0 1.5rem;
-    font-family: 'Certo Sans', sans-serif;
+    font-family: 'Aptos', sans-serif;
     font-weight: 250;
     font-size: 1.5rem;
 }
@@ -2321,7 +2321,7 @@ body.site-fill main { flex: 1 0 auto; }
   margin: 0 0 1.1rem;
   font-size: 1.2em;
   font-weight: 100 !important;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   transition: color 0.18s ease;
   cursor: pointer;
   display: flex;
@@ -2435,6 +2435,7 @@ html{scroll-behavior:smooth}
 }
 
 .logo-img{display:block;max-height:89px;width:auto;transition:max-height .28s ease;margin:0;align-self:center;padding:0}
+ .site-nav a, .site-nav .nav-link, .nav-list .nav-link, .nav-item .nav-link { color: #fff !important; }
 
 /* When header is scrolled/compact, reduce logo to the smaller size */
 .site-header.scrolled .logo-img{max-height:59px}
@@ -2607,7 +2608,7 @@ html{scroll-behavior:smooth}
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  color: inherit;
+  color: white !important
 }
 
 
@@ -2647,7 +2648,7 @@ html{scroll-behavior:smooth}
   display: none;
   background: transparent;
   border: 0;
-  color: #003c34;
+  color: #ffffff;
   font-size: 1.5rem;
   cursor: pointer;
   padding: 0.5rem;
@@ -2750,7 +2751,7 @@ html{scroll-behavior:smooth}
 .brand-sub{color:var(--ad-navy);font-weight:700}
 .badge{background:var(--ad-gold);color:var(--ad-dark);padding:.15rem .5rem;font-weight:800;font-size:.75rem}
 
-.hero h1{margin:0 0 .6rem;font-size:2rem;color:var(--ad-navy);line-height:1.05;font-family:'Certo Sans',sans-serif;font-weight:bold}
+.hero h1{margin:0 0 .6rem;font-size:2rem;color:var(--ad-navy);line-height:1.05;font-family:'Aptos',sans-serif;font-weight:bold}
 .lead{margin:0 0 1rem;color:#34495a;font-weight:300}
 
 .hero-ctas{display:flex;gap:.6rem}
@@ -2909,7 +2910,7 @@ html{scroll-behavior:smooth}
   color: #003c34;
   font-size: 1.4rem;
   margin: 0 0 0.75rem;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   font-weight: bold;
   letter-spacing: -0.01em;
 }
@@ -3654,7 +3655,7 @@ html{scroll-behavior:smooth}
   position: relative;
   color: #f6630c;
   font-size: clamp(27.6px, 5.865vw, 55.2px);
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   font-weight: bold;
   letter-spacing: 0.6px;
   text-transform: none;
@@ -3669,7 +3670,7 @@ html{scroll-behavior:smooth}
 .home .image-hero .hero-contact-subtitle {
   position: relative;
   font-size: clamp(27.6px, 5.865vw, 55.2px);
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   font-weight: bold;
   letter-spacing: 0.6px;
   text-transform: none;
@@ -4282,7 +4283,7 @@ html{scroll-behavior:smooth}
 .training-intro .intro-left .label{
   display: inline-block;
   color: #f6630c;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   font-weight: bold;
   font-size: 1.1rem;
   letter-spacing: 0.5px;
@@ -4295,7 +4296,7 @@ html{scroll-behavior:smooth}
   font-size: clamp(2.2rem, 4vw, 3.2rem);
   line-height: 1.2;
   font-weight: bold;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
 }
 .training-intro .learn-more {
   display: inline-flex;
@@ -4304,7 +4305,7 @@ html{scroll-behavior:smooth}
   color: #f6630c;
   font-weight: bold;
   font-size: 1.15rem;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -4327,7 +4328,7 @@ html{scroll-behavior:smooth}
   font-size: 1.25rem;
   line-height: 1.6;
   font-weight: 300;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   max-width: 520px;
 }
 .drill-stats{display:flex;align-items:center;gap:1.25rem}
@@ -4355,7 +4356,7 @@ html{scroll-behavior:smooth}
   font-weight: bold;
   font-size: 1.2rem;
   color: #003c34;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
 }
 .drilling-since .year{
   font-size: 3.8rem;
@@ -4363,7 +4364,7 @@ html{scroll-behavior:smooth}
   -webkit-text-stroke: 2px #f6630c;
   font-weight: bold;
   line-height: 1;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
 }
 
 @media (max-width: 900px) {
@@ -5055,7 +5056,7 @@ html{scroll-behavior:smooth}
 }
 
 .course-tag > div:first-child {
-  font-family: 'Certo Sans', 'Montserrat', Arial, sans-serif;
+  font-family: 'Aptos', 'Montserrat', Arial, sans-serif;
   font-weight: 500 !important;
   margin-bottom: 0.125rem;
   opacity: 0.9;
@@ -5852,7 +5853,7 @@ html{scroll-behavior:smooth}
   border:1px solid rgba(2,10,20,0.12);
   background:#fff;
   font-weight: 300;
-  font-family:'Certo Sans', sans-serif;
+  font-family:'Aptos', sans-serif;
   color:var(--text);
   transition: all 0.3s ease;
 }
@@ -6457,7 +6458,7 @@ body.facility .image-hero .hero-text-container{
 body.facility .image-hero .hero-contact{
   color: var(--contact-hero-color, #f6630c) !important;
   font-size: clamp(24px, 5.1vw, 48px) !important;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   font-weight: bold;
   line-height: 1.2;
   text-shadow: 0 8px 24px rgba(2,10,20,0.48);
@@ -6708,7 +6709,7 @@ h3 {
   color: #f6630c;
   font-weight: bold;
   font-size: 1.15rem;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -7118,7 +7119,7 @@ body.our-facility .feature-panels-grid .panel-overlay {
   font-weight: 700;
   margin: 0;
   line-height: 1.3;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   text-shadow: 0 2px 8px rgba(0,0,0,0.45);
   position: relative;
   padding-bottom: 0.5rem;
@@ -7144,7 +7145,7 @@ body.our-facility .feature-panels-grid .panel-overlay {
   font-size: 1.05rem;
   margin: 0;
   font-weight: 400;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   max-height: 0;
   opacity: 0;
   transition: max-height 500ms cubic-bezier(.2,.9,.3,1), opacity 450ms ease;
@@ -7718,7 +7719,7 @@ body.our-facility .feature-panels-grid .panel-overlay {
         }
 		.timeline-year {
 			font-size: 2.3rem;
-			font-family: 'Certo Sans', Arial, sans-serif;
+			font-family: 'Aptos', Arial, sans-serif;
 			font-weight: 200;
 			color: #fff;
 			opacity: 1;
@@ -7847,4 +7848,5 @@ body.our-facility .feature-panels-grid .panel-overlay {
     margin: 0 2px !important;
     box-sizing: border-box !important;
   }
+
 }

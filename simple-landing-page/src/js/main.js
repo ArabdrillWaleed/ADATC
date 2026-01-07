@@ -645,99 +645,13 @@ document.addEventListener('DOMContentLoaded', function() {
       (function(){
         // Wrap the behavior so it can run immediately if the header exists
         // or re-run once after fragments are inserted (header injected later).
-        // Also create a fallback spacer early so content isn't overlapped while
-        // the header fragment is still being fetched/inserted.
-        const ensureInitialSpacer = function(){
-          if(document.getElementById('header-spacer')) return;
-          const spacer = document.createElement('div');
-          spacer.id = 'header-spacer';
-          // Set initial header height variables and safe default spacer height
-          spacer.style.height = '90px'; // Default to expanded header height
-          try {
-            document.documentElement.style.setProperty('--header-height', '90px');
-            document.documentElement.style.setProperty('--header-height-base', '90px');
-            document.documentElement.style.setProperty('--header-height-scrolled', '64px');
-          } catch(e) {}
-          // insert before main content as a conservative fallback
-          const main = document.querySelector('main');
-          if(main && main.parentNode){
-            main.parentNode.insertBefore(spacer, main);
-          } else if(document.body.firstChild){
-            document.body.insertBefore(spacer, document.body.firstChild);
-          } else {
-            document.body.appendChild(spacer);
-          }
-        };
-
-        ensureInitialSpacer();
+        // Removed header spacer logic
 
         const run = function(){
           const header = document.querySelector('.site-header');
           if(!header) return false;
 
-          // If an initial spacer exists in a fallback position, move it to be
-          // immediately after the header so measurements are accurate.
-          let headerSpacer = document.querySelector('#header-spacer');
-          if(!headerSpacer){
-            headerSpacer = document.createElement('div');
-            headerSpacer.id = 'header-spacer';
-            header.parentNode.insertBefore(headerSpacer, header.nextSibling);
-          } else {
-            // move existing spacer to be just after header
-            if(headerSpacer.parentNode !== header.parentNode || headerSpacer.previousSibling !== header){
-              try{ headerSpacer.parentNode.removeChild(headerSpacer); }catch(e){}
-              header.parentNode.insertBefore(headerSpacer, header.nextSibling);
-            }
-          }
-
-          const updateSpacer = () => {
-            const rect = header.getBoundingClientRect();
-            const height = Math.round(rect.height);
-            
-            // Update both spacer height and CSS variable
-            headerSpacer.style.height = height + 'px';
-            try {
-              // Always keep header height variables in sync
-              document.documentElement.style.setProperty('--header-height', height + 'px');
-              document.documentElement.style.setProperty('--header-height-base', height + 'px');
-              document.documentElement.style.setProperty('--header-height-scrolled', Math.min(height, 64) + 'px');
-            } catch(e) {
-              console.warn('Failed to update header height variables:', e);
-            }
-          };
-
-          // Set initial header height values before any measurements
-          try {
-            document.documentElement.style.setProperty('--header-height', '64px');
-            document.documentElement.style.setProperty('--header-height-base', '90px');
-            document.documentElement.style.setProperty('--header-height-scrolled', '64px');
-          } catch(e) {}
-
-          // Update on resize
-          updateSpacer();
-          window.addEventListener('resize', updateSpacer);
-
-          // Use ResizeObserver for dynamic header size changes
-          if('ResizeObserver' in window) {
-            try {
-              const ro = new ResizeObserver(entries => {
-                // Only update if size actually changed
-                if(entries[0].contentRect.height !== header.getBoundingClientRect().height) {
-                  updateSpacer();
-                }
-              });
-              ro.observe(header);
-            } catch(e) {
-              console.warn('ResizeObserver setup failed:', e);
-              // Fallback: periodic re-checks
-              setTimeout(updateSpacer, 250);
-              setTimeout(updateSpacer, 800);
-            }
-          } else {
-            // Legacy fallback: periodic re-checks 
-            setTimeout(updateSpacer, 250);
-            setTimeout(updateSpacer, 800);
-          }
+          // Removed header spacer management
 
           // Animation helper: when toggling the scrolled state, play a hide-then-drop animation
           // so the header visually disappears (moves up + fades) then returns smaller.

@@ -117,15 +117,7 @@
       padding-left: 2vw;
       padding-right: 2vw;
     }
-  position: absolute;
-  bottom: 2rem;
-  left: 0;
-  right: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  z-index: 1001;
+  
 }
 
 .dit-nav-btn {
