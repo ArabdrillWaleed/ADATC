@@ -12,7 +12,7 @@
   border: 2px solid rgba(0, 60, 52, 0.1);
   border-radius: 0;
   @font-face {
-    font-family: 'Certo Sans';
+    font-family: 'Aptos';
     src: url('../fonts/CertoSans-Regular.woff2') format('woff2'),
          url('../fonts/CertoSans-Regular.woff') format('woff'),
          url('../fonts/CertoSans-Regular.otf') format('opentype');
@@ -72,7 +72,7 @@
   font-weight: 600;
   margin: 0 0 0.75rem;
   line-height: 1.3;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
 }
 
 .accreditation-description {
@@ -81,7 +81,7 @@
   line-height: 1.6;
   margin: 0 0 1rem;
   font-weight: 400;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   flex: 1;
 }
 
@@ -100,7 +100,7 @@
   border-radius: 4px;
   font-size: 0.85rem;
   font-weight: 600;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   white-space: nowrap;
 }
 

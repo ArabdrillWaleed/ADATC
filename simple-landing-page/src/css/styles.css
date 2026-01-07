@@ -1817,8 +1817,7 @@ p { animation-delay: 0.7s; }
 /* Import Aptos fonts */
 @font-face {
   font-family: 'Aptos';
-  src: url('fonts/CertoSans-Light.woff2') format('woff2'),
-       url('fonts/CertoSans-Light.woff') format('woff');
+  src: url('fonts/Aptos-Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -1826,8 +1825,7 @@ p { animation-delay: 0.7s; }
 
 @font-face {
   font-family: 'Aptos';
-  src: url('fonts/CertoSans-Regular.woff2') format('woff2'),
-       url('fonts/CertoSans-Regular.woff') format('woff');
+  src: url('fonts/Aptos.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -1835,8 +1833,7 @@ p { animation-delay: 0.7s; }
 
 @font-face {
   font-family: 'Aptos';
-  src: url('fonts/CertoSans-Bold.woff2') format('woff2'),
-       url('fonts/CertoSans-Bold.woff') format('woff');
+  src: url('fonts/Aptos-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -1844,28 +1841,28 @@ p { animation-delay: 0.7s; }
 
 @font-face {
   font-family: 'Aptos';
-  src: url('fonts/CertoSans-Light.otf') format('opentype');
+  src: url('fonts/Aptos-Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Aptos';
-  src: url('fonts/CertoSans-Regular.otf') format('opentype');
+  src: url('fonts/Aptos.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Aptos';
-  src: url('fonts/CertoSans-Bold.otf') format('opentype');
+  src: url('fonts/Aptos-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Aptos';
-  src: url('fonts/CertoSans-Heavy.otf') format('opentype');
+  src: url('fonts/Aptos-Black.ttf') format('truetype');
   font-weight: 900;
   font-style: normal;
   font-display: swap;

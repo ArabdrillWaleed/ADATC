@@ -99,7 +99,8 @@
 }
 .slideshow-hero-title {
   font-size: 2.7rem;
-  font-weight: 800;
+  font-weight: 400;
+  color: #fff;
   margin-bottom: 1.2rem;
   line-height: 1.1;
   letter-spacing: 0.01em;
@@ -702,7 +703,7 @@
 /* Trusted by Customers Section */
 .trusted-by-section {
   background: #f8f9fb;
-  padding: 3rem 0 2.5rem 0;
+  padding:120px;
   margin-bottom: 0;
 }
 .trusted-by-title {
@@ -772,25 +773,25 @@
 }
 /* Certo Sans font-face setup */
 @font-face {
-  font-family: 'Certo Sans';
+  font-family: 'Aptos';
   src: url('../../fonts/CertoSans-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Certo Sans';
+  font-family: 'Aptos';
   src: url('../../fonts/CertoSans-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Certo Sans';
+  font-family: 'Aptos';
   src: url('../../fonts/CertoSans-Light.otf') format('opentype');
   font-weight: 300;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Certo Sans';
+  font-family: 'Aptos';
   src: url('../../fonts/CertoSans-Heavy.otf') format('opentype');
   font-weight: 900;
   font-style: normal;
@@ -1119,6 +1120,7 @@
 /* Modern Values Section */
 .modern-values {
   background: #f8f9fb;
+
   
 }
 

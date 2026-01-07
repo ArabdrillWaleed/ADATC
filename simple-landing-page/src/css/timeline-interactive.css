@@ -21,7 +21,7 @@
   font-size: 1.4rem;
   margin: 0 0 1.5rem;
   font-weight: bold;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -91,7 +91,7 @@
   font-size: 1.2rem;
   margin: 0 0 1rem;
   font-weight: bold;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
   transition: color 0.3s ease;
 }
 

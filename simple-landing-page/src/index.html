@@ -25,6 +25,24 @@
     </div>
   </div>
   <div id="site-header-placeholder"></div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      function enableHeaderScroll() {
+        var header = document.querySelector('.site-header');
+        if(!header) return;
+        window.addEventListener('scroll', function() {
+          if(window.scrollY > 10) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
+          }
+        });
+      }
+      // Try immediately, and also after a short delay in case header is injected
+      enableHeaderScroll();
+      setTimeout(enableHeaderScroll, 500);
+    });
+  </script>
 
   <main>
 
@@ -39,13 +57,12 @@
       <div class="slideshow-hero-overlay"></div>
     </div>
     <div class="slideshow-hero-content container">
-      <h1 class="slideshow-hero-title">
-        <span class="typewriter-text" id="hero-typewriter"></span>
-        <span class="typewriter-text typewriter-white" id="hero-typewriter-white" style="display:none;"></span>
+      <h1 class="slideshow-hero-title"> Driving Excellence <br> Powered by Local People</h1>
+        
+       
       </h1>
-      <a href="about.html" class="slideshow-hero-cta" id="hero-cta-0">Who We Are</a>
-      <a href="courses.html" class="slideshow-hero-cta" id="hero-cta-1">Explore Courses</a>
-      <a href="simulation-center.html" class="slideshow-hero-cta" id="hero-cta-2">View Our Simulators</a>
+     
+      
     </div>
     <div class="slideshow-hero-scroll">
       
@@ -55,41 +72,7 @@
     </div>
   </section>
 
-  <script>
-    // Typewriter effect for hero headline (two lines, second line white)
-    document.addEventListener('DOMContentLoaded', function() {
-      const el1 = document.getElementById('hero-typewriter');
-      const el2 = document.getElementById('hero-typewriter-white');
-      const phrases = [
-        {text: 'Building Capabilities.', el: el1},
-        {text: 'Transforming Talent Through Innovative Training.', el: el2}
-      ];
-      let i = 0, j = 0, isDeleting = false, current = '';
-      function type() {
-        const phraseObj = phrases[i % phrases.length];
-        phrases.forEach((p, idx) => p.el.style.display = idx === (i % phrases.length) ? '' : 'none');
-        if (!isDeleting) {
-          current = phraseObj.text.substring(0, j+1);
-          j++;
-          if (j === phraseObj.text.length) {
-            isDeleting = true;
-            setTimeout(type, 1200);
-            return;
-          }
-        } else {
-          current = phraseObj.text.substring(0, j-1);
-          j--;
-          if (j === 0) {
-            isDeleting = false;
-            i++;
-          }
-        }
-        phraseObj.el.textContent = current;
-        setTimeout(type, isDeleting ? 40 : 90);
-      }
-      if (el1 && el2) type();
-    });
-  </script>
+  
   
  <section class="trusted-by-section" aria-label="Trusted by Customers">
     <div class="container trusted-by-container">

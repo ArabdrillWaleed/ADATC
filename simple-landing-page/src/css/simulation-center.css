@@ -76,7 +76,7 @@
   font-weight: 600;
   margin: 0 0 1rem;
   line-height: 1.3;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
 }
 
 /* Meta Badges */
@@ -96,7 +96,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
 }
 
 .sim-system {
@@ -106,7 +106,7 @@
   border-radius: 4px;
   font-size: 0.85rem;
   font-weight: 600;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
 }
 
 /* Card Description */
@@ -116,7 +116,7 @@
   line-height: 1.6;
   margin: 0 0 1.25rem;
   font-weight: 400;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
 }
 
 /* Card Features List */
@@ -134,7 +134,7 @@
   padding-left: 1.5rem;
   position: relative;
   font-weight: 400;
-  font-family: 'Certo Sans', sans-serif;
+  font-family: 'Aptos', sans-serif;
 }
 
 .simulator-card-features li:before {

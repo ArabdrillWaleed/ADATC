@@ -42,9 +42,9 @@
 				<li class="nav-item"><a class="nav-link" href="media.html">Media</a></li>
 				<li class="nav-item"><a class="nav-link" href="faq.html">Faq</a></li>
 				<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-				<li class="nav-item nav-item-find-course">
-        <a class="nav-link find-course-btn" href="courses.html">Find Course</a>
-      </li>
+			</ul>
+		</nav>
+		<a class="find-course-btn" href="courses.html">Find Course</a>
 				
 			</ul>
 		</nav>
@@ -74,25 +74,30 @@
     background: #fff !important;
   }
 }
-.find-course-btn {
-  background-color: #f6630c !important;
-  color: #fff !important;
-  font-size: 1.08rem;
-  font-weight: 700;
-  border: none;
-  border-radius: 12px;
-  padding: 0.55em 1.7em;
-  margin-left: 1.2rem;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
-  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
-  text-decoration: none;
-  display: inline-block;
+ .find-course-btn {
+	background-color: #f6630c !important;
+	opacity: 1 !important;
+	color: #fff !important;
+	font-size: 1.08rem;
+	font-weight: 500;
+	border: none;
+	border-radius: 5px;
+	padding: 0.4em 1.2em;
+	margin-left: auto;
+	margin-right: 0;
+	box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+	transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+	text-decoration: none;
+	display: inline-block;
+	position: relative;
+	z-index: 99999 !important;
+	
 }
-.find-course-btn:hover {
-  background: #003c34;
-  color: #fff !important;
-  text-decoration: none;
-  box-shadow: 0 6px 24px rgba(0,60,52,0.18);
+ .find-course-btn:hover {
+	background-color: #d65308 !important;
+	color: #fff !important;
+	text-decoration: none;
+	box-shadow: 0 6px 24px rgba(0,60,52,0.18);
 }
 </style>
 <script>
